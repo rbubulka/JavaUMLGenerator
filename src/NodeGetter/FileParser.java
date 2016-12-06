@@ -1,4 +1,4 @@
-package parsing;
+package NodeGetter;
 
 public interface FileParser {
 	//TODO

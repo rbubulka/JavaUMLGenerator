@@ -1,6 +1,6 @@
 import java.nio.file.Path;
 
-import parsing.FileParser;
+import NodeGetter.FileParser;
 import printing.Printer;
 
 public class UMLGenerator {
