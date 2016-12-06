@@ -1,11 +1,12 @@
 import java.nio.file.Path;
 
-import printing.FileParser;
+import parsing.FileParser;
+import printing.Printer;
 
 public class UMLGenerator {
 
 	private FileParser parser;
-	private GVFileWriter gvWriter;
+	private Printer gvprinter;
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
