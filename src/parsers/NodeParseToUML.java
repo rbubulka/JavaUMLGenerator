@@ -17,7 +17,7 @@ public class NodeParseToUML {
 	}
 	
 	public void doParse(List<ClassNode> nodes){
-		List<HashMap<String,String>> classInfoList = new ArrayList<>(); 
+		List<HashMap<String,String>> classInfoList = new ArrayList<>();
 		for(ClassNode n: nodes){
 			HashMap<String, String> classInfo = new HashMap<>();
 			classInfo.put("FileName",n.name);
@@ -29,6 +29,8 @@ public class NodeParseToUML {
 			classInfoList.add(classInfo);
 			
 		}
+		
+		
 		
 	}
 }

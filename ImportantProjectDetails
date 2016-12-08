@@ -1,0 +1,21 @@
+Assumptions/Notes on project requirements:
+	1. The project description says complex JAVA projects. Asses JAVA code. 
+		a) there is only protected, private and public thus there should be no reason to change this and thus behaviors revolving around scope can be hardcoded
+	2. Display UML, not nesseicarily always GraphVix for output
+	3. This tool will eventually have to grade the design on its adherence to deisgn patterns
+	4. things that may change in product discription
+		a) more commandline arguments
+		b) make uml with other programs
+		c)show in JavaFX
+		
+	INPUTS:
+		list of class names
+		arg flags
+		
+	Behavior:
+		ancestors at the top
+		class names italicize abstract and interfaces
+		methods indicate ppp
+		variables indicate type and ppp
+		inheritence arrows
+		
