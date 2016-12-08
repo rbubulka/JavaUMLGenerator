@@ -2,6 +2,9 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.objectweb.asm.tree.ClassNode;
 
@@ -46,18 +49,37 @@ public class UMLGenerator {
 				
 				
 			}
-			ArrayList<ClassNode> nodelist=getNodes();
+			NodeRelation nodeRelations = this.getNodes();
+			Set<ClassNode> nodelist= nodeRelations.getNodes();
+			List<String> relations = nodeRelations.getRelations();
 		}
 		
 		
 	}
 	public void parseNodes(ArrayList<ClassNode> nodelist){
-		this.
 	}
-	public ArrayList<ClassNode> getNodes() throws IOException{
-		ArrayList<ClassNode> nodes=new ArrayList<ClassNode>();
-		this.parser.addClasses(this.classnames,nodes);
-		return nodes;
+	public NodeRelation getNodes() throws IOException{
+		TreeSet<ClassNode> nodes=new TreeSet<ClassNode>();
+		ArrayList<String> relations = new ArrayList<>();
+		this.parser.addClasses(this.classnames,nodes, relations);
+		return new NodeRelation(nodes, relations);
+		
+	}
+	private class NodeRelation {
+		Set<ClassNode> nodes;
+		List<String> relations;
+		public NodeRelation(Set<ClassNode> nodes, List<String> relations){
+			this.relations = relations;
+			this.nodes =  nodes;
+		}
+		
+		public Set<ClassNode> getNodes(){
+			return this.nodes;
+		}
+		public List<String> getRelations(){
+			return this.relations;
+		}
+		
 	}
 
 }
