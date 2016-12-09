@@ -8,9 +8,9 @@ import com.sun.xml.internal.ws.org.objectweb.asm.Opcodes;
 
 public abstract class FieldsParser implements Parser {
 	
-	protected FieldsParser otherPpp;
+	protected FieldsParser otherparser;
 	public FieldsParser(FieldsParser other){
-		this.otherPpp = other;
+		this.otherparser = other;
 	}
 	
 	
@@ -24,7 +24,7 @@ public abstract class FieldsParser implements Parser {
 			result.append(text+" "+fn.desc + fn.name+"\n");
 			}
 		}
-		if(otherPpp !=  null)this.otherPpp.parse(fields);
+		if(otherparser !=  null)this.otherparser.parse(fields);
 		return result.toString();
 		
 

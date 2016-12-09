@@ -9,9 +9,9 @@ import com.sun.xml.internal.ws.org.objectweb.asm.Opcodes;
 
 public abstract class MethodsParser implements Parser {
 
-	protected MethodsParser otherPpp;
+	protected MethodsParser otherparser;
 	public MethodsParser(MethodsParser other){
-		this.otherPpp = other;
+		this.otherparser = other;
 		
 	}
 	public abstract String parse(List methods);
@@ -23,7 +23,7 @@ public abstract class MethodsParser implements Parser {
 				result.append(text+" " + md.name +" "+ md.signature + "\n");
 			}
 		}
-		if(otherPpp !=  null)result.append(this.otherPpp.parse(methods));
+		if(otherparser !=  null)result.append(this.otherparser.parse(methods));
 		return result.toString();
 	}
 
