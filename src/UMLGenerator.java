@@ -8,6 +8,8 @@ import java.util.TreeSet;
 
 import org.objectweb.asm.tree.ClassNode;
 
+import com.sun.xml.internal.ws.org.objectweb.asm.Opcodes;
+
 import NodeGetter.ClassFileGetter;
 import NodeGetter.FileGetter;
 import parsers.*;
@@ -17,17 +19,17 @@ public class UMLGenerator {
 
 	private FileGetter parser=new ClassFileGetter();
 //	private Printer gvprinter;
-	private MethodsPpp methodppp=new PublicMethodsPpp();
-	private FieldsPpp fieldppp=new PublicFieldsPpp();
+	private MethodsPpp methodppp=new PublicMethodsPpp(null);
+	private FieldsPpp fieldppp=new PublicFieldsPpp(null);
 
 	private ArrayList<String> classnames=new ArrayList<String>();
 	private HashMap<String,Object> argsmap=new HashMap<String,Object>(){{
-	    put("-publicMethod",new PublicMethodsPpp());
-	    put("-protectedMethod",new ProtectedMethodsPpp());
-	    put("-privateMethod",new PrivateMethodsPpp());
-	    put("-publicField",new PublicFieldsPpp());
-	    put("-protectedField",new ProtectedFieldsPpp());
-	    put("-privateField",new PrivateFieldsPpp());
+	    put("-publicMethod",new PublicMethodsPpp(null));
+	    put("-protectedMethod",new ProtectedMethodsPpp(new PublicMethodsPpp(null)));
+	    put("-privateMethod",new PrivateMethodsPpp(new ProtectedMethodsPpp(new PublicMethodsPpp(null))));
+	    put("-publicField",new PublicFieldsPpp(null));
+	    put("-protectedField",new ProtectedFieldsPpp(new PublicFieldsPpp(null)));
+	    put("-privateField",new PrivateFieldsPpp(new ProtectedFieldsPpp(new PublicFieldsPpp(null))));
 	}};
 
 	public UMLGenerator(String[] args) throws Exception{
@@ -52,12 +54,30 @@ public class UMLGenerator {
 			NodeRelation nodeRelations = this.getNodes();
 			Set<ClassNode> nodelist= nodeRelations.getNodes();
 			List<String> relations = nodeRelations.getRelations();
+			String infostring=parseNodes(nodelist);
 		}
 		
 		
 	}
-	public void parseNodes(ArrayList<ClassNode> nodelist){
-	}
+	public String parseNodes(Set<ClassNode> nodes ){
+		StringBuilder result=new StringBuilder();
+		for(ClassNode cn : nodes){
+		if((cn.access&Opcodes.ACC_PUBLIC)>0){
+			result.append("classinfo\n"+"public "+cn.name+"\n");}
+		else{
+			result.append("classinfo\n"+"protected "+cn.name+"\n");}
+		
+			result.append("fieldinfo\n"+this.fieldppp.parse(cn.fields)+"\n");
+			result.append("methodinfo\n"+this.methodppp.parse(cn.methods)+"\n");
+			result.append("end\n");
+		}
+		return result.toString();
+		}
+		
+		
+		
+		
+	
 	public NodeRelation getNodes() throws IOException{
 		TreeSet<ClassNode> nodes=new TreeSet<ClassNode>();
 		ArrayList<String> relations = new ArrayList<>();

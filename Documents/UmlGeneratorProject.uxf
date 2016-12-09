@@ -5,7 +5,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>176</x>
-      <y>336</y>
+      <y>328</y>
       <w>432</w>
       <h>56</h>
     </coordinates>
@@ -19,7 +19,7 @@ void addClasses(ArrayList&lt;String), set&lt;ClassNode&gt; nodes, List&lt;String
     <id>UMLClass</id>
     <coordinates>
       <x>640</x>
-      <y>88</y>
+      <y>80</y>
       <w>288</w>
       <h>144</h>
     </coordinates>
@@ -32,7 +32,7 @@ ArrayList&lt;String&gt; classname;
 HashMpa&lt;String, Obj&gt; argsmap;
 -
 public UMLGenerator(String[] args) throws  Exception
-public void parseNodes(ArrayList&lt;ClassNode&gt; nodeList)
+public void parseNodes(Set&lt;ClassNode&gt; nodeList)
 public NodeRelation getNodes()
 
 </panel_attributes>
@@ -42,7 +42,7 @@ public NodeRelation getNodes()
     <id>Relation</id>
     <coordinates>
       <x>400</x>
-      <y>224</y>
+      <y>216</y>
       <w>320</w>
       <h>128</h>
     </coordinates>
@@ -53,7 +53,7 @@ public NodeRelation getNodes()
     <id>UMLClass</id>
     <coordinates>
       <x>944</x>
-      <y>432</y>
+      <y>424</y>
       <w>448</w>
       <h>56</h>
     </coordinates>
@@ -67,7 +67,7 @@ public void fileWrite(String fileName, List&lt;HashMap&gt; classdetails, List&lt
     <id>UMLClass</id>
     <coordinates>
       <x>728</x>
-      <y>520</y>
+      <y>512</y>
       <w>440</w>
       <h>56</h>
     </coordinates>
@@ -79,10 +79,10 @@ public void fileWrite(String fileName, List&lt;HashMap&gt; classdetails, List&lt
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>624</x>
-      <y>632</y>
-      <w>208</w>
-      <h>56</h>
+      <x>600</x>
+      <y>608</y>
+      <w>232</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>Parsers
 &lt;&lt;interface&gt;&gt;
@@ -94,7 +94,7 @@ public String parser(List);</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1072</x>
-      <y>480</y>
+      <y>472</y>
       <w>24</w>
       <h>56</h>
     </coordinates>
@@ -105,12 +105,13 @@ public String parser(List);</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>504</x>
-      <y>768</y>
+      <y>760</y>
       <w>168</w>
       <h>56</h>
     </coordinates>
     <panel_attributes>/FieldsPpp/
 --
+public FieldsPpp(FieldsPpp other)
 public String parse()
 </panel_attributes>
     <additional_attributes/>
@@ -119,12 +120,13 @@ public String parse()
     <id>UMLClass</id>
     <coordinates>
       <x>512</x>
-      <y>1016</y>
+      <y>1008</y>
       <w>168</w>
       <h>56</h>
     </coordinates>
     <panel_attributes>PrivateFieldsPpp
 --
+public PrivateFieldsPpp(FieldsPpp other)
 public String parse()</panel_attributes>
     <additional_attributes/>
   </element>
@@ -132,7 +134,7 @@ public String parse()</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>392</x>
-      <y>816</y>
+      <y>808</y>
       <w>192</w>
       <h>72</h>
     </coordinates>
@@ -143,12 +145,13 @@ public String parse()</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>328</x>
-      <y>1024</y>
+      <y>1016</y>
       <w>168</w>
       <h>64</h>
     </coordinates>
     <panel_attributes>ProtectedFieldsPpp
 --
+public ProtectedFieldsPpp(FieldsPpp other)
 public String parse()</panel_attributes>
     <additional_attributes/>
   </element>
@@ -156,12 +159,13 @@ public String parse()</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>304</x>
-      <y>872</y>
+      <y>864</y>
       <w>168</w>
       <h>64</h>
     </coordinates>
     <panel_attributes>PublicFieldsPpp
 --
+public PublicFieldsPpp(FieldsPpp other)
 public String parse()
 
 </panel_attributes>
@@ -171,7 +175,7 @@ public String parse()
     <id>Relation</id>
     <coordinates>
       <x>416</x>
-      <y>816</y>
+      <y>808</y>
       <w>184</w>
       <h>224</h>
     </coordinates>
@@ -182,7 +186,7 @@ public String parse()
     <id>Relation</id>
     <coordinates>
       <x>584</x>
-      <y>816</y>
+      <y>808</y>
       <w>32</w>
       <h>216</h>
     </coordinates>
@@ -193,12 +197,13 @@ public String parse()
     <id>UMLClass</id>
     <coordinates>
       <x>992</x>
-      <y>960</y>
+      <y>952</y>
       <w>168</w>
       <h>56</h>
     </coordinates>
     <panel_attributes>PrivateMethodsPpp
 --
+public PrivateMethodsPpp(MethodsPpp other)
 public String parse()</panel_attributes>
     <additional_attributes/>
   </element>
@@ -206,12 +211,13 @@ public String parse()</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>808</x>
-      <y>952</y>
+      <y>944</y>
       <w>168</w>
       <h>64</h>
     </coordinates>
     <panel_attributes>ProtectedMethodsPpp
 --
+public ProtectedMethodsPpp(MethodsPpp other)
 public String parse()</panel_attributes>
     <additional_attributes/>
   </element>
@@ -219,12 +225,13 @@ public String parse()</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>624</x>
-      <y>936</y>
+      <y>928</y>
       <w>168</w>
       <h>64</h>
     </coordinates>
     <panel_attributes>PublicMethodsPpp
 --
+public PublicMethodsPpp(MethodsPpp other)
 public String parse()</panel_attributes>
     <additional_attributes/>
   </element>
@@ -232,12 +239,13 @@ public String parse()</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>720</x>
-      <y>768</y>
+      <y>760</y>
       <w>168</w>
       <h>56</h>
     </coordinates>
     <panel_attributes>/MethodsPpp/
 --
+public MethodsPpp(MethodsPpp other)
 public String parse()</panel_attributes>
     <additional_attributes/>
   </element>
@@ -245,7 +253,7 @@ public String parse()</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>792</x>
-      <y>816</y>
+      <y>808</y>
       <w>128</w>
       <h>152</h>
     </coordinates>
@@ -256,7 +264,7 @@ public String parse()</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>712</x>
-      <y>816</y>
+      <y>808</y>
       <w>88</w>
       <h>136</h>
     </coordinates>
@@ -267,7 +275,7 @@ public String parse()</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>808</x>
-      <y>816</y>
+      <y>808</y>
       <w>280</w>
       <h>160</h>
     </coordinates>
@@ -278,7 +286,7 @@ public String parse()</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>616</x>
-      <y>680</y>
+      <y>672</y>
       <w>88</w>
       <h>104</h>
     </coordinates>
@@ -289,7 +297,7 @@ public String parse()</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>712</x>
-      <y>680</y>
+      <y>672</y>
       <w>104</w>
       <h>104</h>
     </coordinates>
@@ -300,18 +308,18 @@ public String parse()</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>696</x>
-      <y>224</y>
+      <y>216</y>
       <w>40</w>
-      <h>424</h>
+      <h>408</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;510.0;30.0;10.0</additional_attributes>
+    <additional_attributes>10.0;490.0;30.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>728</x>
-      <y>224</y>
+      <y>216</y>
       <w>408</w>
       <h>224</h>
     </coordinates>
@@ -322,7 +330,7 @@ public String parse()</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1280</x>
-      <y>536</y>
+      <y>528</y>
       <w>168</w>
       <h>56</h>
     </coordinates>
@@ -336,7 +344,7 @@ public void print(Path path)</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1280</x>
-      <y>632</y>
+      <y>624</y>
       <w>168</w>
       <h>56</h>
     </coordinates>
@@ -349,7 +357,7 @@ public void print(Path path)</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1360</x>
-      <y>584</y>
+      <y>576</y>
       <w>24</w>
       <h>64</h>
     </coordinates>
@@ -360,7 +368,7 @@ public void print(Path path)</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1296</x>
-      <y>480</y>
+      <y>472</y>
       <w>88</w>
       <h>72</h>
     </coordinates>
@@ -372,7 +380,7 @@ has a</panel_attributes>
     <id>UMLNote</id>
     <coordinates>
       <x>288</x>
-      <y>640</y>
+      <y>632</y>
       <w>280</w>
       <h>56</h>
     </coordinates>
@@ -386,7 +394,7 @@ bg=blue</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>688</x>
-      <y>8</y>
+      <y>0</y>
       <w>192</w>
       <h>40</h>
     </coordinates>
@@ -399,7 +407,7 @@ pubic static void main(String[] args)</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>720</x>
-      <y>40</y>
+      <y>32</y>
       <w>80</w>
       <h>64</h>
     </coordinates>
@@ -410,7 +418,7 @@ pubic static void main(String[] args)</panel_attributes>
     <id>UMLNote</id>
     <coordinates>
       <x>1112</x>
-      <y>192</y>
+      <y>184</y>
       <w>224</w>
       <h>96</h>
     </coordinates>
@@ -424,7 +432,7 @@ bg=blue
     <id>UMLClass</id>
     <coordinates>
       <x>232</x>
-      <y>112</y>
+      <y>104</y>
       <w>272</w>
       <h>104</h>
     </coordinates>
@@ -442,7 +450,7 @@ public List&lt;String&gt; getRelations();</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>488</x>
-      <y>144</y>
+      <y>136</y>
       <w>168</w>
       <h>32</h>
     </coordinates>
@@ -454,7 +462,7 @@ is inner class of</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>176</x>
-      <y>448</y>
+      <y>440</y>
       <w>424</w>
       <h>56</h>
     </coordinates>
@@ -467,7 +475,7 @@ void addClasses(ArrayList&lt;String), set&lt;ClassNode&gt; nodes, List&lt;String
     <id>Relation</id>
     <coordinates>
       <x>384</x>
-      <y>384</y>
+      <y>376</y>
       <w>24</w>
       <h>80</h>
     </coordinates>
@@ -478,7 +486,7 @@ void addClasses(ArrayList&lt;String), set&lt;ClassNode&gt; nodes, List&lt;String
     <id>UMLClass</id>
     <coordinates>
       <x>984</x>
-      <y>760</y>
+      <y>752</y>
       <w>168</w>
       <h>56</h>
     </coordinates>
@@ -491,7 +499,7 @@ public String parse()</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>784</x>
-      <y>680</y>
+      <y>672</y>
       <w>304</w>
       <h>96</h>
     </coordinates>

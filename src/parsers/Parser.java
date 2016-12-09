@@ -3,5 +3,5 @@ package parsers;
 import java.util.List;
 
 public interface Parser {
-	public String parse(List methods);
+	public String parse(List nodes);
 }
