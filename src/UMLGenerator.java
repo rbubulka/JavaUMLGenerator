@@ -19,17 +19,20 @@ public class UMLGenerator {
 
 	private FileGetter parser=new ClassFileGetter();
 //	private Printer gvprinter;
-	private MethodsPpp methodppp=new PublicMethodsPpp(null);
-	private FieldsPpp fieldppp=new PublicFieldsPpp(null);
+	private MethodsParser methodparser=new PublicMethodsParser(null);
+	private FieldsParser fieldparser=new PublicFieldsParser(null);
+	private ClassParser classparser=new PublicClassParser(null);
 
 	private ArrayList<String> classnames=new ArrayList<String>();
 	private HashMap<String,Object> argsmap=new HashMap<String,Object>(){{
-	    put("-publicMethod",new PublicMethodsPpp(null));
-	    put("-protectedMethod",new ProtectedMethodsPpp(new PublicMethodsPpp(null)));
-	    put("-privateMethod",new PrivateMethodsPpp(new ProtectedMethodsPpp(new PublicMethodsPpp(null))));
-	    put("-publicField",new PublicFieldsPpp(null));
-	    put("-protectedField",new ProtectedFieldsPpp(new PublicFieldsPpp(null)));
-	    put("-privateField",new PrivateFieldsPpp(new ProtectedFieldsPpp(new PublicFieldsPpp(null))));
+	    put("-publicMethod",new PublicMethodsParser(null));
+	    put("-protectedMethod",new ProtectedMethodsParser(new PublicMethodsParser(null)));
+	    put("-privateMethod",new PrivateMethodsParser(new ProtectedMethodsParser(new PublicMethodsParser(null))));
+	    put("-publicField",new PublicFieldsParser(null));
+	    put("-protectedField",new ProtectedFieldsParser(new PublicFieldsParser(null)));
+	    put("-privateField",new PrivateFieldsParser(new ProtectedFieldsParser(new PublicFieldsParser(null))));
+	    put("-publicClass",new PublicClassParser(null));
+	    put("-protectedClass",new ProtectedClassParser(new PublicClassParser(null)));
 	}};
 
 	public UMLGenerator(String[] args) throws Exception{
@@ -40,10 +43,13 @@ public class UMLGenerator {
 			}
 			else{
 				if(a.contains("Method")){
-					methodppp=(MethodsPpp) this.argsmap.get(a);
+					methodparser=(MethodsParser) this.argsmap.get(a);
 				}
 				else if(a.contains("Field")){
-					fieldppp=(FieldsPpp) this.argsmap.get(a);
+					fieldparser=(FieldsParser) this.argsmap.get(a);
+				}
+				else if(a.contains("Class")){
+					classparser=(ClassParser) this.argsmap.get(a);
 				}
 				else{
 					throw new Exception("wrong args");
@@ -54,27 +60,15 @@ public class UMLGenerator {
 			NodeRelation nodeRelations = this.getNodes();
 			Set<ClassNode> nodelist= nodeRelations.getNodes();
 			List<String> relations = nodeRelations.getRelations();
-			String infostring=parseNodes(nodelist);
+
+			NodeParseToUML nptu=new NodeParseToUML(this.methodparser, this.fieldparser, this.classparser, null);
+			List<HashMap<String,String>> parsedstring=nptu.doParse(nodelist);
+			
 		}
 		
 		
 	}
-	public String parseNodes(Set<ClassNode> nodes ){
-		StringBuilder result=new StringBuilder();
-		for(ClassNode cn : nodes){
-		if((cn.access&Opcodes.ACC_PUBLIC)>0){
-			result.append("classinfo\n"+"public "+cn.name+"\n");}
-		else{
-			result.append("classinfo\n"+"protected "+cn.name+"\n");}
-		
-			result.append("fieldinfo\n"+this.fieldppp.parse(cn.fields)+"\n");
-			result.append("methodinfo\n"+this.methodppp.parse(cn.methods)+"\n");
-			result.append("end\n");
-		}
-		return result.toString();
-		}
-		
-		
+
 		
 		
 	
