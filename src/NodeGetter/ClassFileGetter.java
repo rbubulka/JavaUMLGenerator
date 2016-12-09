@@ -2,6 +2,7 @@ package NodeGetter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.Stack;
@@ -20,7 +21,7 @@ public class ClassFileGetter implements FileGetter {
 			reader.accept(classNode, ClassReader.EXPAND_FRAMES);
 			nodes.add(classNode);
 		}
-		Set<String> visited=new TreeSet<String>();
+		HashSet<String> visited=new HashSet<String>();
 		Stack<ClassNode> st=new Stack<>();
 		st.addAll(nodes);
 		while(!st.isEmpty()){
@@ -28,14 +29,15 @@ public class ClassFileGetter implements FileGetter {
 			if (!visited.contains(v.name)){
 				visited.add(v.name);
 				nodes.add(v);
-				for(ClassNode cn: (List<ClassNode>)v.interfaces){
+				for(String cns: (List<String>)v.interfaces){
+					ClassNode cn= new ClassNode();
 					st.push(cn);
-					relations.add(v.name + "implements" + cn.name);
+					relations.add(v.name + " implements " + cn.name);
 					ClassReader readertemp = new ClassReader(v.superName);
 					ClassNode classNodetemp = new ClassNode();
 					readertemp.accept(classNodetemp, ClassReader.EXPAND_FRAMES);
 					st.push(classNodetemp);
-					relations.add(v.name + "extends" + v.superName);
+					relations.add(v.name + " extends " + v.superName);
 				}
 			}
 		}
