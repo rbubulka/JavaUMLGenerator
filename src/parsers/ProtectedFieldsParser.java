@@ -12,9 +12,8 @@ public class ProtectedFieldsParser extends FieldsParser {
 	
 	public ProtectedFieldsParser(FieldsParser other){
 		super(other);
+		this.opcode=Opcodes.ACC_PROTECTED;
+		this.text="protected";
 	}
-	@Override
-	public String parse(List fields) {
-		return this.parseinfo(Opcodes.ACC_PROTECTED, "protected", fields);
-	}
+	
 }

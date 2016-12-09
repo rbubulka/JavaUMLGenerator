@@ -11,10 +11,9 @@ public class PrivateMethodsParser extends MethodsParser {
 
 	public PrivateMethodsParser(MethodsParser other){
 		super(other);
+		this.opcode=Opcodes.ACC_PRIVATE;
+		this.text="private";
 	}
 	
-	@Override
-	public String parse(List methods) {
-		return this.parseinfo(Opcodes.ACC_PRIVATE, "private", methods);
-	}
+	
 }

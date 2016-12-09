@@ -11,12 +11,9 @@ public class PublicMethodsParser extends MethodsParser {
 	
 	public PublicMethodsParser(MethodsParser other){
 		super(other);
+		this.opcode=Opcodes.ACC_PUBLIC;
+		this.text="public";
 	}
 	
 	
-	@SuppressWarnings("unchecked")
-	@Override
-	public String parse(List methods) {
-		return this.parseinfo(Opcodes.ACC_PUBLIC, "public", methods);
-	}
 }

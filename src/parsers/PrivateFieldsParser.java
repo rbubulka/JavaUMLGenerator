@@ -11,14 +11,11 @@ public class PrivateFieldsParser extends FieldsParser {
 	
 	
 	public PrivateFieldsParser(FieldsParser other) {
+		
 		super(other);
-		// TODO Auto-generated constructor stub
+		this.opcode=Opcodes.ACC_PRIVATE;
+		this.text="private";
 	}
 
-	@Override
-	public String parse(List fields) {
-		return this.parseinfo(Opcodes.ACC_PRIVATE, "private", fields);
-	
 
-	}
 }

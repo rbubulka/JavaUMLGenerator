@@ -8,10 +8,9 @@ public class PublicClassParser extends ClassParser {
 
 	public PublicClassParser(ClassParser other) {
 		super(other);
+		this.opcode=Opcodes.ACC_PUBLIC;
+		this.text="public";
 		
 	}
-	@Override
-	public String parse(List fields) {
-		return this.parseinfo(Opcodes.ACC_PUBLIC, "public", fields);}
 
 }

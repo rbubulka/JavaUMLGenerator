@@ -8,10 +8,8 @@ public class ProtectedClassParser extends ClassParser {
 
 	public ProtectedClassParser(ClassParser other) {
 		super(other);
-		// TODO Auto-generated constructor stub
+		this.opcode=Opcodes.ACC_PROTECTED;
+		this.text="protected";
 	}
-	@Override
-	public String parse(List node) {
-		return this.parseinfo(Opcodes.ACC_PROTECTED, "protected", node);
 	}
-}
+	

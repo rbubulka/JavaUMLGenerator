@@ -8,23 +8,23 @@ import org.objectweb.asm.tree.MethodNode;
 import com.sun.xml.internal.ws.org.objectweb.asm.Opcodes;
 
 public abstract class MethodsParser implements Parser {
-
+	protected int opcode;
+	protected String text;
 	protected MethodsParser otherparser;
 	public MethodsParser(MethodsParser other){
 		this.otherparser = other;
 		
 	}
-	public abstract String parse(List methods);
-	
-	public String parseinfo(int Opcode, String text,List methods){
+	public  String parse(List methods){
 		StringBuilder result= new StringBuilder();
 		for(MethodNode md:(List<MethodNode>)methods){
-			if((md.access&Opcode)>0){
+			if((md.access&opcode)>0){
 				result.append(text+" " + md.name +" "+ md.signature + "\n");
 			}
 		}
 		if(otherparser !=  null)result.append(this.otherparser.parse(methods));
 		return result.toString();
 	}
+
 
 }

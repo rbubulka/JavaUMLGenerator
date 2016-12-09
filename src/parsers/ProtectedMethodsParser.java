@@ -11,10 +11,9 @@ public class ProtectedMethodsParser extends MethodsParser {
 	
 	public ProtectedMethodsParser(MethodsParser other){
 		super(other);
+		this.opcode=Opcodes.ACC_PROTECTED;
+		this.text="protected";
 	}
 	
-	@Override
-	public String parse(List methods) {
-		return this.parseinfo(Opcodes.ACC_PROTECTED, "protected", methods);
-	}
+	
 }
