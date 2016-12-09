@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>176</x>
+      <y>336</y>
+      <w>432</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>FileGetter
+&lt;&lt;interface&gt;&gt;
+--
+void addClasses(ArrayList&lt;String), set&lt;ClassNode&gt; nodes, List&lt;String relations)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>640</x>
+      <y>88</y>
+      <w>288</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>UMLGenerator
+--
+FileGetter parser;
+MethodsPpp methodPpp;
+FieldPpp fieldppp;
+ArrayList&lt;String&gt; classname;
+HashMpa&lt;String, Obj&gt; argsmap;
+-
+public UMLGenerator(String[] args) throws  Exception
+public void parseNodes(ArrayList&lt;ClassNode&gt; nodeList)
+public NodeRelation getNodes()
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>400</x>
+      <y>224</y>
+      <w>320</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;140.0;380.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>944</x>
+      <y>432</y>
+      <w>448</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>OutputMaker
+&lt;&lt;interface&gt;&gt;
+--
+public void fileWrite(String fileName, List&lt;HashMap&gt; classdetails, List&lt;String&gt; relations)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>728</x>
+      <y>520</y>
+      <w>440</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>JVMaker
+--
+public void fileWrite(String fileName, List&lt;HashMap&gt; classdetails, List&lt;String&gt; relations)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>624</x>
+      <y>632</y>
+      <w>208</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Parsers
+&lt;&lt;interface&gt;&gt;
+--
+public String parser(List);</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1072</x>
+      <y>480</y>
+      <w>24</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>504</x>
+      <y>768</y>
+      <w>168</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>/FieldsPpp/
+--
+public String parse()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>512</x>
+      <y>1016</y>
+      <w>168</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>PrivateFieldsPpp
+--
+public String parse()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>392</x>
+      <y>816</y>
+      <w>192</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>220.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>328</x>
+      <y>1024</y>
+      <w>168</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>ProtectedFieldsPpp
+--
+public String parse()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>304</x>
+      <y>872</y>
+      <w>168</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>PublicFieldsPpp
+--
+public String parse()
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>416</x>
+      <y>816</y>
+      <w>184</w>
+      <h>224</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>210.0;10.0;10.0;260.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>584</x>
+      <y>816</y>
+      <w>32</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>20.0;10.0;10.0;250.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>992</x>
+      <y>960</y>
+      <w>168</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>PrivateMethodsPpp
+--
+public String parse()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>808</x>
+      <y>952</y>
+      <w>168</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>ProtectedMethodsPpp
+--
+public String parse()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>624</x>
+      <y>936</y>
+      <w>168</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>PublicMethodsPpp
+--
+public String parse()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>720</x>
+      <y>768</y>
+      <w>168</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>/MethodsPpp/
+--
+public String parse()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>792</x>
+      <y>816</y>
+      <w>128</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;140.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>712</x>
+      <y>816</y>
+      <w>88</w>
+      <h>136</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>90.0;10.0;10.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>808</x>
+      <y>816</y>
+      <w>280</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;330.0;180.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>616</x>
+      <y>680</y>
+      <w>88</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>90.0;10.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>712</x>
+      <y>680</y>
+      <w>104</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;110.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>696</x>
+      <y>224</y>
+      <w>40</w>
+      <h>424</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;510.0;30.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>728</x>
+      <y>224</y>
+      <w>408</w>
+      <h>224</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>490.0;260.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1280</x>
+      <y>536</y>
+      <w>168</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Printer
+&lt;&lt;interface&gt;&gt;
+--
+public void print(Path path)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1280</x>
+      <y>632</y>
+      <w>168</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>JVPrinter
+--
+public void print(Path path)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1360</x>
+      <y>584</y>
+      <w>24</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1296</x>
+      <y>480</y>
+      <w>88</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+has a</panel_attributes>
+    <additional_attributes>90.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>288</x>
+      <y>640</y>
+      <w>280</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Note: 
+Add decotartors for additional detials about methods 
+ie calls classes 
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>688</x>
+      <y>8</y>
+      <w>192</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Runner
+--
+pubic static void main(String[] args)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>720</x>
+      <y>40</y>
+      <w>80</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;60.0;80.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1112</x>
+      <y>192</y>
+      <w>224</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>Ppp = private public protected stnads for 
+behaviors based on scope
+bg=blue
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>232</x>
+      <y>112</y>
+      <w>272</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>NodeRelation
+--
+private Set&lt;ClassNode&gt; nodes
+private List&lt;String&gt; relations
+--
+public NodeRelations(Set&lt;ClassNode&gt;, List&lt;String)
+public Set&lt;ClassNode&gt; getNodes();
+public List&lt;String&gt; getRelations();</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>488</x>
+      <y>144</y>
+      <w>168</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+is inner class of</panel_attributes>
+    <additional_attributes>190.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>176</x>
+      <y>448</y>
+      <w>424</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>ClassFileGetter
+--
+void addClasses(ArrayList&lt;String), set&lt;ClassNode&gt; nodes, List&lt;String relations)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>384</x>
+      <y>384</y>
+      <w>24</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>984</x>
+      <y>760</y>
+      <w>168</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>OtherParser
+--
+public String parse()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>784</x>
+      <y>680</y>
+      <w>304</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;360.0;100.0</additional_attributes>
+  </element>
+</diagram>
