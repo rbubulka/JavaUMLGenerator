@@ -3,32 +3,36 @@ package parsers;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
 
 
 public class NodeParseToUML {
-	private MethodsPpp mppp;
-	private FieldsPpp fppp;
-	public NodeParseToUML(MethodsPpp mppp,FieldsPpp fppp,List<Parser> otherppp){
-		this.mppp=mppp;
-		this.fppp=fppp;
+	private MethodsParser mparser;
+	private FieldsParser fparser;
+	private ClassParser cparser;
+	public NodeParseToUML(MethodsParser mppp,FieldsParser fppp,ClassParser cppp,List<Parser> otherppp){
+		this.mparser=mppp;
+		this.fparser=fppp;
+		this.cparser=cppp;
 	}
 	
-	public void doParse(List<ClassNode> nodes){
+	public List<HashMap<String,String>> doParse(Set<ClassNode> nodes){
 		List<HashMap<String,String>> classInfoList = new ArrayList<>();
 		for(ClassNode n: nodes){
 			HashMap<String, String> classInfo = new HashMap<>();
-			classInfo.put("FileName",n.name);
-			classInfo.put("Interface",String.valueOf((n.access&Opcodes.ACC_INTERFACE)>0));
-			classInfo.put("Abstract", String.valueOf((n.access&Opcodes.ACC_ABSTRACT)>0));
-			classInfo.put("Protected",String.valueOf((n.access&Opcodes.ACC_PROTECTED)>0));
-			classInfo.put("Method",mppp.parse(n.methods));
-			classInfo.put("Field",fppp.parse(n.fields));
+			ArrayList<ClassNode> temp=new ArrayList<>();
+			temp.add(n);
+			classInfo.put("Class",cparser.parse(temp));
+			classInfo.put("Method",mparser.parse(n.methods));
+			classInfo.put("Field",fparser.parse(n.fields));
 			classInfoList.add(classInfo);
 			
 		}
+		return classInfoList;
 		
 		
 		
