@@ -4,7 +4,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>176</x>
+      <x>392</x>
       <y>328</y>
       <w>432</w>
       <h>56</h>
@@ -18,7 +18,7 @@ void addClasses(ArrayList&lt;String), set&lt;ClassNode&gt; nodes, List&lt;String
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>640</x>
+      <x>856</x>
       <y>80</y>
       <w>288</w>
       <h>144</h>
@@ -26,13 +26,13 @@ void addClasses(ArrayList&lt;String), set&lt;ClassNode&gt; nodes, List&lt;String
     <panel_attributes>UMLGenerator
 --
 FileGetter parser;
-MethodsPpp methodPpp;
-FieldPpp fieldppp;
+MethodsParser methodparser;
+FieldParser fieldparser;
+ClassParser ClassParser 
 ArrayList&lt;String&gt; classname;
 HashMpa&lt;String, Obj&gt; argsmap;
 -
 public UMLGenerator(String[] args) throws  Exception
-public void parseNodes(Set&lt;ClassNode&gt; nodeList)
 public NodeRelation getNodes()
 
 </panel_attributes>
@@ -41,7 +41,7 @@ public NodeRelation getNodes()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>400</x>
+      <x>616</x>
       <y>216</y>
       <w>320</w>
       <h>128</h>
@@ -52,7 +52,7 @@ public NodeRelation getNodes()
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>944</x>
+      <x>1160</x>
       <y>424</y>
       <w>448</w>
       <h>56</h>
@@ -66,7 +66,7 @@ public void fileWrite(String fileName, List&lt;HashMap&gt; classdetails, List&lt
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>728</x>
+      <x>944</x>
       <y>512</y>
       <w>440</w>
       <h>56</h>
@@ -79,7 +79,7 @@ public void fileWrite(String fileName, List&lt;HashMap&gt; classdetails, List&lt
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>600</x>
+      <x>816</x>
       <y>608</y>
       <w>232</w>
       <h>72</h>
@@ -87,13 +87,14 @@ public void fileWrite(String fileName, List&lt;HashMap&gt; classdetails, List&lt
     <panel_attributes>Parsers
 &lt;&lt;interface&gt;&gt;
 --
-public String parser(List);</panel_attributes>
+public String parser(List);
+public String parseinfo(int,String,List);</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1072</x>
+      <x>1288</x>
       <y>472</y>
       <w>24</w>
       <h>56</h>
@@ -104,68 +105,71 @@ public String parser(List);</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>504</x>
+      <x>720</x>
       <y>760</y>
-      <w>168</w>
-      <h>56</h>
+      <w>200</w>
+      <h>112</h>
     </coordinates>
-    <panel_attributes>/FieldsPpp/
+    <panel_attributes>/FieldsParser/
 --
-public FieldsPpp(FieldsPpp other)
-public String parse()
+protected FieldsParser otherparser
+--
+public FieldsParser(FieldsParser other)
+public abstract String parse()
+public String parseinfo(int,String,List)
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>512</x>
+      <x>728</x>
       <y>1008</y>
       <w>168</w>
       <h>56</h>
     </coordinates>
-    <panel_attributes>PrivateFieldsPpp
+    <panel_attributes>PrivateFieldsParser
 --
-public PrivateFieldsPpp(FieldsPpp other)
+public PrivateFieldsParser(FieldsParser other)
 public String parse()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>392</x>
-      <y>808</y>
+      <x>608</x>
+      <y>856</y>
       <w>192</w>
-      <h>72</h>
+      <h>32</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>220.0;10.0;10.0;70.0</additional_attributes>
+    <additional_attributes>220.0;20.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>328</x>
+      <x>544</x>
       <y>1016</y>
       <w>168</w>
       <h>64</h>
     </coordinates>
-    <panel_attributes>ProtectedFieldsPpp
+    <panel_attributes>ProtectedFieldsParser
 --
-public ProtectedFieldsPpp(FieldsPpp other)
+public ProtectedFieldsParser(FieldsParser other)
 public String parse()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>304</x>
+      <x>520</x>
       <y>864</y>
       <w>168</w>
       <h>64</h>
     </coordinates>
-    <panel_attributes>PublicFieldsPpp
+    <panel_attributes>PublicFieldsParser
 --
-public PublicFieldsPpp(FieldsPpp other)
+public PublicFieldsParser(FieldsParser other)
 public String parse()
 
 </panel_attributes>
@@ -174,118 +178,122 @@ public String parse()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>416</x>
-      <y>808</y>
+      <x>632</x>
+      <y>864</y>
       <w>184</w>
-      <h>224</h>
+      <h>168</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>210.0;10.0;10.0;260.0</additional_attributes>
+    <additional_attributes>210.0;10.0;10.0;190.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>584</x>
-      <y>808</y>
+      <x>800</x>
+      <y>864</y>
       <w>32</w>
-      <h>216</h>
+      <h>160</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>20.0;10.0;10.0;250.0</additional_attributes>
+    <additional_attributes>20.0;10.0;10.0;180.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>992</x>
+      <x>1208</x>
       <y>952</y>
       <w>168</w>
       <h>56</h>
     </coordinates>
-    <panel_attributes>PrivateMethodsPpp
+    <panel_attributes>PrivateMethodsParser
 --
-public PrivateMethodsPpp(MethodsPpp other)
+public PrivateMethodsPpp(MethodsParser other)
 public String parse()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>808</x>
+      <x>1024</x>
       <y>944</y>
       <w>168</w>
       <h>64</h>
     </coordinates>
-    <panel_attributes>ProtectedMethodsPpp
+    <panel_attributes>ProtectedMethodsParser
 --
-public ProtectedMethodsPpp(MethodsPpp other)
+public ProtectedMethodsParser(MethodsParser other)
 public String parse()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>624</x>
+      <x>840</x>
       <y>928</y>
       <w>168</w>
       <h>64</h>
     </coordinates>
-    <panel_attributes>PublicMethodsPpp
+    <panel_attributes>PublicMethodsParser
 --
-public PublicMethodsPpp(MethodsPpp other)
+public PublicMethodsParser(MethodsParser other)
 public String parse()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>720</x>
+      <x>936</x>
       <y>760</y>
-      <w>168</w>
-      <h>56</h>
+      <w>232</w>
+      <h>104</h>
     </coordinates>
-    <panel_attributes>/MethodsPpp/
+    <panel_attributes>/MethodsParser/
 --
-public MethodsPpp(MethodsPpp other)
-public String parse()</panel_attributes>
+protected MethodsParser otherparser
+--
+public MethodsParser(MethodsParser other)
+public abstract String parse()
+public String parseinfo(int,String,List)
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>792</x>
-      <y>808</y>
+      <x>1008</x>
+      <y>856</y>
       <w>128</w>
-      <h>152</h>
+      <h>104</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;140.0;170.0</additional_attributes>
+    <additional_attributes>10.0;10.0;140.0;110.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>712</x>
-      <y>808</y>
+      <x>928</x>
+      <y>856</y>
       <w>88</w>
-      <h>136</h>
+      <h>88</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>90.0;10.0;10.0;150.0</additional_attributes>
+    <additional_attributes>90.0;10.0;10.0;90.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>808</x>
-      <y>808</y>
+      <x>1024</x>
+      <y>856</y>
       <w>280</w>
-      <h>160</h>
+      <h>112</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;330.0;180.0</additional_attributes>
+    <additional_attributes>10.0;10.0;330.0;120.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>616</x>
+      <x>832</x>
       <y>672</y>
       <w>88</w>
       <h>104</h>
@@ -296,7 +304,7 @@ public String parse()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>712</x>
+      <x>928</x>
       <y>672</y>
       <w>104</w>
       <h>104</h>
@@ -307,7 +315,7 @@ public String parse()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>696</x>
+      <x>912</x>
       <y>216</y>
       <w>40</w>
       <h>408</h>
@@ -318,7 +326,7 @@ public String parse()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>728</x>
+      <x>944</x>
       <y>216</y>
       <w>408</w>
       <h>224</h>
@@ -329,7 +337,7 @@ public String parse()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1280</x>
+      <x>1496</x>
       <y>528</y>
       <w>168</w>
       <h>56</h>
@@ -343,7 +351,7 @@ public void print(Path path)</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1280</x>
+      <x>1496</x>
       <y>624</y>
       <w>168</w>
       <h>56</h>
@@ -356,7 +364,7 @@ public void print(Path path)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1360</x>
+      <x>1576</x>
       <y>576</y>
       <w>24</w>
       <h>64</h>
@@ -367,7 +375,7 @@ public void print(Path path)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1296</x>
+      <x>1512</x>
       <y>472</y>
       <w>88</w>
       <h>72</h>
@@ -379,8 +387,8 @@ has a</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>288</x>
-      <y>632</y>
+      <x>512</x>
+      <y>608</y>
       <w>280</w>
       <h>56</h>
     </coordinates>
@@ -393,7 +401,7 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>688</x>
+      <x>904</x>
       <y>0</y>
       <w>192</w>
       <h>40</h>
@@ -406,7 +414,7 @@ pubic static void main(String[] args)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>720</x>
+      <x>936</x>
       <y>32</y>
       <w>80</w>
       <h>64</h>
@@ -417,7 +425,7 @@ pubic static void main(String[] args)</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1112</x>
+      <x>1328</x>
       <y>184</y>
       <w>224</w>
       <h>96</h>
@@ -431,7 +439,7 @@ bg=blue
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>232</x>
+      <x>448</x>
       <y>104</y>
       <w>272</w>
       <h>104</h>
@@ -449,7 +457,7 @@ public List&lt;String&gt; getRelations();</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>488</x>
+      <x>704</x>
       <y>136</y>
       <w>168</w>
       <h>32</h>
@@ -461,7 +469,7 @@ is inner class of</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>176</x>
+      <x>392</x>
       <y>440</y>
       <w>424</w>
       <h>56</h>
@@ -474,7 +482,7 @@ void addClasses(ArrayList&lt;String), set&lt;ClassNode&gt; nodes, List&lt;String
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>384</x>
+      <x>600</x>
       <y>376</y>
       <w>24</w>
       <h>80</h>
@@ -485,7 +493,7 @@ void addClasses(ArrayList&lt;String), set&lt;ClassNode&gt; nodes, List&lt;String
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>984</x>
+      <x>1200</x>
       <y>752</y>
       <w>168</w>
       <h>56</h>
@@ -498,12 +506,93 @@ public String parse()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>784</x>
+      <x>1000</x>
       <y>672</y>
       <w>304</w>
       <h>96</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;360.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>232</x>
+      <y>800</y>
+      <w>232</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>/ClassParser/
+--
+protected ClassParser otherparser
+--
+public ClassParser(ClassParser other)
+public abstract String parse()
+public String parseinfo(int,String,List)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>88</x>
+      <y>968</y>
+      <w>208</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>PublicClassParser
+--
+public PublicFieldsParser(FieldsParser other)
+public String parse()
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>304</x>
+      <y>968</y>
+      <w>224</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>ProtectedClassParser
+--
+public ProtectedFieldsParser(FieldsParser other)
+public String parse()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>216</x>
+      <y>896</y>
+      <w>120</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>130.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>328</x>
+      <y>896</y>
+      <w>32</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;20.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>336</x>
+      <y>672</y>
+      <w>560</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>680.0;10.0;10.0;160.0</additional_attributes>
   </element>
 </diagram>
