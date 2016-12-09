@@ -11,7 +11,7 @@ import org.objectweb.asm.tree.ClassNode;
 public class NodeParseToUML {
 	private MethodsPpp mppp;
 	private FieldsPpp fppp;
-	public NodeParseToUML(MethodsPpp mppp,FieldsPpp fppp,List<Ppp> otherppp){
+	public NodeParseToUML(MethodsPpp mppp,FieldsPpp fppp,List<Parser> otherppp){
 		this.mppp=mppp;
 		this.fppp=fppp;
 	}
