@@ -31,10 +31,12 @@ public class ClassFileGetter implements FileGetter {
 				nodes.add(v);
 				for(String cns: (List<String>)v.interfaces){
 					if(cns!=null){
-					ClassNode cn= new ClassNode();
+					ClassReader cr = new ClassReader(cns);
+					ClassNode cn = new ClassNode();
+					cr.accept(cn, ClassReader.EXPAND_FRAMES);
 					st.push(cn);
-					relations.add(v.name + " implements " + cn.name);
-					if(v.superName==null){
+					relations.add(v.name + " implements " + cns);
+					if(v.superName!=null){
 					ClassReader readertemp = new ClassReader(v.superName);
 					ClassNode classNodetemp = new ClassNode();
 					readertemp.accept(classNodetemp, ClassReader.EXPAND_FRAMES);

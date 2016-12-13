@@ -8,8 +8,6 @@ import com.sun.xml.internal.ws.org.objectweb.asm.Opcodes;
 
 public class ProtectedFieldsParser extends FieldsParser {
 	
-
-	
 	public ProtectedFieldsParser(FieldsParser other){
 		super(other);
 		this.opcode=Opcodes.ACC_PROTECTED;

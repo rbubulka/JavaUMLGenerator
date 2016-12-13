@@ -31,6 +31,7 @@ public class UMLGenerator {
 	    put("-publicMethod",new PublicMethodsParser(null));
 	    put("-protectedMethod",new ProtectedMethodsParser(new PublicMethodsParser(null)));
 	    put("-privateMethod",new PrivateMethodsParser(new ProtectedMethodsParser(new PublicMethodsParser(null))));
+	    put("-noMethod",new NoMethod(null));
 	    put("-publicField",new PublicFieldsParser(null));
 	    put("-protectedField",new ProtectedFieldsParser(new PublicFieldsParser(null)));
 	    put("-privateField",new PrivateFieldsParser(new ProtectedFieldsParser(new PublicFieldsParser(null))));
@@ -64,6 +65,8 @@ public class UMLGenerator {
 				
 				
 			}
+			
+		}
 			NodeRelation nodeRelations = this.getNodes();
 			Set<ClassNode> nodelist= nodeRelations.getNodes();
 			List<String> relations = nodeRelations.getRelations();
@@ -71,7 +74,6 @@ public class UMLGenerator {
 			NodeParseToUML nptu=new NodeParseToUML(this.methodparser, this.fieldparser, this.classparser, null);
 			List<HashMap<String,String>> parsedstring=nptu.doParse(nodelist);
 			this.outputmaker.fileWrite("tomato", parsedstring, relations);
-		}
 		
 		
 	}
