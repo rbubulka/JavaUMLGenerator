@@ -30,14 +30,16 @@ public class ClassFileGetter implements FileGetter {
 				visited.add(v.name);
 				nodes.add(v);
 				for(String cns: (List<String>)v.interfaces){
+					if(cns!=null){
 					ClassNode cn= new ClassNode();
 					st.push(cn);
 					relations.add(v.name + " implements " + cn.name);
+					if(v.superName==null){
 					ClassReader readertemp = new ClassReader(v.superName);
 					ClassNode classNodetemp = new ClassNode();
 					readertemp.accept(classNodetemp, ClassReader.EXPAND_FRAMES);
 					st.push(classNodetemp);
-					relations.add(v.name + " extends " + v.superName);
+					relations.add(v.name + " extends " + v.superName);}}
 				}
 			}
 		}
