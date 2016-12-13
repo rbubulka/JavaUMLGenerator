@@ -25,7 +25,7 @@ public abstract class ClassParser implements Parser {
 			}
 		}
 		if(otherparser !=  null)this.otherparser.parse(nodes);
-		return "";
+		return result.toString();
 	}
 
 

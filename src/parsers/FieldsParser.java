@@ -19,7 +19,7 @@ public abstract class FieldsParser implements Parser {
 		StringBuilder result = new StringBuilder();
 		for(FieldNode fn : (List<FieldNode>) fields ){
 			if((fn.access&opcode)>0){
-			result.append(text+" "+fn.desc + fn.name+"\n");
+			result.append(text+" "+fn.desc +" "+ fn.name+"\n");
 			}
 		}
 		if(otherparser !=  null)this.otherparser.parse(fields);

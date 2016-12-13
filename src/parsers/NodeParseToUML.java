@@ -1,6 +1,7 @@
 package parsers;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -24,9 +25,7 @@ public class NodeParseToUML {
 		List<HashMap<String,String>> classInfoList = new ArrayList<>();
 		for(ClassNode n: nodes){
 			HashMap<String, String> classInfo = new HashMap<>();
-			ArrayList<ClassNode> temp=new ArrayList<>();
-			temp.add(n);
-			classInfo.put("Class",cparser.parse(temp));
+			classInfo.put("Class",cparser.parse(Collections.singletonList(n)));
 			classInfo.put("Method",mparser.parse(n.methods));
 			classInfo.put("Field",fparser.parse(n.fields));
 			classInfoList.add(classInfo);
