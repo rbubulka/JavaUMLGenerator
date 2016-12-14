@@ -14,7 +14,7 @@ public class ClassFileGetter implements FileGetter {
 
 
 	@Override
-	public void addClasses(ArrayList<String> classnames,Set<ClassNode> nodes, List<String> relations) throws IOException {
+	public void addClasses(ArrayList<String> classnames,Set<ClassNode> nodes, List<String> relations, boolean recursive) throws IOException {
 		for(String cname:classnames){
 			ClassReader reader = new ClassReader(cname);
 			ClassNode classNode = new ClassNode();

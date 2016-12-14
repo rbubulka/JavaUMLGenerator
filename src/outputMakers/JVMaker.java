@@ -32,17 +32,17 @@ public class JVMaker implements OutputMaker {
 			// check if abstract
 			String temp1 = "";
 			String temp2 = "";
-			if (splited[5].equals("true")) {
-				temp1 = "<I>";
-				temp2 = "</I>";
+			if (splited[5].toLowerCase().trim().equals("true")&&splited[3].toLowerCase().trim().equals("false")) {
+				temp1 = "\\<i\\>";
+				temp2 = "\\</I\\>";
 			}
 			// check if interface
 			if (splited[3].equals("true")) {
-				classDetailString.append("<<interface>>\n");
+				classDetailString.append("\\<\\<interface\\>\\>\\n");
 			}
 			// add in class name to the uml object
 			classDetailString.append(temp1 + splitclassname(splited[1]) + temp2);
-			classDetailString.append("|");
+			classDetailString.append("|\\l");
 			// field
 			String fieldinfo = map.get("Field");
 			String[] fields = fieldinfo.split("\n");
@@ -50,7 +50,7 @@ public class JVMaker implements OutputMaker {
 				if (field != null && !field.equals("")) {
 					String[] splitedfield = field.split(" ");
 					classDetailString.append(ppp.get(splitedfield[0]));
-					classDetailString.append(splitedfield[1] + " : " + splitclassname(splitedfield[2]) + "\n");
+					classDetailString.append(splitclassname(splitedfield[1]) + " : " + splitclassname(splitedfield[2]) + "\\l");
 				}
 				
 			}
@@ -62,15 +62,18 @@ public class JVMaker implements OutputMaker {
 				if(method!=null && !method.equals("")){
 					String[] splitedmethod=method.split(" ");
 					classDetailString.append(ppp.get(splitedmethod[0]));
-					classDetailString.append(splitedmethod[1]);
+					classDetailString.append(splitedmethod[1].replaceAll("<", "\\\\<").replaceAll(">", "\\\\>"));
 					if(!splitedmethod[2].equals("null")){
 					String[] inputAndOther=splitedmethod[2].split(Pattern.quote(")"));
-					
-					classDetailString.append(inputAndOther[0].replaceAll(";", " "));
+					String[] inputs=inputAndOther[0].split(";");
+					classDetailString.append("(");
+					for(String input:inputs){
+	classDetailString.append(this.splitclassname(input));}
+//					classDetailString.append(inputAndOther[0].replaceAll(";", " "));
 					classDetailString.append(")");
 					classDetailString.append(" : ");
 					classDetailString.append(this.splitclassname(inputAndOther[1]));}
-					classDetailString.append("\n");
+					classDetailString.append("\\l");
 				}
 			}
 			
@@ -82,8 +85,8 @@ public class JVMaker implements OutputMaker {
 		}
 
 		HashMap<String, String> details = new HashMap<>();
-		details.put("implements", "[arrowhead = onormal, style = \"dashed\"]");
-		details.put("extends", "[arrowhead=onormal]");
+		details.put("implements", "[arrowhead = \"onormal\", style = \"dashed\"]");
+		details.put("extends", "[arrowhead=\"onormal\"]");
 		StringBuilder relationstring = generateRelationsString(relations, details);
 
 //		 System.out.println(classDetailString.toString());
@@ -93,7 +96,7 @@ public class JVMaker implements OutputMaker {
 		if (!file.exists()) {
 			file.createNewFile();
 		}
-		byte[] contentInBytes = (classDetailString.toString()+relationstring.toString()).getBytes();
+		byte[] contentInBytes = ("digraph G { rankdir=BT;\n"+classDetailString.toString()+relationstring.toString()+"}").getBytes();
 
 		fop.write(contentInBytes);
 		fop.flush();
@@ -104,7 +107,7 @@ public class JVMaker implements OutputMaker {
 		StringBuilder relationstring = new StringBuilder();
 		for (String arrowstring : relations) {
 			String[] ls = arrowstring.split(" ");
-			relationstring.append(ls[0] + " -> " + ls[2] + " " + details.get(ls[1]) + "\n");
+			relationstring.append(splitclassname(ls[0]) + " -> " + splitclassname(ls[2]) + " " + details.get(ls[1]) + ";\n");
 
 		}
 		return relationstring;

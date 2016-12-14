@@ -25,7 +25,7 @@ public class UMLGenerator {
 	private FieldsParser fieldparser = new PublicFieldsParser(null);
 	private ClassParser classparser = new PublicClassParser(null);
 	private OutputMaker outputmaker = new JVMaker();
-	private String output = "C:\\Users\\bubulkr\\Desktop\\output.txt";
+	private String output = "C:\\Users\\bubulkr\\Desktop\\output.dot";
 
 	private ArrayList<String> classnames = new ArrayList<String>();
 	private HashMap<String, Object> argsmap = new HashMap<String, Object>() {
