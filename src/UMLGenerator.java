@@ -25,7 +25,8 @@ public class UMLGenerator {
 	private FieldsParser fieldparser = new PublicFieldsParser(null);
 	private ClassParser classparser = new PublicClassParser(null);
 	private OutputMaker outputmaker = new JVMaker();
-	private String output = "C:\\Users\\bubulkr\\Desktop\\output.dot";
+	private String output = "C:\\Users\\bubulkr\\Desktop\\output.";
+	private boolean recursive = false;
 
 	private ArrayList<String> classnames = new ArrayList<String>();
 	private HashMap<String, Object> argsmap = new HashMap<String, Object>() {
@@ -40,6 +41,7 @@ public class UMLGenerator {
 			put("-publicClass", new PublicClassParser(null));
 			put("-protectedClass", new ProtectedClassParser(new PublicClassParser(null)));
 			put("-JVMaker", new JVMaker());
+			put("-recursive", null);
 			put("-o=", null);
 		}
 	};
@@ -56,7 +58,9 @@ public class UMLGenerator {
 					classparser = (ClassParser) this.argsmap.get(a);
 				} else if (a.contains("JVM")) {
 					outputmaker = (JVMaker) this.argsmap.get(a);
-				} 
+				} else if(a.contains("-recursive")){
+					this.recursive = true;
+				}
 			} else if(a.contains("-o=")){
 					this.output = a.substring(3);				
 			}else{
@@ -64,7 +68,7 @@ public class UMLGenerator {
 			}
 
 		}
-		NodeRelation nodeRelations = this.getNodes();
+		NodeRelation nodeRelations = this.getNodes(this.recursive);
 		Set<ClassNode> nodelist = nodeRelations.getNodes();
 		List<String> relations = nodeRelations.getRelations();
 
@@ -74,10 +78,10 @@ public class UMLGenerator {
 
 	}
 
-	public NodeRelation getNodes() throws IOException {
+	public NodeRelation getNodes(boolean recursive) throws IOException {
 		HashSet<ClassNode> nodes = new HashSet<ClassNode>();
 		ArrayList<String> relations = new ArrayList<>();
-		this.parser.addClasses(this.classnames, nodes, relations);
+		this.parser.addClasses(this.classnames, nodes, relations,recursive);
 		return new NodeRelation(nodes, relations);
 
 	}

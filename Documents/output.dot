@@ -13,7 +13,7 @@ label= "{\<\<interface\>\>\nCollection|\l|+size\l+isEmpty\l+contains\l+iterator(
 
 "AbstractSet" [
 shape="record",
-label= "{<I>AbstractSet</I>|\l|#\<init\>\l+equals\l+hashCode\l+removeAll(Collection) : Z\l}"];
+label= "{\<I\>AbstractSet\</I\>|\l|#\<init\>\l+equals\l+hashCode\l+removeAll(Collection) : Z\l}"];
 
 "Cloneable" [
 shape="record",
@@ -33,7 +33,7 @@ label= "{\<\<interface\>\>\nSortedSet|\l|+comparator() : ComparatorTE\l+subSet(T
 
 "AbstractCollection" [
 shape="record",
-label= "{<I>AbstractCollection</I>|\l-I : MAX_ARRAY_SIZE\l|-finishToArray(ObjectTTIterator) : TT\l-hugeCapacity\l#\<init\>\l+iterator() : IteratorTE\l+size\l+isEmpty\l+contains\l+toArray\l+toArray(ObjectTT) : TT\l+add(TE) : Z\l+remove\l+containsAll(Collection) : Z\l+addAll(CollectionTE) : Z\l+removeAll(Collection) : Z\l+retainAll(Collection) : Z\l+clear\l+toString\l}"];
+label= "{\<I\>AbstractCollection\</I\>|\l-I : MAX_ARRAY_SIZE\l|-finishToArray(ObjectTTIterator) : TT\l-hugeCapacity\l#\<init\>\l+iterator() : IteratorTE\l+size\l+isEmpty\l+contains\l+toArray\l+toArray(ObjectTT) : TT\l+add(TE) : Z\l+remove\l+containsAll(Collection) : Z\l+addAll(CollectionTE) : Z\l+removeAll(Collection) : Z\l+retainAll(Collection) : Z\l+clear\l+toString\l}"];
 
 "Iterable" [
 shape="record",

@@ -28,13 +28,13 @@ public class JVMaker implements OutputMaker {
 			String[] splited = classinfo.split(" ");
 			classDetailString.append("\"" + splitclassname(splited[1]) + "\" [\n");
 			classDetailString.append("shape=\"record\",\n");
-			classDetailString.append("label= <");
+			classDetailString.append("label= \"{");
 			// check if abstract
 			String temp1 = "";
 			String temp2 = "";
 			if (splited[5].toLowerCase().trim().equals("true")&&splited[3].toLowerCase().trim().equals("false")) {
-				temp1 = "<I>";
-				temp2 = "</I>";
+				temp1 = "\\<I\\>";
+				temp2 = "\\</I\\>";
 			}
 			// check if interface
 			if (splited[3].equals("true")) {
@@ -78,7 +78,7 @@ public class JVMaker implements OutputMaker {
 			}
 			
 			// close label
-			classDetailString.append(">");
+			classDetailString.append("}\"");
 			// close class
 			classDetailString.append("];\n\n");
 
