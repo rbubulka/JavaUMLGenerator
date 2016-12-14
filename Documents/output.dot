@@ -1,64 +1,18 @@
 digraph G { rankdir=BT;
-"NavigableSet" [
+"Container" [
 shape="record",
-label= "{\<\<interface\>\>\nNavigableSet|\l|+lower(TE) : TE\l+floor(TE) : TE\l+ceiling(TE) : TE\l+higher(TE) : TE\l+pollFirst() : TE\l+pollLast() : TE\l+iterator() : IteratorTE\l+descendingSet() : NavigableSetTE\l+descendingIterator() : IteratorTE\l+subSet(TEZTEZ) : NavigableSetTE\l+headSet(TEZ) : NavigableSetTE\l+tailSet(TEZ) : NavigableSetTE\l+subSet(TETE) : SortedSetTE\l+headSet(TE) : SortedSetTE\l+tailSet(TE) : SortedSetTE\l}"];
-
-"TreeSet" [
-shape="record",
-label= "{TreeSet|\l-NavigableMap : m\l-Object : PRESENT\l-J : serialVersionUID\l|-writeObject\l-readObject\l+\<init\>\l+\<init\>(ComparatorTE) : V\l+\<init\>(CollectionTE) : V\l+\<init\>(SortedSetTE) : V\l+iterator() : IteratorTE\l+descendingIterator() : IteratorTE\l+descendingSet() : NavigableSetTE\l+size\l+isEmpty\l+contains\l+add(TE) : Z\l+remove\l+clear\l+addAll(CollectionTE) : Z\l+subSet(TEZTEZ) : NavigableSetTE\l+headSet(TEZ) : NavigableSetTE\l+tailSet(TEZ) : NavigableSetTE\l+subSet(TETE) : SortedSetTE\l+headSet(TE) : SortedSetTE\l+tailSet(TE) : SortedSetTE\l+comparator() : ComparatorTE\l+first() : TE\l+last() : TE\l+lower(TE) : TE\l+floor(TE) : TE\l+ceiling(TE) : TE\l+higher(TE) : TE\l+pollFirst() : TE\l+pollLast() : TE\l+clone\l+spliterator() : SpliteratorTE\l}"];
-
-"Collection" [
-shape="record",
-label= "{\<\<interface\>\>\nCollection|\l|+size\l+isEmpty\l+contains\l+iterator() : IteratorTE\l+toArray\l+toArray(ObjectTT) : TT\l+add(TE) : Z\l+remove\l+containsAll(Collection) : Z\l+addAll(CollectionTE) : Z\l+removeAll(Collection) : Z\l+removeIf(PredicateTE) : Z\l+retainAll(Collection) : Z\l+clear\l+equals\l+hashCode\l+spliterator() : SpliteratorTE\l+stream() : StreamTE\l+parallelStream() : StreamTE\l}"];
-
-"AbstractSet" [
-shape="record",
-label= "{\<I\>AbstractSet\</I\>|\l|#\<init\>\l+equals\l+hashCode\l+removeAll(Collection) : Z\l}"];
-
-"Cloneable" [
-shape="record",
-label= "{\<\<interface\>\>\nCloneable|\l|}"];
-
-"Object" [
-shape="record",
-label= "{Object|\l|-registerNatives\l#clone\l#finalize\l+\<init\>\l+getClass() : Class\l+hashCode\l+equals\l+toString\l+notify\l+notifyAll\l+wait\l+wait\l+wait\l}"];
+label= "{Container|\l-PlatformLogger : log\l-PlatformLogger : eventLog\l-Component : EMPTY_ARRAY\l-List : component\l-LightweightDispatcher : dispatcher\l-FocusTraversalPolicy : focusTraversalPolicy\l-Z : focusCycleRoot\l-Z : focusTraversalPolicyProvider\l-Set : printingThreads\l-Z : printing\l-J : serialVersionUID\l-I : numOfHWComponents\l-I : numOfLWComponents\l-PlatformLogger : mixingLog\l-ObjectStreamField : serialPersistentFields\l-Z : isJavaAwtSmartInvalidate\l-Z : descendUnconditionallyWhenValidating\l-I : containerSerializedDataVersion\l|-initIDs\l-checkAddToSelf\l-checkNotAWindow\l-checkAdding\l-removeDelicately\l-isRemoveNotifyNeeded\l-reparentTraverse\l-reparentChild\l-addDelicately\l-getListenersCount\l-getMouseEventTarget\l-getMouseEventTargetImpl\l-getChildAt\l-startLWModal\l-stopLWModal\l-findTraversalRoot\l-isParentOf\l-writeObject\l-readObject\l-getTopmostComponentIndex\l-getBottommostComponentIndex\l-recursiveShowHeavyweightChildren\l-recursiveHideHeavyweightChildren\l-recursiveRelocateHeavyweightChildren\l#addImpl\l#validateTree\l#processEvent\l#processContainerEvent\l#paramString\l+\<init\>\l+getComponentCount\l+countComponents\l+getComponent\l+getComponents\l+getInsets\l+insets\l+add\l+add\l+add\l+setComponentZOrder\l+getComponentZOrder\l+add\l+add\l+remove\l+remove\l+removeAll\l+getLayout\l+setLayout\l+doLayout\l+layout\l+isValidateRoot\l+invalidate\l+validate\l+setFont\l+getPreferredSize\l+preferredSize\l+getMinimumSize\l+minimumSize\l+getMaximumSize\l+getAlignmentX\l+getAlignmentY\l+paint\l+update\l+print\l+paintComponents\l+printComponents\l+addContainerListener\l+removeContainerListener\l+getContainerListeners\l+getListeners(EventListenerClassTT) : TT\l+deliverEvent\l+getComponentAt\l+locate\l+getComponentAt\l+getMousePosition\l+findComponentAt\l+findComponentAt\l+addNotify\l+removeNotify\l+isAncestorOf\l+list\l+list\l+setFocusTraversalKeys(AWTKeyStroke) : V\l+getFocusTraversalKeys(I) : AWTKeyStroke\l+areFocusTraversalKeysSet\l+isFocusCycleRoot\l+setFocusTraversalPolicy\l+getFocusTraversalPolicy\l+isFocusTraversalPolicySet\l+setFocusCycleRoot\l+isFocusCycleRoot\l+setFocusTraversalPolicyProvider\l+isFocusTraversalPolicyProvider\l+transferFocusDownCycle\l+applyComponentOrientation\l+addPropertyChangeListener\l+addPropertyChangeListener\l}"];
 
 "Serializable" [
 shape="record",
 label= "{\<\<interface\>\>\nSerializable|\l|}"];
 
-"SortedSet" [
+"JComponent" [
 shape="record",
-label= "{\<\<interface\>\>\nSortedSet|\l|+comparator() : ComparatorTE\l+subSet(TETE) : SortedSetTE\l+headSet(TE) : SortedSetTE\l+tailSet(TE) : SortedSetTE\l+first() : TE\l+last() : TE\l+spliterator() : SpliteratorTE\l}"];
+label= "{\<I\>JComponent\</I\>|\l-String : uiClassID\l-Hashtable : readObjectCallbacks\l-Set : managingFocusForwardTraversalKeys\l-Set : managingFocusBackwardTraversalKeys\l-I : NOT_OBSCURED\l-I : PARTIALLY_OBSCURED\l-I : COMPLETELY_OBSCURED\l-Object : INPUT_VERIFIER_SOURCE_KEY\l-Z : isAlignmentXSet\l-F : alignmentX\l-Z : isAlignmentYSet\l-F : alignmentY\l-ArrayTable : clientProperties\l-VetoableChangeSupport : vetoableChangeSupport\l-Z : autoscrolls\l-Border : border\l-I : flags\l-InputVerifier : inputVerifier\l-Z : verifyInputWhenFocusTarget\l-String : KEYBOARD_BINDINGS_KEY\l-String : WHEN_IN_FOCUSED_WINDOW_BINDINGS\l-String : NEXT_FOCUS\l-JPopupMenu : popupMenu\l-I : IS_DOUBLE_BUFFERED\l-I : ANCESTOR_USING_BUFFER\l-I : IS_PAINTING_TILE\l-I : IS_OPAQUE\l-I : KEY_EVENTS_ENABLED\l-I : FOCUS_INPUTMAP_CREATED\l-I : ANCESTOR_INPUTMAP_CREATED\l-I : WIF_INPUTMAP_CREATED\l-I : ACTIONMAP_CREATED\l-I : CREATED_DOUBLE_BUFFER\l-I : IS_PRINTING\l-I : IS_PRINTING_ALL\l-I : IS_REPAINTING\l-I : WRITE_OBJ_COUNTER_FIRST\l-I : RESERVED_1\l-I : RESERVED_2\l-I : RESERVED_3\l-I : RESERVED_4\l-I : RESERVED_5\l-I : RESERVED_6\l-I : WRITE_OBJ_COUNTER_LAST\l-I : REQUEST_FOCUS_DISABLED\l-I : INHERITS_POPUP_MENU\l-I : OPAQUE_SET\l-I : AUTOSCROLLS_SET\l-I : FOCUS_TRAVERSAL_KEYS_FORWARD_SET\l-I : FOCUS_TRAVERSAL_KEYS_BACKWARD_SET\l-AtomicBoolean : revalidateRunnableScheduled\l-List : tempRectangles\l-InputMap : focusInputMap\l-InputMap : ancestorInputMap\l-ComponentInputMap : windowInputMap\l-ActionMap : actionMap\l-String : defaultLocale\l-Component : componentObtainingGraphicsFrom\l-Object : componentObtainingGraphicsFromLock\l-Object : aaTextInfo\l|-isComponentObtainingGraphicsFrom\l-fetchRectangle\l-recycleRectangle\l-uninstallUIAndProperties\l-adjustPaintFlags\l-registerNextFocusableComponent\l-registerNextFocusableComponent\l-deregisterNextFocusableComponent\l-registerWithKeyboardManager\l-unregisterWithKeyboardManager\l-registerWithKeyboardManager\l-unregisterWithKeyboardManager\l-getClientProperties\l-getAncestorNotifier\l-getObscuredState\l-setFlag\l-getFlag\l-readObject\l-writeObject\l-lambda$revalidate$0\l#setUI\l#getComponentGraphics\l#paintComponent\l#paintChildren\l#paintBorder\l#printComponent\l#printChildren\l#printBorder\l#requestFocusInWindow\l#processComponentKeyEvent\l#processKeyEvent\l#processKeyBinding\l#processMouseEvent\l#processMouseMotionEvent\l#fireVetoableChange\l#isPaintingOrigin\l#paramString\l+setInheritsPopupMenu\l+getInheritsPopupMenu\l+setComponentPopupMenu\l+getComponentPopupMenu\l+\<init\>\l+updateUI\l+getUIClassID\l+update\l+paint\l+printAll\l+print\l+isPaintingTile\l+isPaintingForPrint\l+isManagingFocus\l+setNextFocusableComponent\l+getNextFocusableComponent\l+setRequestFocusEnabled\l+isRequestFocusEnabled\l+requestFocus\l+requestFocus\l+requestFocusInWindow\l+grabFocus\l+setVerifyInputWhenFocusTarget\l+getVerifyInputWhenFocusTarget\l+getFontMetrics\l+setPreferredSize\l+getPreferredSize\l+setMaximumSize\l+getMaximumSize\l+setMinimumSize\l+getMinimumSize\l+contains\l+setBorder\l+getBorder\l+getInsets\l+getInsets\l+getAlignmentY\l+setAlignmentY\l+getAlignmentX\l+setAlignmentX\l+setInputVerifier\l+getInputVerifier\l+getGraphics\l+setDebugGraphicsOptions\l+getDebugGraphicsOptions\l+registerKeyboardAction\l+registerKeyboardAction\l+unregisterKeyboardAction\l+getRegisteredKeyStrokes\l+getConditionForKeyStroke\l+getActionForKeyStroke\l+resetKeyboardActions\l+setInputMap\l+getInputMap\l+getInputMap\l+setActionMap\l+getActionMap\l+getBaseline\l+getBaselineResizeBehavior\l+requestDefaultFocus\l+setVisible\l+setEnabled\l+setForeground\l+setBackground\l+setFont\l+getDefaultLocale\l+setDefaultLocale\l+setToolTipText\l+getToolTipText\l+getToolTipText\l+getToolTipLocation\l+getPopupLocation\l+createToolTip\l+scrollRectToVisible\l+setAutoscrolls\l+getAutoscrolls\l+setTransferHandler\l+getTransferHandler\l+enable\l+disable\l+getClientProperty\l+putClientProperty\l+setFocusTraversalKeys(AWTKeyStroke) : V\l+isLightweightComponent\l+reshape\l+getBounds\l+getSize\l+getLocation\l+getX\l+getY\l+getWidth\l+getHeight\l+isOpaque\l+setOpaque\l+computeVisibleRect\l+getVisibleRect\l+firePropertyChange\l+firePropertyChange\l+firePropertyChange\l+addVetoableChangeListener\l+removeVetoableChangeListener\l+getVetoableChangeListeners\l+getTopLevelAncestor\l+addAncestorListener\l+removeAncestorListener\l+getAncestorListeners\l+getListeners(EventListenerClassTT) : TT\l+addNotify\l+removeNotify\l+repaint\l+repaint\l+revalidate\l+isValidateRoot\l+isOptimizedDrawingEnabled\l+paintImmediately\l+paintImmediately\l+setDoubleBuffered\l+isDoubleBuffered\l+getRootPane\l+hide\l}"];
 
-"AbstractCollection" [
-shape="record",
-label= "{\<I\>AbstractCollection\</I\>|\l-I : MAX_ARRAY_SIZE\l|-finishToArray(ObjectTTIterator) : TT\l-hugeCapacity\l#\<init\>\l+iterator() : IteratorTE\l+size\l+isEmpty\l+contains\l+toArray\l+toArray(ObjectTT) : TT\l+add(TE) : Z\l+remove\l+containsAll(Collection) : Z\l+addAll(CollectionTE) : Z\l+removeAll(Collection) : Z\l+retainAll(Collection) : Z\l+clear\l+toString\l}"];
-
-"Iterable" [
-shape="record",
-label= "{\<\<interface\>\>\nIterable|\l|+iterator() : IteratorTT\l+forEach(ConsumerTT) : V\l+spliterator() : SpliteratorTT\l}"];
-
-"Set" [
-shape="record",
-label= "{\<\<interface\>\>\nSet|\l|+size\l+isEmpty\l+contains\l+iterator() : IteratorTE\l+toArray\l+toArray(ObjectTT) : TT\l+add(TE) : Z\l+remove\l+containsAll(Collection) : Z\l+addAll(CollectionTE) : Z\l+retainAll(Collection) : Z\l+removeAll(Collection) : Z\l+clear\l+equals\l+hashCode\l+spliterator() : SpliteratorTE\l}"];
-
-TreeSet -> NavigableSet [arrowhead = "onormal", style = "dashed"];
-TreeSet -> AbstractSet [arrowhead="onormal"];
-TreeSet -> Cloneable [arrowhead = "onormal", style = "dashed"];
-TreeSet -> AbstractSet [arrowhead="onormal"];
-TreeSet -> Serializable [arrowhead = "onormal", style = "dashed"];
-TreeSet -> AbstractSet [arrowhead="onormal"];
-AbstractSet -> Set [arrowhead = "onormal", style = "dashed"];
-AbstractSet -> AbstractCollection [arrowhead="onormal"];
-AbstractCollection -> Collection [arrowhead = "onormal", style = "dashed"];
-AbstractCollection -> Object [arrowhead="onormal"];
-Collection -> Iterable [arrowhead = "onormal", style = "dashed"];
-Collection -> Object [arrowhead="onormal"];
-Set -> Collection [arrowhead = "onormal", style = "dashed"];
-Set -> Object [arrowhead="onormal"];
-NavigableSet -> SortedSet [arrowhead = "onormal", style = "dashed"];
-NavigableSet -> Object [arrowhead="onormal"];
-SortedSet -> Set [arrowhead = "onormal", style = "dashed"];
-SortedSet -> Object [arrowhead="onormal"];
+JComponent -> Serializable [arrowhead = "onormal", style = "dashed"];
+JComponent -> Container [arrowhead="onormal"];
+JComponent -> TransferHandlerHasGetTransferHandler [arrowhead = "onormal", style = "dashed"];
+JComponent -> Container [arrowhead="onormal"];
 }

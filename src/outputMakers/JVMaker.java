@@ -8,8 +8,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class JVMaker implements OutputMaker {
+import printing.*;
 
+public class JVMaker implements OutputMaker {
+	private Printer printer=new GVFilePrinter();;
 	public void fileWrite(String filePath, List<HashMap<String, String>> classdetails, List<String> relations) throws IOException {
 
 		StringBuilder classDetailString = new StringBuilder();
@@ -101,6 +103,8 @@ public class JVMaker implements OutputMaker {
 		fop.write(contentInBytes);
 		fop.flush();
 		fop.close();
+		printer.print(filePath);
+		
 	}
 
 	private StringBuilder generateRelationsString(List<String> relations, HashMap<String, String> details) {

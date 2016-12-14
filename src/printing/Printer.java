@@ -1,5 +1,5 @@
 package printing;
 
 public interface Printer {
-	public void print();
+	public void print(String path);
 }
