@@ -1,12 +1,16 @@
 package outputMakers;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
 public class JVMaker implements OutputMaker {
 
-	public void fileWrite(String fileName, List<HashMap<String, String>> classdetails, List<String> relations) {
+	public void fileWrite(String filePath, List<HashMap<String, String>> classdetails, List<String> relations) throws IOException {
 
 		StringBuilder classDetailString = new StringBuilder();
 		HashMap<String, String> ppp = new HashMap<>();
@@ -82,9 +86,18 @@ public class JVMaker implements OutputMaker {
 		details.put("extends", "[arrowhead=onormal]");
 		StringBuilder relationstring = generateRelationsString(relations, details);
 
-		 System.out.println(classDetailString.toString());
+//		 System.out.println(classDetailString.toString());
 		// System.out.println(relationstring.toString());
+		File file = new File(filePath);
+		FileOutputStream fop = new FileOutputStream(file);
+		if (!file.exists()) {
+			file.createNewFile();
+		}
+		byte[] contentInBytes = (classDetailString.toString()+relationstring.toString()).getBytes();
 
+		fop.write(contentInBytes);
+		fop.flush();
+		fop.close();
 	}
 
 	private StringBuilder generateRelationsString(List<String> relations, HashMap<String, String> details) {

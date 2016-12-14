@@ -20,89 +20,85 @@ import printing.Printer;
 
 public class UMLGenerator {
 
-	private FileGetter parser=new ClassFileGetter();
-	private MethodsParser methodparser=new PublicMethodsParser(null);
-	private FieldsParser fieldparser=new PublicFieldsParser(null);
-	private ClassParser classparser=new PublicClassParser(null);
-	private OutputMaker outputmaker=new JVMaker();
+	private FileGetter parser = new ClassFileGetter();
+	private MethodsParser methodparser = new PublicMethodsParser(null);
+	private FieldsParser fieldparser = new PublicFieldsParser(null);
+	private ClassParser classparser = new PublicClassParser(null);
+	private OutputMaker outputmaker = new JVMaker();
+	private String output = "C:\\Users\\bubulkr\\Desktop\\output.txt";
 
-	private ArrayList<String> classnames=new ArrayList<String>();
-	private HashMap<String,Object> argsmap=new HashMap<String,Object>(){{
-	    put("-publicMethod",new PublicMethodsParser(null));
-	    put("-protectedMethod",new ProtectedMethodsParser(new PublicMethodsParser(null)));
-	    put("-privateMethod",new PrivateMethodsParser(new ProtectedMethodsParser(new PublicMethodsParser(null))));
-	    put("-noMethod",new NoMethod(null));
-	    put("-publicField",new PublicFieldsParser(null));
-	    put("-protectedField",new ProtectedFieldsParser(new PublicFieldsParser(null)));
-	    put("-privateField",new PrivateFieldsParser(new ProtectedFieldsParser(new PublicFieldsParser(null))));
-	    put("-publicClass",new PublicClassParser(null));
-	    put("-protectedClass",new ProtectedClassParser(new PublicClassParser(null)));
-	    put("-JVMaker",new JVMaker());
-	}};
+	private ArrayList<String> classnames = new ArrayList<String>();
+	private HashMap<String, Object> argsmap = new HashMap<String, Object>() {
+		{
+			put("-publicMethod", new PublicMethodsParser(null));
+			put("-protectedMethod", new ProtectedMethodsParser(new PublicMethodsParser(null)));
+			put("-privateMethod", new PrivateMethodsParser(new ProtectedMethodsParser(new PublicMethodsParser(null))));
+			put("-noMethod", new NoMethod(null));
+			put("-publicField", new PublicFieldsParser(null));
+			put("-protectedField", new ProtectedFieldsParser(new PublicFieldsParser(null)));
+			put("-privateField", new PrivateFieldsParser(new ProtectedFieldsParser(new PublicFieldsParser(null))));
+			put("-publicClass", new PublicClassParser(null));
+			put("-protectedClass", new ProtectedClassParser(new PublicClassParser(null)));
+			put("-JVMaker", new JVMaker());
+			put("-o=", null);
+		}
+	};
 
-	public UMLGenerator(String[] args) throws Exception{
-		
-		for(String a:args){
-			if(!this.argsmap.containsKey(a)){
+	public UMLGenerator(String[] args) throws Exception {
+
+		for (String a : args) {
+			if (this.argsmap.containsKey(a)) {
+				if (a.contains("Method")) {
+					methodparser = (MethodsParser) this.argsmap.get(a);
+				} else if (a.contains("Field")) {
+					fieldparser = (FieldsParser) this.argsmap.get(a);
+				} else if (a.contains("Class")) {
+					classparser = (ClassParser) this.argsmap.get(a);
+				} else if (a.contains("JVM")) {
+					outputmaker = (JVMaker) this.argsmap.get(a);
+				} 
+			} else if(a.contains("-o=")){
+					this.output = a.substring(3);				
+			}else{
 				this.classnames.add(a);
 			}
-			else{
-				if(a.contains("Method")){
-					methodparser=(MethodsParser) this.argsmap.get(a);
-				}
-				else if(a.contains("Field")){
-					fieldparser=(FieldsParser) this.argsmap.get(a);
-				}
-				else if(a.contains("Class")){
-					classparser=(ClassParser) this.argsmap.get(a);
-				}
-				else if(a.contains("JVM")){
-					outputmaker=(JVMaker) this.argsmap.get(a);
-				}
-				else{
-					throw new Exception("wrong args");
-				}
-				
-				
-			}
-			
+
 		}
-			NodeRelation nodeRelations = this.getNodes();
-			Set<ClassNode> nodelist= nodeRelations.getNodes();
-			List<String> relations = nodeRelations.getRelations();
+		NodeRelation nodeRelations = this.getNodes();
+		Set<ClassNode> nodelist = nodeRelations.getNodes();
+		List<String> relations = nodeRelations.getRelations();
 
-			NodeParseToUML nptu=new NodeParseToUML(this.methodparser, this.fieldparser, this.classparser, null);
-			List<HashMap<String,String>> parsedstring=nptu.doParse(nodelist);
-			this.outputmaker.fileWrite("tomato", parsedstring, relations);
-		
-		
+		NodeParseToUML nptu = new NodeParseToUML(this.methodparser, this.fieldparser, this.classparser, null);
+		List<HashMap<String, String>> parsedstring = nptu.doParse(nodelist);
+		this.outputmaker.fileWrite(this.output, parsedstring, relations);
+
 	}
 
-		
-		
-	
-	public NodeRelation getNodes() throws IOException{
-		HashSet<ClassNode> nodes=new HashSet<ClassNode>();
+	public NodeRelation getNodes() throws IOException {
+		HashSet<ClassNode> nodes = new HashSet<ClassNode>();
 		ArrayList<String> relations = new ArrayList<>();
-		this.parser.addClasses(this.classnames,nodes, relations);
+		this.parser.addClasses(this.classnames, nodes, relations);
 		return new NodeRelation(nodes, relations);
-		
+
 	}
+
 	private class NodeRelation {
 		Set<ClassNode> nodes;
 		List<String> relations;
-		public NodeRelation(Set<ClassNode> nodes, List<String> relations){
+
+		public NodeRelation(Set<ClassNode> nodes, List<String> relations) {
 			this.relations = relations;
-			this.nodes =  nodes;
+			this.nodes = nodes;
 		}
-		
-		public Set<ClassNode> getNodes(){
+
+		public Set<ClassNode> getNodes() {
 			return this.nodes;
 		}
-		public List<String> getRelations(){
+
+		public List<String> getRelations() {
 			return this.relations;
 		}
-		
+
 	}
 
 }
