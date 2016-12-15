@@ -30,20 +30,21 @@ public class GVMaker implements OutputMaker {
 			String[] splited = classinfo.split(" ");
 			classDetailString.append("\"" + splitclassname(splited[1]) + "\" [\n");
 			classDetailString.append("shape=\"record\",\n");
-			classDetailString.append("label= \"{");
+			classDetailString.append("label= <{");
 			// check if abstract
 			String temp1 = "";
 			String temp2 = "";
 			if (splited[5].toLowerCase().trim().equals("true")&&splited[3].toLowerCase().trim().equals("false")) {
-				classDetailString.append("\\<\\<abstract\\>\\>\\n");
+					temp1 = "<i>";
+					temp2 = "</i>";
 			}
 			// check if interface
 			if (splited[3].equals("true")) {
-				classDetailString.append("\\<\\<interface\\>\\>\\n");
+				classDetailString.append("&#60;&#60;interface&#62;&#62;<br/>");
 			}
 			// add in class name to the uml object
 			classDetailString.append(temp1 + splitclassname(splited[1]) + temp2);
-			classDetailString.append("|\\l");
+			classDetailString.append("|<br align=\"left\"/>");
 			// field
 			String fieldinfo = map.get("Field");
 			String[] fields = fieldinfo.split("\n");
@@ -51,7 +52,7 @@ public class GVMaker implements OutputMaker {
 				if (field != null && !field.equals("")) {
 					String[] splitedfield = field.split(" ");
 					classDetailString.append(ppp.get(splitedfield[0]));
-					classDetailString.append(splitclassname(splitedfield[1]) + " : " + splitclassname(splitedfield[2]) + "\\l");
+					classDetailString.append(splitclassname(splitedfield[1]) + " : " + splitclassname(splitedfield[2]) + "<br align=\"left\"/>");
 				}
 				
 			}
@@ -63,7 +64,7 @@ public class GVMaker implements OutputMaker {
 				if(method!=null && !method.equals("")){
 					String[] splitedmethod=method.split(" ");
 					classDetailString.append(ppp.get(splitedmethod[0]));
-					classDetailString.append(splitedmethod[1].replaceAll("<", "\\\\<").replaceAll(">", "\\\\>"));
+					classDetailString.append(splitedmethod[1].replaceAll("<", "&#60;").replaceAll(">", "&#62;"));
 					if(!splitedmethod[2].equals("null")){
 					String[] inputAndOther=splitedmethod[2].split(Pattern.quote(")"));
 					String[] inputs=inputAndOther[0].split(";");
@@ -74,12 +75,12 @@ public class GVMaker implements OutputMaker {
 					classDetailString.append(")");
 					classDetailString.append(" : ");
 					classDetailString.append(this.splitclassname(inputAndOther[1]));}
-					classDetailString.append("\\l");
+					classDetailString.append("<br align=\"left\"/>");
 				}
 			}
 			
 			// close label
-			classDetailString.append("}\"");
+			classDetailString.append("}>");
 			// close class
 			classDetailString.append("];\n\n");
 

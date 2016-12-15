@@ -1,47 +1,47 @@
 digraph G { rankdir=BT;
 "AbstractSet" [
 shape="record",
-label= "{\<\<abstract\>\>\nAbstractSet|\l|}"];
+label= <{<i>AbstractSet</i>|<br align="left"/>|+equals<br align="left"/>+hashCode<br align="left"/>+removeAll(Collection) : Z<br align="left"/>}>];
 
 "Collection" [
 shape="record",
-label= "{\<\<interface\>\>\nCollection|\l|}"];
+label= <{&#60;&#60;interface&#62;&#62;<br/>Collection|<br align="left"/>|+size<br align="left"/>+isEmpty<br align="left"/>+contains<br align="left"/>+iterator() : IteratorTE<br align="left"/>+toArray<br align="left"/>+toArray(ObjectTT) : TT<br align="left"/>+add(TE) : Z<br align="left"/>+remove<br align="left"/>+containsAll(Collection) : Z<br align="left"/>+addAll(CollectionTE) : Z<br align="left"/>+removeAll(Collection) : Z<br align="left"/>+removeIf(PredicateTE) : Z<br align="left"/>+retainAll(Collection) : Z<br align="left"/>+clear<br align="left"/>+equals<br align="left"/>+hashCode<br align="left"/>+spliterator() : SpliteratorTE<br align="left"/>+stream() : StreamTE<br align="left"/>+parallelStream() : StreamTE<br align="left"/>}>];
 
 "Serializable" [
 shape="record",
-label= "{\<\<interface\>\>\nSerializable|\l|}"];
+label= <{&#60;&#60;interface&#62;&#62;<br/>Serializable|<br align="left"/>|}>];
 
 "Cloneable" [
 shape="record",
-label= "{\<\<interface\>\>\nCloneable|\l|}"];
+label= <{&#60;&#60;interface&#62;&#62;<br/>Cloneable|<br align="left"/>|}>];
 
 "NavigableSet" [
 shape="record",
-label= "{\<\<interface\>\>\nNavigableSet|\l|}"];
+label= <{&#60;&#60;interface&#62;&#62;<br/>NavigableSet|<br align="left"/>|+lower(TE) : TE<br align="left"/>+floor(TE) : TE<br align="left"/>+ceiling(TE) : TE<br align="left"/>+higher(TE) : TE<br align="left"/>+pollFirst() : TE<br align="left"/>+pollLast() : TE<br align="left"/>+iterator() : IteratorTE<br align="left"/>+descendingSet() : NavigableSetTE<br align="left"/>+descendingIterator() : IteratorTE<br align="left"/>+subSet(TEZTEZ) : NavigableSetTE<br align="left"/>+headSet(TEZ) : NavigableSetTE<br align="left"/>+tailSet(TEZ) : NavigableSetTE<br align="left"/>+subSet(TETE) : SortedSetTE<br align="left"/>+headSet(TE) : SortedSetTE<br align="left"/>+tailSet(TE) : SortedSetTE<br align="left"/>}>];
 
 "AbstractCollection" [
 shape="record",
-label= "{\<\<abstract\>\>\nAbstractCollection|\l|}"];
+label= <{<i>AbstractCollection</i>|<br align="left"/>|+iterator() : IteratorTE<br align="left"/>+size<br align="left"/>+isEmpty<br align="left"/>+contains<br align="left"/>+toArray<br align="left"/>+toArray(ObjectTT) : TT<br align="left"/>+add(TE) : Z<br align="left"/>+remove<br align="left"/>+containsAll(Collection) : Z<br align="left"/>+addAll(CollectionTE) : Z<br align="left"/>+removeAll(Collection) : Z<br align="left"/>+retainAll(Collection) : Z<br align="left"/>+clear<br align="left"/>+toString<br align="left"/>}>];
 
 "Iterable" [
 shape="record",
-label= "{\<\<interface\>\>\nIterable|\l|}"];
+label= <{&#60;&#60;interface&#62;&#62;<br/>Iterable|<br align="left"/>|+iterator() : IteratorTT<br align="left"/>+forEach(ConsumerTT) : V<br align="left"/>+spliterator() : SpliteratorTT<br align="left"/>}>];
 
 "TreeSet" [
 shape="record",
-label= "{TreeSet|\l|}"];
+label= <{TreeSet|<br align="left"/>|+&#60;init&#62;<br align="left"/>+&#60;init&#62;(ComparatorTE) : V<br align="left"/>+&#60;init&#62;(CollectionTE) : V<br align="left"/>+&#60;init&#62;(SortedSetTE) : V<br align="left"/>+iterator() : IteratorTE<br align="left"/>+descendingIterator() : IteratorTE<br align="left"/>+descendingSet() : NavigableSetTE<br align="left"/>+size<br align="left"/>+isEmpty<br align="left"/>+contains<br align="left"/>+add(TE) : Z<br align="left"/>+remove<br align="left"/>+clear<br align="left"/>+addAll(CollectionTE) : Z<br align="left"/>+subSet(TEZTEZ) : NavigableSetTE<br align="left"/>+headSet(TEZ) : NavigableSetTE<br align="left"/>+tailSet(TEZ) : NavigableSetTE<br align="left"/>+subSet(TETE) : SortedSetTE<br align="left"/>+headSet(TE) : SortedSetTE<br align="left"/>+tailSet(TE) : SortedSetTE<br align="left"/>+comparator() : ComparatorTE<br align="left"/>+first() : TE<br align="left"/>+last() : TE<br align="left"/>+lower(TE) : TE<br align="left"/>+floor(TE) : TE<br align="left"/>+ceiling(TE) : TE<br align="left"/>+higher(TE) : TE<br align="left"/>+pollFirst() : TE<br align="left"/>+pollLast() : TE<br align="left"/>+clone<br align="left"/>+spliterator() : SpliteratorTE<br align="left"/>}>];
 
 "Object" [
 shape="record",
-label= "{Object|\l|}"];
+label= <{Object|<br align="left"/>|+&#60;init&#62;<br align="left"/>+getClass() : Class<br align="left"/>+hashCode<br align="left"/>+equals<br align="left"/>+toString<br align="left"/>+notify<br align="left"/>+notifyAll<br align="left"/>+wait<br align="left"/>+wait<br align="left"/>+wait<br align="left"/>}>];
 
 "Set" [
 shape="record",
-label= "{\<\<interface\>\>\nSet|\l|}"];
+label= <{&#60;&#60;interface&#62;&#62;<br/>Set|<br align="left"/>|+size<br align="left"/>+isEmpty<br align="left"/>+contains<br align="left"/>+iterator() : IteratorTE<br align="left"/>+toArray<br align="left"/>+toArray(ObjectTT) : TT<br align="left"/>+add(TE) : Z<br align="left"/>+remove<br align="left"/>+containsAll(Collection) : Z<br align="left"/>+addAll(CollectionTE) : Z<br align="left"/>+retainAll(Collection) : Z<br align="left"/>+removeAll(Collection) : Z<br align="left"/>+clear<br align="left"/>+equals<br align="left"/>+hashCode<br align="left"/>+spliterator() : SpliteratorTE<br align="left"/>}>];
 
 "SortedSet" [
 shape="record",
-label= "{\<\<interface\>\>\nSortedSet|\l|}"];
+label= <{&#60;&#60;interface&#62;&#62;<br/>SortedSet|<br align="left"/>|+comparator() : ComparatorTE<br align="left"/>+subSet(TETE) : SortedSetTE<br align="left"/>+headSet(TE) : SortedSetTE<br align="left"/>+tailSet(TE) : SortedSetTE<br align="left"/>+first() : TE<br align="left"/>+last() : TE<br align="left"/>+spliterator() : SpliteratorTE<br align="left"/>}>];
 
 TreeSet -> NavigableSet [arrowhead = "onormal", style = "dashed"];
 TreeSet -> AbstractSet [arrowhead="onormal"];

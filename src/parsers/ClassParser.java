@@ -24,7 +24,7 @@ public abstract class ClassParser implements Parser {
 			result.append(text+" "+cn.name+" " +"Interface? "+String.valueOf((cn.access&Opcodes.ACC_INTERFACE)>0)+" Abstract? "+String.valueOf((cn.access&Opcodes.ACC_ABSTRACT)>0)+"\n");
 			}
 		}
-		if(otherparser !=  null)this.otherparser.parse(nodes);
+		if(otherparser !=  null)result.append(this.otherparser.parse(nodes));
 		return result.toString();
 	}
 

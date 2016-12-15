@@ -22,7 +22,7 @@ public abstract class FieldsParser implements Parser {
 			result.append(text+" "+fn.desc +" "+ fn.name+"\n");
 			}
 		}
-		if(otherparser !=  null)this.otherparser.parse(fields);
+		if(otherparser !=  null)result.append(this.otherparser.parse(fields));
 		return result.toString();
 		
 
