@@ -35,8 +35,7 @@ public class JVMaker implements OutputMaker {
 			String temp1 = "";
 			String temp2 = "";
 			if (splited[5].toLowerCase().trim().equals("true")&&splited[3].toLowerCase().trim().equals("false")) {
-				temp1 = "\\<I\\>";
-				temp2 = "\\</I\\>";
+				classDetailString.append("\\<\\<abstract\\>\\>\\n");
 			}
 			// check if interface
 			if (splited[3].equals("true")) {
@@ -103,7 +102,7 @@ public class JVMaker implements OutputMaker {
 		fop.write(contentInBytes);
 		fop.flush();
 		fop.close();
-		printer.print(filePath);
+		//printer.print(filePath);
 		
 	}
 
