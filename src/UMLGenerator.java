@@ -27,7 +27,7 @@ public class UMLGenerator {
 	private FieldsParser fieldparser = new PublicFieldsParser(null);
 	private ClassParser classparser = new PublicClassParser(null);
 	private OutputMaker outputmaker = new JVMaker();
-	private String output = "C:\\Users\\Administrator\\Desktop\\output.dot";
+	private String output = ".\\Documents\\output.dot";
 //	private String output = "C:\\Users\\bubulkr\\Desktop\\output.";
 	private boolean recursive = false;
 
