@@ -1,7 +1,13 @@
 package NodeGetter;
 
+import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -18,10 +24,18 @@ public class ClassFileGetter implements FileGetter {
 	public void addClasses(ArrayList<String> classnames, Set<ClassNode> nodes, List<String> relations,
 			boolean recursive) throws IOException {
 		for (String cname : classnames) {
+			if(cname.contains(":")){
+		        FileInputStream in=new FileInputStream(cname);		       
+		        ClassReader cr=new ClassReader(in);
+		        ClassNode classNode=new ClassNode();
+		        cr.accept(classNode, ClassReader.EXPAND_FRAMES);
+		        nodes.add(classNode);
+			}
+			else{
 			ClassReader reader = new ClassReader(cname);
 			ClassNode classNode = new ClassNode();
 			reader.accept(classNode, ClassReader.EXPAND_FRAMES);
-			nodes.add(classNode);
+			nodes.add(classNode);}
 		}
 		HashSet<String> visited = new HashSet<String>();
 		Stack<ClassNode> st = new Stack<>();

@@ -1,4 +1,6 @@
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,7 +27,8 @@ public class UMLGenerator {
 	private FieldsParser fieldparser = new PublicFieldsParser(null);
 	private ClassParser classparser = new PublicClassParser(null);
 	private OutputMaker outputmaker = new JVMaker();
-	private String output = "C:\\Users\\bubulkr\\Desktop\\output.";
+	private String output = "C:\\Users\\Administrator\\Desktop\\output.dot";
+//	private String output = "C:\\Users\\bubulkr\\Desktop\\output.";
 	private boolean recursive = false;
 
 	private ArrayList<String> classnames = new ArrayList<String>();
@@ -64,6 +67,7 @@ public class UMLGenerator {
 			} else if(a.contains("-o=")){
 					this.output = a.substring(3);				
 			}else{
+			
 				this.classnames.add(a);
 			}
 
