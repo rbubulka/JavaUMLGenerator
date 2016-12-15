@@ -1,11 +1,11 @@
 digraph G { rankdir=BT;
 "AbstractSet" [
 shape="record",
-label= "{\<\<abstract\>\>\nAbstractSet|\l|#\<init\>\l+equals\l+hashCode\l+removeAll(Collection) : Z\l}"];
+label= "{\<\<abstract\>\>\nAbstractSet|\l|}"];
 
 "Collection" [
 shape="record",
-label= "{\<\<interface\>\>\nCollection|\l|+size\l+isEmpty\l+contains\l+iterator() : IteratorTE\l+toArray\l+toArray(ObjectTT) : TT\l+add(TE) : Z\l+remove\l+containsAll(Collection) : Z\l+addAll(CollectionTE) : Z\l+removeAll(Collection) : Z\l+removeIf(PredicateTE) : Z\l+retainAll(Collection) : Z\l+clear\l+equals\l+hashCode\l+spliterator() : SpliteratorTE\l+stream() : StreamTE\l+parallelStream() : StreamTE\l}"];
+label= "{\<\<interface\>\>\nCollection|\l|}"];
 
 "Serializable" [
 shape="record",
@@ -17,31 +17,31 @@ label= "{\<\<interface\>\>\nCloneable|\l|}"];
 
 "NavigableSet" [
 shape="record",
-label= "{\<\<interface\>\>\nNavigableSet|\l|+lower(TE) : TE\l+floor(TE) : TE\l+ceiling(TE) : TE\l+higher(TE) : TE\l+pollFirst() : TE\l+pollLast() : TE\l+iterator() : IteratorTE\l+descendingSet() : NavigableSetTE\l+descendingIterator() : IteratorTE\l+subSet(TEZTEZ) : NavigableSetTE\l+headSet(TEZ) : NavigableSetTE\l+tailSet(TEZ) : NavigableSetTE\l+subSet(TETE) : SortedSetTE\l+headSet(TE) : SortedSetTE\l+tailSet(TE) : SortedSetTE\l}"];
+label= "{\<\<interface\>\>\nNavigableSet|\l|}"];
 
 "AbstractCollection" [
 shape="record",
-label= "{\<\<abstract\>\>\nAbstractCollection|\l-I : MAX_ARRAY_SIZE\l|-finishToArray(ObjectTTIterator) : TT\l-hugeCapacity\l#\<init\>\l+iterator() : IteratorTE\l+size\l+isEmpty\l+contains\l+toArray\l+toArray(ObjectTT) : TT\l+add(TE) : Z\l+remove\l+containsAll(Collection) : Z\l+addAll(CollectionTE) : Z\l+removeAll(Collection) : Z\l+retainAll(Collection) : Z\l+clear\l+toString\l}"];
+label= "{\<\<abstract\>\>\nAbstractCollection|\l|}"];
 
 "Iterable" [
 shape="record",
-label= "{\<\<interface\>\>\nIterable|\l|+iterator() : IteratorTT\l+forEach(ConsumerTT) : V\l+spliterator() : SpliteratorTT\l}"];
+label= "{\<\<interface\>\>\nIterable|\l|}"];
 
 "TreeSet" [
 shape="record",
-label= "{TreeSet|\l-NavigableMap : m\l-Object : PRESENT\l-J : serialVersionUID\l|-writeObject\l-readObject\l+\<init\>\l+\<init\>(ComparatorTE) : V\l+\<init\>(CollectionTE) : V\l+\<init\>(SortedSetTE) : V\l+iterator() : IteratorTE\l+descendingIterator() : IteratorTE\l+descendingSet() : NavigableSetTE\l+size\l+isEmpty\l+contains\l+add(TE) : Z\l+remove\l+clear\l+addAll(CollectionTE) : Z\l+subSet(TEZTEZ) : NavigableSetTE\l+headSet(TEZ) : NavigableSetTE\l+tailSet(TEZ) : NavigableSetTE\l+subSet(TETE) : SortedSetTE\l+headSet(TE) : SortedSetTE\l+tailSet(TE) : SortedSetTE\l+comparator() : ComparatorTE\l+first() : TE\l+last() : TE\l+lower(TE) : TE\l+floor(TE) : TE\l+ceiling(TE) : TE\l+higher(TE) : TE\l+pollFirst() : TE\l+pollLast() : TE\l+clone\l+spliterator() : SpliteratorTE\l}"];
+label= "{TreeSet|\l|}"];
 
 "Object" [
 shape="record",
-label= "{Object|\l|-registerNatives\l#clone\l#finalize\l+\<init\>\l+getClass() : Class\l+hashCode\l+equals\l+toString\l+notify\l+notifyAll\l+wait\l+wait\l+wait\l}"];
+label= "{Object|\l|}"];
 
 "Set" [
 shape="record",
-label= "{\<\<interface\>\>\nSet|\l|+size\l+isEmpty\l+contains\l+iterator() : IteratorTE\l+toArray\l+toArray(ObjectTT) : TT\l+add(TE) : Z\l+remove\l+containsAll(Collection) : Z\l+addAll(CollectionTE) : Z\l+retainAll(Collection) : Z\l+removeAll(Collection) : Z\l+clear\l+equals\l+hashCode\l+spliterator() : SpliteratorTE\l}"];
+label= "{\<\<interface\>\>\nSet|\l|}"];
 
 "SortedSet" [
 shape="record",
-label= "{\<\<interface\>\>\nSortedSet|\l|+comparator() : ComparatorTE\l+subSet(TETE) : SortedSetTE\l+headSet(TE) : SortedSetTE\l+tailSet(TE) : SortedSetTE\l+first() : TE\l+last() : TE\l+spliterator() : SpliteratorTE\l}"];
+label= "{\<\<interface\>\>\nSortedSet|\l|}"];
 
 TreeSet -> NavigableSet [arrowhead = "onormal", style = "dashed"];
 TreeSet -> AbstractSet [arrowhead="onormal"];

@@ -15,7 +15,7 @@ import com.sun.xml.internal.ws.org.objectweb.asm.Opcodes;
 
 import NodeGetter.ClassFileGetter;
 import NodeGetter.FileGetter;
-import outputMakers.JVMaker;
+import outputMakers.GVMaker;
 import outputMakers.OutputMaker;
 import parsers.*;
 import printing.Printer;
@@ -26,9 +26,8 @@ public class UMLGenerator {
 	private MethodsParser methodparser = new PublicMethodsParser(null);
 	private FieldsParser fieldparser = new PublicFieldsParser(null);
 	private ClassParser classparser = new PublicClassParser(null);
-	private OutputMaker outputmaker = new JVMaker();
+	private OutputMaker outputmaker = new GVMaker();
 	private String output = ".\\Documents\\output.dot";
-//	private String output = "C:\\Users\\bubulkr\\Desktop\\output.";
 	private boolean recursive = false;
 
 	private ArrayList<String> classnames = new ArrayList<String>();
@@ -41,9 +40,10 @@ public class UMLGenerator {
 			put("-publicField", new PublicFieldsParser(null));
 			put("-protectedField", new ProtectedFieldsParser(new PublicFieldsParser(null)));
 			put("-privateField", new PrivateFieldsParser(new ProtectedFieldsParser(new PublicFieldsParser(null))));
+			put("-noField", new NoField(null));
 			put("-publicClass", new PublicClassParser(null));
 			put("-protectedClass", new ProtectedClassParser(new PublicClassParser(null)));
-			put("-JVMaker", new JVMaker());
+			put("-GVMaker", new GVMaker());
 			put("-recursive", null);
 			put("-o=", null);
 		}
@@ -59,8 +59,8 @@ public class UMLGenerator {
 					fieldparser = (FieldsParser) this.argsmap.get(a);
 				} else if (a.contains("Class")) {
 					classparser = (ClassParser) this.argsmap.get(a);
-				} else if (a.contains("JVM")) {
-					outputmaker = (JVMaker) this.argsmap.get(a);
+				} else if (a.contains("GVM")) {
+					outputmaker = (GVMaker) this.argsmap.get(a);
 				} else if(a.contains("-recursive")){
 					this.recursive = true;
 				}

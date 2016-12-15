@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 import printing.*;
 
-public class JVMaker implements OutputMaker {
+public class GVMaker implements OutputMaker {
 	private Printer printer=new GVFilePrinter();;
 	public void fileWrite(String filePath, List<HashMap<String, String>> classdetails, List<String> relations) throws IOException {
 
