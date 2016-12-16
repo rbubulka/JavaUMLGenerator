@@ -12,7 +12,7 @@ import org.objectweb.asm.tree.ClassNode;
 public class ClassFileGetter implements FileGetter {
 
 	@Override
-	public void addClasses(ArrayList<String> classnames, Set<ClassNode> nodes, List<String> relations,
+	public void addClasses(ArrayList<String> classnames, Set<ClassNode> nodes, Set<String> relations,
 			boolean recursive) throws IOException {
 		for (String cname : classnames) {
 			ClassReader reader = new ClassReader(cname);

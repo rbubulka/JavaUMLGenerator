@@ -6,13 +6,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import printing.*;
 
 public class GVMaker implements OutputMaker {
 	private Printer printer=new GVFilePrinter();;
-	public void fileWrite(String filePath, List<HashMap<String, String>> classdetails, List<String> relations) throws IOException {
+	public void fileWrite(String filePath, List<HashMap<String, String>> classdetails, Set<String> relations) throws IOException {
 
 		StringBuilder classDetailString = new StringBuilder();
 		HashMap<String, String> ppp = new HashMap<>();
@@ -123,7 +124,7 @@ public class GVMaker implements OutputMaker {
 		
 	}
 
-	private StringBuilder generateRelationsString(List<String> relations, HashMap<String, String> details) {
+	private StringBuilder generateRelationsString(Set<String> relations, HashMap<String, String> details) {
 		StringBuilder relationstring = new StringBuilder();
 		for (String arrowstring : relations) {
 			String[] ls = arrowstring.split(" ");
