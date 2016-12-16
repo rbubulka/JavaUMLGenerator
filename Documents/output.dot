@@ -1,6 +1,22 @@
 digraph G { rankdir=BT;
-"PrivateFieldsParser" [
+"FieldsParser" [
 shape="record",
-label= <{PrivateFieldsParser||+&#60;init&#62; void<br align="left"/>}>];
+label= <{<i>FieldsParser</i>|#opcode : I<br align="left"/>#text : Ljava&#47;lang&#47;String;<br align="left"/>#otherparser : Lparsers&#47;FieldsParser;<br align="left"/>|+&#60;init&#62; void<br align="left"/>+parse void<br align="left"/>}>];
 
+"NoField" [
+shape="record",
+label= <{NoField||+&#60;init&#62; void<br align="left"/>+parse void<br align="left"/>}>];
+
+"Object" [
+shape="record",
+label= <{Object||-registerNatives void<br align="left"/>#clone void<br align="left"/>#finalize void<br align="left"/>+&#60;init&#62; void<br align="left"/>+getClass ()Ljava&#47;lang&#47;Class&#60;*&#62;; <br align="left"/>+hashCode void<br align="left"/>+equals void<br align="left"/>+toString void<br align="left"/>+notify void<br align="left"/>+notifyAll void<br align="left"/>+wait void<br align="left"/>+wait void<br align="left"/>+wait void<br align="left"/>}>];
+
+"Parser" [
+shape="record",
+label= <{&#60;&#60;interface&#62;&#62;<br/>Parser||+parse void<br align="left"/>}>];
+
+NoField -> FieldsParser [arrowhead="onormal"];
+FieldsParser -> Object [arrowhead="onormal"];
+Parser -> Object [arrowhead="onormal"];
+FieldsParser -> Parser [arrowhead = "onormal", style = "dashed"];
 }

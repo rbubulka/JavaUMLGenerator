@@ -38,7 +38,7 @@ public class ClassFileGetter implements FileGetter {
 						}
 						relations.add(v.name + " implements " + cns);
 
-					}
+					}}
 					if (v.superName != null) {
 						if (recursive) {
 							ClassReader readertemp = new ClassReader(v.superName);
@@ -49,7 +49,7 @@ public class ClassFileGetter implements FileGetter {
 						relations.add(v.name + " extends " + v.superName);
 					}
 				}
-			}
+			
 		}
 
 	}
