@@ -72,9 +72,8 @@ public class GVMaker implements OutputMaker {
 					for(int i=1;i<splitedmethod.length;i++){
 						String s=splitedmethod[i];
 					
-						if (s.equals("null")){
-							classDetailString.append("void");
-						}else{
+						if (!s.equals("null")){
+						
 						 
 						classDetailString.append(s.replaceAll("<", "&#60;").replaceAll(">", "&#62;").replaceAll("/", "&#47;")+" ");}
 					}
