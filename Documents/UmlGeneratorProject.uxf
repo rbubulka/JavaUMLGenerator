@@ -200,8 +200,8 @@ public PublicFieldsParser(FieldsParser other)
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1990</x>
-      <y>1170</y>
+      <x>1550</x>
+      <y>1300</y>
       <w>460</w>
       <h>70</h>
     </coordinates>
@@ -214,8 +214,8 @@ public PrivateMethodsPpp(MethodsParser other)
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1550</x>
-      <y>1290</y>
+      <x>1360</x>
+      <y>1400</y>
       <w>390</w>
       <h>80</h>
     </coordinates>
@@ -261,13 +261,13 @@ public abstract String parse()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1620</x>
+      <x>1470</x>
       <y>1090</y>
-      <w>70</w>
-      <h>220</h>
+      <w>180</w>
+      <h>330</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;50.0;200.0</additional_attributes>
+    <additional_attributes>160.0;10.0;10.0;310.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -285,11 +285,11 @@ public abstract String parse()
     <coordinates>
       <x>1640</x>
       <y>1090</y>
-      <w>470</w>
-      <h>100</h>
+      <w>30</w>
+      <h>230</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;450.0;80.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;210.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -593,7 +593,8 @@ public ProtectedFieldsParser(FieldsParser other)
     </coordinates>
     <panel_attributes>MethodReturnDependencyParser
 --
-public MethodReturnDependencyParser(MethodsParser other)</panel_attributes>
+public MethodReturnDependencyParser(MethodsParser other)
+public String parse()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -659,5 +660,30 @@ public FieldsDependencyParser</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>20.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2140</x>
+      <y>1220</y>
+      <w>390</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>MethodInstructionParser
+--
+public MethodInstructionParser(MethodsParser other)
+Public String parse()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1740</x>
+      <y>1090</y>
+      <w>420</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;400.0;140.0</additional_attributes>
   </element>
 </diagram>
