@@ -9,6 +9,6 @@ import org.objectweb.asm.tree.ClassNode;
 
 public interface FileGetter {
 
-	void addClasses(ArrayList<String> classnames, Set<ClassNode> nodes, List<String> relations, boolean recursive) throws IOException;
+	void addClasses(ArrayList<String> classnames, Set<ClassNode> nodes, Set<String> relations, boolean recursive) throws IOException;
 	
 }

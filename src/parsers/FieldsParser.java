@@ -1,6 +1,7 @@
 package parsers;
 
 import java.util.List;
+import java.util.Set;
 
 import org.objectweb.asm.tree.FieldNode;
 
@@ -15,14 +16,14 @@ public abstract class FieldsParser implements Parser {
 	}
 	
 	
-	public  String parse(List fields){
+	public  String parse(List fields, Set<String> relations){
 		StringBuilder result = new StringBuilder();
 		for(FieldNode fn : (List<FieldNode>) fields ){
 			if((fn.access&opcode)>0){
 			result.append(text+" "+fn.desc +" "+ fn.name+"\n");
 			}
 		}
-		if(otherparser !=  null)result.append(this.otherparser.parse(fields));
+		if(otherparser !=  null)result.append(this.otherparser.parse(fields, relations));
 		return result.toString();
 		
 

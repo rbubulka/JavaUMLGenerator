@@ -1,6 +1,7 @@
 package parsers;
 
 import java.util.List;
+import java.util.Set;
 
 public class NoField extends FieldsParser {
 
@@ -8,7 +9,7 @@ public class NoField extends FieldsParser {
 		super(other);
 	}
 	@Override
-	public String parse(List fields){
+	public String parse(List fields, Set<String> relations){
 		return "";
 	}
 }

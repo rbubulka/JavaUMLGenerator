@@ -74,17 +74,17 @@ public class UMLGenerator {
 		}
 		NodeRelation nodeRelations = this.getNodes(this.recursive);
 		Set<ClassNode> nodelist = nodeRelations.getNodes();
-		List<String> relations = nodeRelations.getRelations();
+		Set<String> relations = nodeRelations.getRelations();
 
 		NodeParseToUML nptu = new NodeParseToUML(this.methodparser, this.fieldparser, this.classparser, null);
-		List<HashMap<String, String>> parsedstring = nptu.doParse(nodelist);
+		List<HashMap<String, String>> parsedstring = nptu.doParse(nodelist, relations);
 		this.outputmaker.fileWrite(this.output, parsedstring, relations);
 
 	}
 
 	public NodeRelation getNodes(boolean recursive) throws IOException {
 		HashSet<ClassNode> nodes = new HashSet<ClassNode>();
-		ArrayList<String> relations = new ArrayList<>();
+		Set<String> relations = new HashSet<>();
 		this.parser.addClasses(this.classnames, nodes, relations,recursive);
 		return new NodeRelation(nodes, relations);
 
@@ -92,9 +92,9 @@ public class UMLGenerator {
 
 	private class NodeRelation {
 		Set<ClassNode> nodes;
-		List<String> relations;
+		Set<String> relations;
 
-		public NodeRelation(Set<ClassNode> nodes, List<String> relations) {
+		public NodeRelation(Set<ClassNode> nodes, Set<String> relations) {
 			this.relations = relations;
 			this.nodes = nodes;
 		}
@@ -103,7 +103,7 @@ public class UMLGenerator {
 			return this.nodes;
 		}
 
-		public List<String> getRelations() {
+		public Set<String> getRelations() {
 			return this.relations;
 		}
 

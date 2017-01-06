@@ -21,13 +21,13 @@ public class NodeParseToUML {
 		this.cparser=cppp;
 	}
 	
-	public List<HashMap<String,String>> doParse(Set<ClassNode> nodes){
+	public List<HashMap<String,String>> doParse(Set<ClassNode> nodes, Set<String> relations){
 		List<HashMap<String,String>> classInfoList = new ArrayList<>();
 		for(ClassNode n: nodes){
 			HashMap<String, String> classInfo = new HashMap<>();
-			classInfo.put("Class",cparser.parse(Collections.singletonList(n)));
-			classInfo.put("Method",mparser.parse(n.methods));
-			classInfo.put("Field",fparser.parse(n.fields));
+			classInfo.put("Class",cparser.parse(Collections.singletonList(n), relations));
+			classInfo.put("Method",mparser.parse(n.methods, relations));
+			classInfo.put("Field",fparser.parse(n.fields, relations));
 			classInfoList.add(classInfo);
 			
 		}

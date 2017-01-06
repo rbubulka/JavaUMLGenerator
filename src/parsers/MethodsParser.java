@@ -2,6 +2,7 @@ package parsers;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import org.objectweb.asm.tree.MethodNode;
 
@@ -15,14 +16,14 @@ public abstract class MethodsParser implements Parser {
 		this.otherparser = other;
 		
 	}
-	public  String parse(List methods){
+	public  String parse(List methods, Set<String> relations){
 		StringBuilder result= new StringBuilder();
 		for(MethodNode md:(List<MethodNode>)methods){
 			if((md.access&opcode)>0){
 				result.append(text+" " + md.name +" "+ md.signature + "\n");
 			}
 		}
-		if(otherparser !=  null)result.append(this.otherparser.parse(methods));
+		if(otherparser !=  null)result.append(this.otherparser.parse(methods, relations));
 		return result.toString();
 	}
 
