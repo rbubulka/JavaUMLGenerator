@@ -1,4 +1,4 @@
-package parsers;
+package parsers.MethodParser;
 
 import java.util.List;
 import java.util.Set;

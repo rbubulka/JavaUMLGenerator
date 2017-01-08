@@ -10,6 +10,10 @@ import java.util.TreeSet;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
 
+import parsers.ClassParser.ClassParser;
+import parsers.FieldParser.FieldsParser;
+import parsers.MethodParser.MethodsParser;
+
 
 public class NodeParseToUML {
 	private MethodsParser mparser;

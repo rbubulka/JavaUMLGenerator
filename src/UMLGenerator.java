@@ -18,6 +18,19 @@ import NodeGetter.FileGetter;
 import outputMakers.GVMaker;
 import outputMakers.OutputMaker;
 import parsers.*;
+import parsers.ClassParser.ClassParser;
+import parsers.ClassParser.ProtectedClassParser;
+import parsers.ClassParser.PublicClassParser;
+import parsers.FieldParser.FieldsParser;
+import parsers.FieldParser.NoField;
+import parsers.FieldParser.PrivateFieldsParser;
+import parsers.FieldParser.ProtectedFieldsParser;
+import parsers.FieldParser.PublicFieldsParser;
+import parsers.MethodParser.MethodsParser;
+import parsers.MethodParser.NoMethod;
+import parsers.MethodParser.PrivateMethodsParser;
+import parsers.MethodParser.ProtectedMethodsParser;
+import parsers.MethodParser.PublicMethodsParser;
 import printing.Printer;
 
 public class UMLGenerator {
