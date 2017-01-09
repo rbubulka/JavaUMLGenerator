@@ -17,8 +17,11 @@ public abstract class FieldsParser implements Parser {
 		this.otherparser = other;
 	}
 	
+	public String parse(List fields, Set<String> relations){
+		return this.parse(fields, relations, "");
+	}
 	
-	public  String parse(List fields, Set<String> relations){
+	public  String parse(List fields, Set<String> relations,String classname){
 		StringBuilder result = new StringBuilder();
 		for(FieldNode fn : (List<FieldNode>) fields ){
 			if((fn.access&opcode)>0){

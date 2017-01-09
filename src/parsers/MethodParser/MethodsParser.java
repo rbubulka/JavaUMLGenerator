@@ -16,6 +16,7 @@ public abstract class MethodsParser implements Parser {
 	protected MethodsParser otherparser;
 	public MethodsParser(MethodsParser other){
 		this.otherparser = other;
+	
 		
 	}
 	public  String parse(List methods, Set<String> relations){
