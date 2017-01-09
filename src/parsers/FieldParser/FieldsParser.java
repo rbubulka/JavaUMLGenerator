@@ -33,6 +33,9 @@ public abstract class FieldsParser implements Parser {
 		
 
 	}
+	public int getOpcode(){
+		return opcode;
+	}
 	
 	
 }

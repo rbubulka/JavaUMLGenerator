@@ -17,19 +17,11 @@ import NodeGetter.ClassFileGetter;
 import NodeGetter.FileGetter;
 import outputMakers.GVMaker;
 import outputMakers.OutputMaker;
+import parserMakers.*;
 import parsers.*;
-import parsers.ClassParser.ClassParser;
-import parsers.ClassParser.ProtectedClassParser;
-import parsers.ClassParser.PublicClassParser;
-import parsers.FieldParser.FieldsParser;
-import parsers.FieldParser.NoField;
-import parsers.FieldParser.PrivateFieldsParser;
-import parsers.FieldParser.ProtectedFieldsParser;
-import parsers.FieldParser.PublicFieldsParser;
-import parsers.MethodParser.MethodsParser;
-import parsers.MethodParser.NoMethod;
-import parsers.MethodParser.PrivateMethodsParser;
-import parsers.MethodParser.ProtectedMethodsParser;
+import parsers.ClassParser.*;
+import parsers.FieldParser.*;
+import parsers.MethodParser.*;
 import parsers.MethodParser.PublicMethodsParser;
 import printing.Printer;
 
@@ -42,49 +34,60 @@ public class UMLGenerator {
 	private OutputMaker outputmaker = new GVMaker();
 	private String output = ".\\Documents\\output.dot";
 	private boolean recursive = false;
-
 	private ArrayList<String> classnames = new ArrayList<String>();
-	private HashMap<String, Object> argsmap = new HashMap<String, Object>() {
-		{
-			put("-publicMethod", new PublicMethodsParser(null));
-			put("-protectedMethod", new ProtectedMethodsParser(new PublicMethodsParser(null)));
-			put("-privateMethod", new PrivateMethodsParser(new ProtectedMethodsParser(new PublicMethodsParser(null))));
-			put("-noMethod", new NoMethod(null));
-			put("-publicField", new PublicFieldsParser(null));
-			put("-protectedField", new ProtectedFieldsParser(new PublicFieldsParser(null)));
-			put("-privateField", new PrivateFieldsParser(new ProtectedFieldsParser(new PublicFieldsParser(null))));
-			put("-noField", new NoField(null));
-			put("-publicClass", new PublicClassParser(null));
-			put("-protectedClass", new ProtectedClassParser(new PublicClassParser(null)));
-			put("-GVMaker", new GVMaker());
-			put("-recursive", null);
-			put("-o=", null);
-		}
-	};
+
 
 	public UMLGenerator(String[] args) throws Exception {
-
 		for (String a : args) {
-			if (this.argsmap.containsKey(a)) {
-				if (a.contains("Method")) {
-					methodparser = (MethodsParser) this.argsmap.get(a);
-				} else if (a.contains("Field")) {
-					fieldparser = (FieldsParser) this.argsmap.get(a);
-				} else if (a.contains("Class")) {
-					classparser = (ClassParser) this.argsmap.get(a);
-				} else if (a.contains("GVM")) {
-					outputmaker = (GVMaker) this.argsmap.get(a);
-				} else if(a.contains("-recursive")){
-					this.recursive = true;
-				}
-			} else if(a.contains("-o=")){
-					this.output = a.substring(3);				
-			}else{
-			
+			if (a.equals("-publicClass")) {
+				ClassParserMaker.getInstance().setPublicFields(true);
+			} else if(a.equals("-protectedClass")){
+				ClassParserMaker.getInstance().setProtectedFields(true);
+			} else if(a.equals("-fieldDependency")){
+				FieldParserMaker.getInstance().setDependecies(true);
+			} else if (a.equals("-publicField")) {
+				FieldParserMaker.getInstance().setPublicFields(true);
+			} else if(a.equals("-protectedField")){
+				FieldParserMaker.getInstance().setProtectedFields(true);
+			} else if(a.equals("-privateField")){
+				FieldParserMaker.getInstance().setPrivateFields(true);
+			} else if(a.equals("-fieldDependency")){
+				FieldParserMaker.getInstance().setDependecies(true);
+			} else if (a.equals("-publicMethod")) {
+				MethodParserMaker.getInstance().setPublicFields(true);
+			} else if(a.equals("-protectedMethod")){
+				MethodParserMaker.getInstance().setProtectedFields(true);
+			} else if(a.equals("-privateMethod")){
+				MethodParserMaker.getInstance().setPrivateFields(true);
+			} else if(a.equals("-MRD")){
+				MethodParserMaker.getInstance().setDependecies(true);
+			} else if(a.equals("MID")){
+				MethodParserMaker.getInstance().setInstructions(true);
+			}
+			else if (a.equals("-GVM")) {
+				outputmaker = new GVMaker();
+			} else if (a.equals("-recursive")) {
+				this.recursive = true;
+			} else if (a.contains("-o=")) {
+				this.output = a.substring(3);
+			} else {
 				this.classnames.add(a);
 			}
 
 		}
+		MethodsParser mp = MethodParserMaker.getInstance().makeParser();
+		if(mp != null){
+			 this.methodparser = mp;
+		}
+		FieldsParser fp = FieldParserMaker.getInstance().makeParser();
+		if(fp != null){
+			this.fieldparser = fp;
+		}
+		ClassParser cp = ClassParserMaker.getInstance().makeParser();
+		if(cp != null){
+			this.classparser = cp;
+		}
+
 		NodeRelation nodeRelations = this.getNodes(this.recursive);
 		Set<ClassNode> nodelist = nodeRelations.getNodes();
 		Set<String> relations = nodeRelations.getRelations();
@@ -98,7 +101,7 @@ public class UMLGenerator {
 	public NodeRelation getNodes(boolean recursive) throws IOException {
 		HashSet<ClassNode> nodes = new HashSet<ClassNode>();
 		Set<String> relations = new HashSet<>();
-		this.parser.addClasses(this.classnames, nodes, relations,recursive);
+		this.parser.addClasses(this.classnames, nodes, relations, recursive);
 		return new NodeRelation(nodes, relations);
 
 	}
