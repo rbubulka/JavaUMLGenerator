@@ -19,14 +19,18 @@ public abstract class MethodsParser implements Parser {
 	
 		
 	}
-	public  String parse(List methods, Set<String> relations){
+	public String parse(List methods, Set<String> relations){
+		return this.parse(methods, relations, "");
+	}
+	
+	public  String parse(List methods, Set<String> relations,String name){
 		StringBuilder result= new StringBuilder();
 		for(MethodNode md:(List<MethodNode>)methods){
 			if((md.access&opcode)>0){
-				result.append(text+" " + md.name +" "+ md.signature + "\n");
+				result.append(text+" " + md.name +" "+ md.desc + "\n");
 			}
 		}
-		if(otherparser !=  null)result.append(this.otherparser.parse(methods, relations));
+		if(otherparser !=  null)result.append(this.otherparser.parse(methods, relations, name));
 		return result.toString();
 	}
 

@@ -30,8 +30,8 @@ public class NodeParseToUML {
 		for(ClassNode n: nodes){
 			HashMap<String, String> classInfo = new HashMap<>();
 			classInfo.put("Class",cparser.parse(Collections.singletonList(n), relations));
-			classInfo.put("Method",mparser.parse(n.methods, relations));
-			classInfo.put("Field",fparser.parse(n.fields, relations));
+			classInfo.put("Method",mparser.parse(n.methods, relations,n.name));
+			classInfo.put("Field",fparser.parse(n.fields, relations,n.name));
 			classInfoList.add(classInfo);
 			
 		}

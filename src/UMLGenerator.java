@@ -43,7 +43,7 @@ public class UMLGenerator {
 				ClassParserMaker.getInstance().setPublicFields(true);
 			} else if(a.equals("-protectedClass")){
 				ClassParserMaker.getInstance().setProtectedFields(true);
-			} else if(a.equals("-fieldDependency")){
+			} else if(a.equals("-FD")){
 				FieldParserMaker.getInstance().setDependecies(true);
 			} else if (a.equals("-publicField")) {
 				FieldParserMaker.getInstance().setPublicFields(true);

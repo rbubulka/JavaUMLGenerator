@@ -36,7 +36,7 @@ public class ClassFileGetter implements FileGetter {
 							cr.accept(cn, ClassReader.EXPAND_FRAMES);
 							st.push(cn);
 						}
-						relations.add(v.name + " implements " + cns);
+						relations.add(v.name + " 1 implements 1 " + cns);
 
 					}}
 					if (v.superName != null) {
@@ -46,7 +46,7 @@ public class ClassFileGetter implements FileGetter {
 							readertemp.accept(classNodetemp, ClassReader.EXPAND_FRAMES);
 							st.push(classNodetemp);
 						}
-						relations.add(v.name + " extends " + v.superName);
+						relations.add(v.name + " 1 extends 1 " + v.superName);
 					}
 				}
 			

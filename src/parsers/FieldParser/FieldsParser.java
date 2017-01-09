@@ -28,7 +28,7 @@ public abstract class FieldsParser implements Parser {
 			result.append(text+" "+fn.desc +" "+ fn.name+"\n");
 			}
 		}
-		if(otherparser !=  null)result.append(this.otherparser.parse(fields, relations));
+		if(otherparser !=  null)result.append(this.otherparser.parse(fields, relations, classname));
 		return result.toString();
 		
 

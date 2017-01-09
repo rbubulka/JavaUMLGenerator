@@ -103,8 +103,9 @@ public class GVMaker implements OutputMaker {
 		}
 
 		HashMap<String, String> details = new HashMap<>();
-		details.put("implements", "[arrowhead = \"onormal\", style = \"dashed\"]");
-		details.put("extends", "[arrowhead=\"onormal\"]");
+		details.put("implements", "[arrowhead = \"onormal\", style = \"dashed\"");
+		details.put("extends", "[arrowhead=\"onormal\"");
+		details.put("hasa", "[arrowhead=\"vee\", style=\"dashed\"");
 		StringBuilder relationstring = generateRelationsString(relations, details);
 
 //		 System.out.println(classDetailString.toString());
@@ -129,7 +130,7 @@ public class GVMaker implements OutputMaker {
 			String[] ls = arrowstring.split(" ");
 //			relationstring.append(ls[0].replaceAll("<", "&#60;").replaceAll(">", "&#62;").replaceAll("/", "&#47;") + " -> " + ls[2].replaceAll("<", "&#60;").replaceAll(">", "&#62;").replaceAll("/", "&#47;") + " " + details.get(ls[1]) + ";\n");
 		
-			relationstring.append(splitclassname(ls[0]).replaceAll("\\$", "") + " -> " + splitclassname(ls[2]).replaceAll("\\$", "") + " " + details.get(ls[1]) + ";\n");
+			relationstring.append(splitclassname(ls[0]).replaceAll("\\$", "") + " -> " + splitclassname(ls[4]).replaceAll("\\$", "") + " " + details.get(ls[2]) + ",headlabel=\""+ls[3]+"\" "+", taillabel=\""+ls[1]+"\" " +"];\n");
 			
 
 		}
