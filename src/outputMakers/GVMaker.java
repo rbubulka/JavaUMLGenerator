@@ -105,7 +105,8 @@ public class GVMaker implements OutputMaker {
 		HashMap<String, String> details = new HashMap<>();
 		details.put("implements", "[arrowhead = \"onormal\", style = \"dashed\"");
 		details.put("extends", "[arrowhead=\"onormal\"");
-		details.put("hasa", "[arrowhead=\"vee\", style=\"dashed\"");
+		details.put("hasa", "[arrowhead=\"vee\"");
+		details.put("usea", "[arrowhead=\"vee\", style=\"dashed\"");
 		StringBuilder relationstring = generateRelationsString(relations, details);
 
 //		 System.out.println(classDetailString.toString());
