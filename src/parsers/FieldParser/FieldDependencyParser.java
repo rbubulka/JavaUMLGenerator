@@ -19,7 +19,7 @@ public abstract class FieldDependencyParser extends FieldsParser {
 			if ((fn.access & opcode) > 0) {
 				String hasNumber = "1";
 				if (fn.desc.trim().charAt(0) == '[') {
-					hasNumber = "N";
+					hasNumber = "*";
 				}
 
 				relations.add(classname + " 1 hasa " + hasNumber + " " + splitclassname(fn.desc));
