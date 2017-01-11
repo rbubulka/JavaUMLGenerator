@@ -17,12 +17,11 @@ public abstract class FieldDependencyParser extends FieldsParser {
 		StringBuilder result = new StringBuilder();
 		for(FieldNode fn : (List<FieldNode>) fields ){
 			if ((fn.access & opcode) > 0) {
-				String hasNumber = "1";
-				if (fn.desc.trim().charAt(0) == '[') {
-					hasNumber = "*";
+				if (fn.signature != null && fn.signature.contains("<")) {
+					addCollectionDependency(relations, classname, fn.signature);
+				} else {
+					addDependency(relations, classname, fn.desc, false);
 				}
-
-				relations.add(classname + " 1 hasa " + hasNumber + " " + splitclassname(fn.desc));
 			}
 		}
 		if(otherparser !=  null)result.append(this.otherparser.parse(fields, relations,classname));
@@ -34,6 +33,31 @@ public abstract class FieldDependencyParser extends FieldsParser {
 	public String splitclassname(String in) {
 		String[] result = in.split("/");
 		return result[result.length - 1].replaceAll("//W", "").replaceAll(";", "").replaceAll("\\[", "");
+	}
+	
+	private void addCollectionDependency(Set<String> relations, String classname, String local) {
+		if (!local.contains("<")) {
+			addDependency(relations, classname, local, true);
+		} else {
+			String collectionType = local.substring(local.indexOf("<")+1, local.lastIndexOf(">"));
+			String[] types = collectionType.split(";");
+			for (String type : types) {
+				if (type.contains("<")) {
+					addCollectionDependency(relations, classname, type);
+				} else {
+					addDependency(relations, classname, type, true);
+				} 
+			}
+		}
+	}
+
+	private void addDependency(Set<String> relations, String classname, String type, boolean isCollection) {
+		String num = "1 ";
+		if (isCollection)
+			num = "* ";
+		String[] signature = type.split("/");
+		String dname = signature[signature.length - 1].replaceAll(";", "");
+		relations.add(classname + " 1 hasa " + num + dname);
 	}
 
 }
