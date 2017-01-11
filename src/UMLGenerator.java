@@ -92,8 +92,8 @@ public class UMLGenerator {
 		Set<ClassNode> nodelist = nodeRelations.getNodes();
 		Set<String> relations = nodeRelations.getRelations();
 		NodeParseToUML nptu = new NodeParseToUML(this.methodparser, this.fieldparser, this.classparser, null);
-		this.simplifyRelations(relations);
 		List<HashMap<String, String>> parsedstring = nptu.doParse(nodelist, relations);
+		this.simplifyRelations(relations);
 		this.outputmaker.fileWrite(this.output, parsedstring, relations);
 
 	}
@@ -115,13 +115,12 @@ public class UMLGenerator {
 		Set<String> toRemove = new HashSet<String>();
 		Set<String> toAdd = new HashSet<String>();
 		for (String s : relations) {
-			String[] relationinfo = s.split(" ");
+			String[] sls= s.split(" ");
 				for (String r : relations) {
-					Pattern check=Pattern.compile("["+relationinfo[0]+"]*" + " [1\\*] [A-Za-z]* [1\\*] " + "[" + relationinfo[4] + "]*");
-					if (r != s && check.matcher(r).find()) {
+					String[] rls = r.split(" ");
+					if (r != s && sls[0].equals(rls[0]) && sls[4].equals(rls[4])){
 					
-							String[] rls=r.split(" ");
-							String[] sls=relationinfo;
+						
 							int rnum=checkmap.get(rls[2]);
 							int snum=checkmap.get(sls[2]);
 							if(rnum>snum){
@@ -146,17 +145,15 @@ public class UMLGenerator {
 							else {
 								toRemove.add(r);
 							}
-//							toRemove.add(r);
-							
-//						}
 					
 
 				}
 			}
 
 		}
-		relations.removeAll(toRemove);
 		relations.addAll(toAdd);
+		relations.removeAll(toRemove);
+		
 		
 	}
 
