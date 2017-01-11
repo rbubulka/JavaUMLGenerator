@@ -33,7 +33,6 @@ public abstract class MIDParser extends MethodsParser {
 	}
 
 	private void addCollectionDependency(Set<String> relations, String classname, String local) {
-		System.out.println(local);
 		if (!local.contains("<")) {
 			addDependency(relations, classname, local, true);
 		} else {
