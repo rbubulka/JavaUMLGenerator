@@ -8,6 +8,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.objectweb.asm.tree.ClassNode;
 
@@ -36,35 +38,33 @@ public class UMLGenerator {
 	private boolean recursive = false;
 	private ArrayList<String> classnames = new ArrayList<String>();
 
-
 	public UMLGenerator(String[] args) throws Exception {
 		for (String a : args) {
 			if (a.equals("-publicClass")) {
 				ClassParserMaker.getInstance().setPublicFields(true);
-			} else if(a.equals("-protectedClass")){
+			} else if (a.equals("-protectedClass")) {
 				ClassParserMaker.getInstance().setProtectedFields(true);
-			} else if(a.equals("-FD")){
+			} else if (a.equals("-FD")) {
 				FieldParserMaker.getInstance().setDependecies(true);
 			} else if (a.equals("-publicField")) {
 				FieldParserMaker.getInstance().setPublicFields(true);
-			} else if(a.equals("-protectedField")){
+			} else if (a.equals("-protectedField")) {
 				FieldParserMaker.getInstance().setProtectedFields(true);
-			} else if(a.equals("-privateField")){
+			} else if (a.equals("-privateField")) {
 				FieldParserMaker.getInstance().setPrivateFields(true);
-			} else if(a.equals("-fieldDependency")){
+			} else if (a.equals("-fieldDependency")) {
 				FieldParserMaker.getInstance().setDependecies(true);
 			} else if (a.equals("-publicMethod")) {
 				MethodParserMaker.getInstance().setPublicFields(true);
-			} else if(a.equals("-protectedMethod")){
+			} else if (a.equals("-protectedMethod")) {
 				MethodParserMaker.getInstance().setProtectedFields(true);
-			} else if(a.equals("-privateMethod")){
+			} else if (a.equals("-privateMethod")) {
 				MethodParserMaker.getInstance().setPrivateFields(true);
-			} else if(a.equals("-MRD")){
+			} else if (a.equals("-MRD")) {
 				MethodParserMaker.getInstance().setDependecies(true);
-			} else if(a.equals("MID")){
+			} else if (a.equals("MID")) {
 				MethodParserMaker.getInstance().setInstructions(true);
-			}
-			else if (a.equals("-GVM")) {
+			} else if (a.equals("-GVM")) {
 				outputmaker = new GVMaker();
 			} else if (a.equals("-recursive")) {
 				this.recursive = true;
@@ -76,23 +76,23 @@ public class UMLGenerator {
 
 		}
 		MethodsParser mp = MethodParserMaker.getInstance().makeParser();
-		if(mp != null){
-			 this.methodparser = mp;
+		if (mp != null) {
+			this.methodparser = mp;
 		}
 		FieldsParser fp = FieldParserMaker.getInstance().makeParser();
-		if(fp != null){
+		if (fp != null) {
 			this.fieldparser = fp;
 		}
 		ClassParser cp = ClassParserMaker.getInstance().makeParser();
-		if(cp != null){
+		if (cp != null) {
 			this.classparser = cp;
 		}
 
 		NodeRelation nodeRelations = this.getNodes(this.recursive);
 		Set<ClassNode> nodelist = nodeRelations.getNodes();
 		Set<String> relations = nodeRelations.getRelations();
-
 		NodeParseToUML nptu = new NodeParseToUML(this.methodparser, this.fieldparser, this.classparser, null);
+		this.simplifyRelations(relations);
 		List<HashMap<String, String>> parsedstring = nptu.doParse(nodelist, relations);
 		this.outputmaker.fileWrite(this.output, parsedstring, relations);
 
@@ -104,6 +104,60 @@ public class UMLGenerator {
 		this.parser.addClasses(this.classnames, nodes, relations, recursive);
 		return new NodeRelation(nodes, relations);
 
+	}
+
+	private void simplifyRelations(Set<String> relations) {
+		HashMap<String,Integer> checkmap=new HashMap<>();
+		checkmap.put("usea", 0);
+		checkmap.put("hasa", 1);
+		checkmap.put("implements", 2);
+		checkmap.put("extends", 3);
+		Set<String> toRemove = new HashSet<String>();
+		Set<String> toAdd = new HashSet<String>();
+		for (String s : relations) {
+			String[] relationinfo = s.split(" ");
+				for (String r : relations) {
+					Pattern check=Pattern.compile("["+relationinfo[0]+"]*" + " [1\\*] [A-Za-z]* [1\\*] " + "[" + relationinfo[4] + "]*");
+					if (r != s && check.matcher(r).find()) {
+					
+							String[] rls=r.split(" ");
+							String[] sls=relationinfo;
+							int rnum=checkmap.get(rls[2]);
+							int snum=checkmap.get(sls[2]);
+							if(rnum>snum){
+								toRemove.add(s);
+							}
+							else if(rnum==snum){
+								String sleft=sls[1];
+								String sright=sls[3];
+								String rleft=rls[1];
+								String rright=rls[3];
+								if(!sleft.equals(rleft)){
+									rls[1]="*";
+								}
+								if(!sright.equals(rright)){
+									rls[3]="*";
+								}
+								toAdd.add(rls[0]+" "+rls[1]+" "+rls[2]+" "+rls[3]+" "+rls[4]);
+								toRemove.add(r);
+								toRemove.add(s);
+								
+							}
+							else {
+								toRemove.add(r);
+							}
+//							toRemove.add(r);
+							
+//						}
+					
+
+				}
+			}
+
+		}
+		relations.removeAll(toRemove);
+		relations.addAll(toAdd);
+		
 	}
 
 	private class NodeRelation {

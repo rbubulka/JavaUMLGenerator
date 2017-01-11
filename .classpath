@@ -5,6 +5,5 @@
 	<classpathentry kind="lib" path="asm-all-5.0.4.jar"/>
 	<classpathentry kind="src" path="/Lab1-1"/>
 	<classpathentry kind="lib" path="/Lab1-1/src"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Lab-1-2"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
