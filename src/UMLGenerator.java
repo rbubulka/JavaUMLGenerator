@@ -62,7 +62,7 @@ public class UMLGenerator {
 				MethodParserMaker.getInstance().setPrivateFields(true);
 			} else if (a.equals("-MRD")) {
 				MethodParserMaker.getInstance().setDependecies(true);
-			} else if (a.equals("MID")) {
+			} else if (a.equals("-MID")) {
 				MethodParserMaker.getInstance().setInstructions(true);
 			} else if (a.equals("-GVM")) {
 				outputmaker = new GVMaker();
