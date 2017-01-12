@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -108,15 +109,20 @@ public class UMLGenerator {
 	}
 
 	private void twoWayRelations(Set<String> relations){
+		List r1 =	Arrays.asList(relations.toArray());
 		Set<String> toRemove = new HashSet<String>();
 		Set<String> toAdd = new HashSet<String>();
-		for(String relation1: relations){
-			for(String relation2: relations){
+		for(int i =0; i < r1.size(); i++){
+			String relation1 = (String)r1.get(i);
+			for(int j =i; j < r1.size(); j++){
+				String relation2 = (String)r1.get(j);
 				if(relation1 != relation2){ 
 					String[] rel1 = relation1.split(" ");
 					String[] rel2 = relation2.split(" ");
-//					System.out.println("rel1: "+ rel1[4] + " rel2: "+rel2[4]);
-					if(rel1[0].equals(rel2[4]) && rel1[4].equals(rel2[0]) && rel1[2].equals(rel2[2])){
+					if(
+						( (rel1[0]).equals(rel2[4])||("L"+rel1[0]).equals(rel2[4])) && 
+							(rel1[4].equals("L"+rel2[0]) || rel1[4].equals(rel2[0]) )&& 
+							rel1[2].equals(rel2[2])){
 						String num1 = " 1 ";
 						String num2 = " 1 ";
 						if(rel1[3].equals("*")||rel2[1].equals("*")){ num1 = " *";}
