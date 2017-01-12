@@ -20,7 +20,8 @@ public abstract class MRDParser extends MethodsParser {
 		StringBuilder result = new StringBuilder();
 		for (MethodNode md : (List<MethodNode>) methods) {
 			if ((md.access & opcode) > 0) {
-				String start = md.signature;
+				String start = md.desc;
+//				System.out.println(md.desc);
 				if (start != null) {
 					if(start.contains(":")){
 						start=start.substring(start.indexOf(">")+1);

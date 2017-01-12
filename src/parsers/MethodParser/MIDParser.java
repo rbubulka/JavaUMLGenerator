@@ -48,7 +48,7 @@ public abstract class MIDParser extends MethodsParser {
 		if (!local.contains("<")) {
 			addDependency(relations, classname, local, true);
 		} else {
-			System.out.println(local);
+			//System.out.println(local);
 			String collectionType = "";
 			if(local.contains(">")){ collectionType = local.substring(local.indexOf("<")+1, local.lastIndexOf(">"));}
 			else{

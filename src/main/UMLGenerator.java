@@ -94,9 +94,15 @@ public class UMLGenerator {
 		Set<ClassNode> nodelist = nodeRelations.getNodes();
 		Set<String> relations = nodeRelations.getRelations();
 		NodeParseToUML nptu = new NodeParseToUML(this.methodparser, this.fieldparser, this.classparser, null);
+//		for(String s:relations){
+//			System.out.println(s);
+//		}
 		List<HashMap<String, String>> parsedstring = nptu.doParse(nodelist, relations);
+		
 		this.simplifyRelations(relations);
 		this.twoWayRelations(relations);
+	
+	
 		this.outputmaker.fileWrite(this.output, parsedstring, relations);
 
 	}
@@ -117,6 +123,7 @@ public class UMLGenerator {
 			String relation1 = (String)r1.get(i);
 			for(int j =i; j < r1.size(); j++){
 				String relation2 = (String)r1.get(j);
+				System.out.println(relation1+"    "+relation2);
 				if(relation1 != relation2){ 
 					String[] rel1 = relation1.split(" ");
 					String[] rel2 = relation2.split(" ");

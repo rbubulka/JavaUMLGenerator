@@ -52,7 +52,7 @@ public abstract class FieldDependencyParser extends FieldsParser {
 		String num = "1 ";
 		if (isCollection)
 			num = "* ";
-		relations.add(classname + " 1 hasa " + num + type.replaceAll(";", ""));
+		relations.add(classname + " 1 hasa " + num + "\""+ type.replaceAll(";", "") + "\"");
 	}
 
 }

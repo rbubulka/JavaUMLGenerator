@@ -894,8 +894,8 @@ public ProtectedMRDParser(MethodsParser other)
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2620</x>
-      <y>530</y>
+      <x>2730</x>
+      <y>510</y>
       <w>460</w>
       <h>70</h>
     </coordinates>
@@ -913,7 +913,7 @@ public PublicMRDParser(MethodsParser other)
       <w>170</w>
       <h>150</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <panel_attributes>lt=-&gt;&gt;</panel_attributes>
     <additional_attributes>10.0;10.0;150.0;130.0</additional_attributes>
   </element>
   <element>
@@ -924,19 +924,19 @@ public PublicMRDParser(MethodsParser other)
       <w>50</w>
       <h>240</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <panel_attributes>lt=-&gt;&gt;</panel_attributes>
     <additional_attributes>30.0;10.0;10.0;220.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>2700</x>
-      <y>590</y>
-      <w>150</w>
-      <h>350</h>
+      <y>570</y>
+      <w>260</w>
+      <h>370</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>130.0;10.0;10.0;330.0</additional_attributes>
+    <panel_attributes>lt=-&gt;&gt;</panel_attributes>
+    <additional_attributes>240.0;10.0;10.0;350.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
