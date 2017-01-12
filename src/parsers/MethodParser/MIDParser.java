@@ -68,9 +68,8 @@ public abstract class MIDParser extends MethodsParser {
 
 	private void addDependency(Set<String> relations, String classname, String type, boolean isCollection) {
 		String num = "1 ";
-		if (isCollection)
-			num = "* ";
-		relations.add(classname + " 1 usea " + num + "\""+type.replaceAll("\\[", "")+"\"");
+		if (isCollection) num = "* ";
+		relations.add(classname + " 1 usea " + num +type.trim().replaceAll("\\[", ""));
 	}
 
 }

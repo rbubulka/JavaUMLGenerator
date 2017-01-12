@@ -123,12 +123,14 @@ public class UMLGenerator {
 			String relation1 = (String)r1.get(i);
 			for(int j =i; j < r1.size(); j++){
 				String relation2 = (String)r1.get(j);
-				System.out.println(relation1+"    "+relation2);
 				if(relation1 != relation2){ 
 					String[] rel1 = relation1.split(" ");
 					String[] rel2 = relation2.split(" ");
-					if(
-						( (rel1[0]).equals(rel2[4])||("L"+rel1[0]).equals(rel2[4])) && 
+					
+					//if(relation1.contains("Dummy")||relation2.contains("Dummy")) System.out.println(relation1 + " " + relation2);
+					
+					if(rel1.length >= 5 && rel2.length >= 5 && 
+							( (rel1[0]).equals(rel2[4])||("L"+rel1[0]).equals(rel2[4])) && 
 							(rel1[4].equals("L"+rel2[0]) || rel1[4].equals(rel2[0]) )&& 
 							rel1[2].equals(rel2[2])){
 						String num1 = " 1 ";
@@ -158,9 +160,7 @@ public class UMLGenerator {
 			String[] sls= s.split(" ");
 				for (String r : relations) {
 					String[] rls = r.split(" ");
-					if (r != s && sls[0].equals(rls[0]) && sls[4].equals(rls[4])){
-					
-						
+					if (sls.length == 5 && rls.length == 5 && r != s && sls[0].equals(rls[0]) && sls[4].equals(rls[4])){
 							int rnum=checkmap.get(rls[2]);
 							int snum=checkmap.get(sls[2]);
 							if(rnum>snum){

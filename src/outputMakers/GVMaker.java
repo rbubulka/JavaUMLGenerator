@@ -132,7 +132,7 @@ public class GVMaker implements OutputMaker {
 		for (String arrowstring : relations) {
 			String[] ls = arrowstring.split(" ");
 //			relationstring.append(ls[0].replaceAll("<", "&#60;").replaceAll(">", "&#62;").replaceAll("/", "&#47;") + " -> " + ls[2].replaceAll("<", "&#60;").replaceAll(">", "&#62;").replaceAll("/", "&#47;") + " " + details.get(ls[1]) + ";\n");
-			relationstring.append(splitclassname(ls[0]).replaceAll("\\$", "") + " -> " + splitclassname(ls[4]).replaceAll("\\$", "") + " " + details.get(ls[2]) + ",label=\""+ls[1]+"..."+ls[3]+"\" "+"];\n");
+			if(ls.length >= 5)relationstring.append("\""+splitclassname(ls[0]).replaceAll("\\$", "") +"\"" + " -> " + "\""+ splitclassname(ls[4]).replaceAll("\\$", "") + "\""+" " + details.get(ls[2]) + ",label=\""+ls[1]+"..."+ls[3]+"\" "+"];\n");
 			
 
 		}
@@ -140,6 +140,7 @@ public class GVMaker implements OutputMaker {
 	}
 
 	public String splitclassname(String in) {
+		if(!in.contains("/")) return in;
 		String[] result = in.split("/");
 		String temp=result[result.length-1];
 		if(temp.charAt(0)!='"' && temp.charAt(temp.length()-1)=='"'){
