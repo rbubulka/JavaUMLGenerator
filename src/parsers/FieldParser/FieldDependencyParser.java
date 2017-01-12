@@ -55,9 +55,7 @@ public abstract class FieldDependencyParser extends FieldsParser {
 		String num = "1 ";
 		if (isCollection)
 			num = "* ";
-		String[] signature = type.split("/");
-		String dname = signature[signature.length - 1].replaceAll(";", "");
-		relations.add(classname + " 1 hasa " + num + dname);
+		relations.add(classname + " 1 hasa " + num + type.replaceAll(";", ""));
 	}
 
 }

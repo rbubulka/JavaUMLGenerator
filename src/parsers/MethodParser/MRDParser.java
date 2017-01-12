@@ -80,11 +80,7 @@ public abstract class MRDParser extends MethodsParser {
 		String num = "1 ";
 		if (isCollection)
 			num = "* ";
-		String[] signature = type.split("/");
-		String dname = signature[signature.length - 1].replaceAll(";", "");
-
-		if (!dname.equals("")) {
-			relations.add(classname + " 1 usea " + num + "\""+dname.replaceAll("\\[", "")+"\"");
-		}
+			relations.add(classname + " 1 usea " + num + "\""+type.replaceAll("\\[", "")+"\"");
+		
 	}
 }

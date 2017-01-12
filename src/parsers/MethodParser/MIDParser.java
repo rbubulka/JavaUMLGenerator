@@ -64,9 +64,7 @@ public abstract class MIDParser extends MethodsParser {
 		String num = "1 ";
 		if (isCollection)
 			num = "* ";
-		String[] signature = type.split("/");
-		String dname = signature[signature.length - 1].replaceAll(";", "");
-		relations.add(classname + " 1 usea " + num + dname);
+		relations.add(classname + " 1 usea " + num + "\""+type.replaceAll("\\[", "")+"\"");
 	}
 
 }

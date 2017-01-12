@@ -115,7 +115,7 @@ public class UMLGenerator {
 				if(relation1 != relation2){ 
 					String[] rel1 = relation1.split(" ");
 					String[] rel2 = relation2.split(" ");
-					System.out.println("rel1: "+ rel1[4] + " rel2: "+rel2[4]);
+//					System.out.println("rel1: "+ rel1[4] + " rel2: "+rel2[4]);
 					if(rel1[0].equals(rel2[4]) && rel1[4].equals(rel2[0]) && rel1[2].equals(rel2[2])){
 						String num1 = " 1 ";
 						String num2 = " 1 ";
