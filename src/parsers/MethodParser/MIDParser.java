@@ -1,5 +1,6 @@
 package parsers.MethodParser;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -16,8 +17,19 @@ public abstract class MIDParser extends MethodsParser {
 	public String parse(List methods, Set<String> relations, String classname) {
 		StringBuilder result = new StringBuilder();
 		for (MethodNode mn : (List<MethodNode>) methods) {
+			List<LocalVariableNode> variables = (List<LocalVariableNode>)mn.localVariables;
+//			int lastIndex = 0;
+//			List<LocalVariableNode> toRemove = new ArrayList<LocalVariableNode>();
+//			for(int i = 0; i < variables.size(); i++){
+//				if(variables.get(i).index < lastIndex){
+//					int diff =  lastIndex - variables.get(i).index;
+//					for(int j = 0; j < i; j++) toRemove.add(variables.get(i-(j+1));
+//				}
+//				lastIndex = variables.get(i).index;
+//			}			
+			
 			if (mn.localVariables != null) {
-				for (LocalVariableNode local : (List<LocalVariableNode>) mn.localVariables)
+				for (LocalVariableNode local : variables)
 					if (local != null && local.signature != null) {
 						if (local.signature.contains("<")) {
 							addCollectionDependency(relations, classname, local.signature);

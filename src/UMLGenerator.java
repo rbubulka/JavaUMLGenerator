@@ -94,6 +94,7 @@ public class UMLGenerator {
 		NodeParseToUML nptu = new NodeParseToUML(this.methodparser, this.fieldparser, this.classparser, null);
 		List<HashMap<String, String>> parsedstring = nptu.doParse(nodelist, relations);
 		this.simplifyRelations(relations);
+		this.twoWayRelations(relations);
 		this.outputmaker.fileWrite(this.output, parsedstring, relations);
 
 	}
@@ -106,6 +107,31 @@ public class UMLGenerator {
 
 	}
 
+	private void twoWayRelations(Set<String> relations){
+		Set<String> toRemove = new HashSet<String>();
+		Set<String> toAdd = new HashSet<String>();
+		for(String relation1: relations){
+			for(String relation2: relations){
+				if(relation1 != relation2){ 
+					String[] rel1 = relation1.split(" ");
+					String[] rel2 = relation2.split(" ");
+					System.out.println("rel1: "+ rel1[4] + " rel2: "+rel2[4]);
+					if(rel1[0].equals(rel2[4]) && rel1[4].equals(rel2[0]) && rel1[2].equals(rel2[2])){
+						String num1 = " 1 ";
+						String num2 = " 1 ";
+						if(rel1[3].equals("*")||rel2[1].equals("*")){ num1 = " *";}
+						if(rel2[3].equals("*")||rel1[1].equals("*")){ num2 = " *";}
+						toAdd.add(rel1[0] + num1 + "both" + rel1[2].trim() + num2 + rel1[4]);
+						toRemove.add(relation1);
+						toRemove.add(relation2);
+					}
+				}
+			}
+		}
+		relations.addAll(toAdd);
+		relations.removeAll(toRemove);
+	}
+	
 	private void simplifyRelations(Set<String> relations) {
 		HashMap<String,Integer> checkmap=new HashMap<>();
 		checkmap.put("usea", 0);

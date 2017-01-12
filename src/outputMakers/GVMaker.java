@@ -107,6 +107,8 @@ public class GVMaker implements OutputMaker {
 		details.put("extends", "[arrowhead=\"onormal\"");
 		details.put("hasa", "[arrowhead=\"vee\"");
 		details.put("usea", "[arrowhead=\"vee\", style=\"dashed\"");
+		details.put("bothhasa", "[arrowhead=\"vee\", dir=\"both\"");
+		details.put("bothusea", "[arrowhead=\"vee\", style=\"dashed\", dir=\"both\"");
 		StringBuilder relationstring = generateRelationsString(relations, details);
 
 //		 System.out.println(classDetailString.toString());
