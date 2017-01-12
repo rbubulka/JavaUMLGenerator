@@ -22,6 +22,9 @@ public abstract class MRDParser extends MethodsParser {
 			if ((md.access & opcode) > 0) {
 				String start = md.signature;
 				if (start != null) {
+					if(start.contains(":")){
+						start=start.substring(start.indexOf(">")+1);
+					}
 					String[] startarray = start.split("\\)");
 					String arg = startarray[0].replaceAll("\\(", "");
 					arg = arg.replace(";>;", ">;");
@@ -81,7 +84,7 @@ public abstract class MRDParser extends MethodsParser {
 		String dname = signature[signature.length - 1].replaceAll(";", "");
 
 		if (!dname.equals("")) {
-			relations.add(classname + " 1 usea " + num + dname.replaceAll("\\*", "\"*\""));
+			relations.add(classname + " 1 usea " + num + "\""+dname.replaceAll("\\[", "")+"\"");
 		}
 	}
 }
