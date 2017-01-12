@@ -1,4 +1,7 @@
 package NodeGetter;
+
+import java.util.List;
+
 public class DummyTwo {
-	private DummyOne dummyone;
+	private List<DummyOne> dummyone;
 }
