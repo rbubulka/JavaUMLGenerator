@@ -2,7 +2,7 @@
 <launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
 <stringAttribute key="bad_container_name" value="\CSSE374Project\C"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-<listEntry value="/CSSE374Project/src/Runner.java"/>
+<listEntry value="/CSSE374Project/src/main/Runner.java"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="1"/>
@@ -17,7 +17,7 @@
 </listAttribute>
 <booleanAttribute key="org.eclipse.jdt.launching.DEFAULT_CLASSPATH" value="false"/>
 <stringAttribute key="org.eclipse.jdt.launching.JRE_CONTAINER" value="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="Runner"/>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="main.Runner"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="java.util.TreeSet -publicClass -protectedClass -privateMethod -publicMethod -protectedMethod -privateField -publicField -protectedField -o=C:\Users\bubulkr\Desktop\B.dot -recursive"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="CSSE374Project"/>
 </launchConfiguration>

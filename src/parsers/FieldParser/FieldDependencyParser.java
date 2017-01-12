@@ -30,10 +30,7 @@ public abstract class FieldDependencyParser extends FieldsParser {
 		
 		
 	}
-	public String splitclassname(String in) {
-		String[] result = in.split("/");
-		return result[result.length - 1].replaceAll("//W", "").replaceAll(";", "").replaceAll("\\[", "");
-	}
+
 	
 	private void addCollectionDependency(Set<String> relations, String classname, String local) {
 		if (!local.contains("<")) {
