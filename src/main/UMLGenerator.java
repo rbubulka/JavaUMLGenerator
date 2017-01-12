@@ -133,11 +133,11 @@ public class UMLGenerator {
 							( (rel1[0]).equals(rel2[4])||("L"+rel1[0]).equals(rel2[4])) && 
 							(rel1[4].equals("L"+rel2[0]) || rel1[4].equals(rel2[0]) )&& 
 							rel1[2].equals(rel2[2])){
-						String num1 = " 1 ";
-						String num2 = " 1 ";
-						if(rel1[3].equals("*")||rel2[1].equals("*")){ num1 = " * ";}
-						if(rel2[3].equals("*")||rel1[1].equals("*")){ num2 = " * ";}
-						toAdd.add(rel1[0] + num1 + "both" + rel1[2].trim() + num2 + rel1[4]);
+//						String num1 = " 1 ";
+//						String num2 = " 1 ";
+//						if(rel1[3].equals("*")||rel2[1].equals("*")){ num1 = " * ";}
+//						if(rel2[3].equals("*")||rel1[1].equals("*")){ num2 = " * ";}
+						toAdd.add(rel1[0] + " "+rel1[1]+"..."+rel1[3]+" " + "both" + rel1[2].trim() + " "+rel2[1]+"..."+rel2[3]+" "  + rel1[4]);
 						toRemove.add(relation1);
 						toRemove.add(relation2);
 					}

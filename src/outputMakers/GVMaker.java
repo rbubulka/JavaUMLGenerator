@@ -132,8 +132,13 @@ public class GVMaker implements OutputMaker {
 		for (String arrowstring : relations) {
 			String[] ls = arrowstring.split(" ");
 //			relationstring.append(ls[0].replaceAll("<", "&#60;").replaceAll(">", "&#62;").replaceAll("/", "&#47;") + " -> " + ls[2].replaceAll("<", "&#60;").replaceAll(">", "&#62;").replaceAll("/", "&#47;") + " " + details.get(ls[1]) + ";\n");
-			if(ls.length >= 5)relationstring.append("\""+splitclassname(ls[0]).replaceAll("\\$", "") +"\"" + " -> " + "\""+ splitclassname(ls[4]).replaceAll("\\$", "") + "\""+" " + details.get(ls[2]) + ",label=\""+ls[1]+"..."+ls[3]+"\" "+"];\n");
 			
+			if(ls.length >= 5){
+				if(ls[2].contains("both")){
+					relationstring.append("\""+splitclassname(ls[0]).replaceAll("\\$", "") +"\"" + " -> " + "\""+ splitclassname(ls[4]).replaceAll("\\$", "") + "\""+" " + details.get(ls[2]) + ",headlabel=\""+ls[1]+"\",taillabel=\" "+ls[3]+"\"];\n");
+				}else{
+				relationstring.append("\""+splitclassname(ls[0]).replaceAll("\\$", "") +"\"" + " -> " + "\""+ splitclassname(ls[4]).replaceAll("\\$", "") + "\""+" " + details.get(ls[2]) + ",label=\""+ls[1]+"..."+ls[3]+"\" "+"];\n");
+			}}
 
 		}
 		return relationstring;
