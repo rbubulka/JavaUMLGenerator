@@ -21,6 +21,7 @@ public abstract class MRDParser extends MethodsParser {
 		for (MethodNode md : (List<MethodNode>) methods) {
 			if ((md.access & opcode) > 0) {
 				String start = md.desc;
+				//TODO: something is wrong at here should have sig and desc both
 //				System.out.println(md.desc);
 				if (start != null) {
 					if(start.contains(":")){

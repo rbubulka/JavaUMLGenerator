@@ -33,6 +33,7 @@ public abstract class MIDParser extends MethodsParser {
 					MethodInsnNode mc = (MethodInsnNode) insn;
 					String[] desc=mc.desc.split("\\)");
 					String rt=desc[desc.length-1];
+				
 					if (rt.contains("<")) {
 						addCollectionDependency(relations, classname, rt);
 					} else {
