@@ -13,6 +13,8 @@ import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
 import org.objectweb.asm.tree.ClassNode;
 
 import com.sun.xml.internal.ws.org.objectweb.asm.Opcodes;
@@ -160,7 +162,11 @@ public class UMLGenerator {
 			String[] sls= s.split(" ");
 				for (String r : relations) {
 					String[] rls = r.split(" ");
+					if(s.contains("Pizza")&&r.contains("Pizza")&&r.contains("Pizza")){
+						System.out.println(s+"      "+r);
+					}
 					if (sls.length == 5 && rls.length == 5 && r != s && sls[0].equals(rls[0]) && sls[4].equals(rls[4])){
+						
 							int rnum=checkmap.get(rls[2]);
 							int snum=checkmap.get(sls[2]);
 							if(rnum>snum){
