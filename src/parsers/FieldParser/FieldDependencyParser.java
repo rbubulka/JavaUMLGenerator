@@ -7,6 +7,8 @@ import org.objectweb.asm.tree.FieldNode;
 
 import com.sun.javafx.scene.traversal.Hueristic2D;
 
+import utilities.AvoidNonclassUtils;
+
 public abstract class FieldDependencyParser extends FieldsParser {
 
 	public FieldDependencyParser(FieldsParser other) {
@@ -55,11 +57,12 @@ public abstract class FieldDependencyParser extends FieldsParser {
 	}
 
 	private void addDependency(Set<String> relations, String classname, String type, boolean isCollection) {
+		if(AvoidNonclassUtils.isAClass(type)){
 		String num = "1 ";
 		if (isCollection) {
 			num = "* ";
 		}
-		relations.add(classname + " 1 hasa " + num + type.trim().replaceAll(";", ""));
+		relations.add(classname + " 1 hasa " + num + type.trim().replaceAll(";", ""));}
 	}
 
 }

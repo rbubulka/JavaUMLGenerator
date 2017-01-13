@@ -149,9 +149,9 @@ public class GVMaker implements OutputMaker {
 		String[] result = in.split("/");
 		String temp=result[result.length-1];
 		if(temp.charAt(0)!='"' && temp.charAt(temp.length()-1)=='"'){
-			return "\""+result[result.length - 1].replaceAll("//W", "");
+			return "\""+result[result.length - 1].replaceAll("//W", "").replaceAll(";", "");
 		}
-		return result[result.length - 1].replaceAll("//W", "");
+		return result[result.length - 1].replaceAll("//W", "").replaceAll(";", "");
 	}
 
 	public void printcheck(String fileName, List<HashMap<String, String>> classdetails, List<String> relations) {

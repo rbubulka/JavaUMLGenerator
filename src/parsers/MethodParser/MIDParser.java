@@ -13,6 +13,7 @@ import org.objectweb.asm.tree.MethodInsnNode;
 import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.tree.VarInsnNode;
 
+import utilities.AvoidNonclassUtils;
 public abstract class MIDParser extends MethodsParser {
 
 	public MIDParser(MethodsParser other) {
@@ -142,9 +143,11 @@ public abstract class MIDParser extends MethodsParser {
 	}
 
 	private void addDependency(Set<String> relations, String classname, String type, boolean isCollection) {
+		if(AvoidNonclassUtils.isAClass(type)){
 		String num = "1 ";
 		if (isCollection) num = "* ";
 		relations.add(classname + " 1 usea " + num +type.trim().replaceAll("\\[", ""));
+		}
 	}
 	
 	private LocalVariableNode getLocalVariableNode(VarInsnNode varInsnNode, MethodNode methodNode) {
