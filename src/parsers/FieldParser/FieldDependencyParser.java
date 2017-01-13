@@ -23,6 +23,13 @@ public abstract class FieldDependencyParser extends FieldsParser {
 				} else {
 					addDependency(relations, classname, fn.desc, false);
 				}
+				if(fn.signature==null){
+					if(fn.desc.contains("[")){
+					
+						addDependency(relations, classname, fn.desc.replace(";", "").substring(1), true);
+					}else{
+					addDependency(relations, classname, fn.desc.replace(";", ""), false);}
+				}
 			}
 		}
 		if (otherparser != null)

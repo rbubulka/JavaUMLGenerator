@@ -44,7 +44,13 @@ public abstract class MRDParser extends MethodsParser {
 						if (s != null && s.contains("<")) {
 							this.addCollectionDependency(relations, name, s);
 						} else {
-							this.addDependency(relations, name, s, false);
+							if(s.contains("[")){
+								
+							this.addDependency(relations, name, s.replace(";", ""), true);}
+							else{
+								
+								this.addDependency(relations, name, s.replace(";", ""), false);
+							}
 						}
 
 					}
