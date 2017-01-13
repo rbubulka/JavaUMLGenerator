@@ -101,6 +101,19 @@ public class UMLGenerator {
 //		}
 		List<HashMap<String, String>> parsedstring = nptu.doParse(nodelist, relations);
 		
+		HashSet<String> toremove=new HashSet<>();
+		HashSet<String> toadd=new HashSet<>();
+		for(String r:relations){
+			String s=r.replaceAll(";", "");
+			toremove.add(r);
+			toadd.add(s);
+//			System.out.println(s);
+			
+		}
+		relations.removeAll(toremove);
+		relations.addAll(toadd);
+		
+		
 		this.simplifyRelations(relations);
 		this.twoWayRelations(relations);
 	
@@ -158,14 +171,15 @@ public class UMLGenerator {
 		checkmap.put("extends", 3);
 		Set<String> toRemove = new HashSet<String>();
 		Set<String> toAdd = new HashSet<String>();
-		for (String s : relations) {
+		Object[] rel = relations.toArray();
+		for (int i =0; i < rel.length; i++) {
+			String s = (String)rel[i];
 			String[] sls= s.split(" ");
-				for (String r : relations) {
+				for (int j = i; j<rel.length;j++) {
+					String r = (String)rel[j];
 					String[] rls = r.split(" ");
-					if(s.contains("Pizza")&&r.contains("Pizza")&&r.contains("Pizza")){
-						System.out.println(s+"      "+r);
-					}
-					if (sls.length == 5 && rls.length == 5 && r != s && sls[0].equals(rls[0]) && sls[4].equals(rls[4])){
+					if (sls.length == 5 && rls.length == 5 && r != s && sls[0].equals(rls[0])&& 
+							(sls[4].equals(rls[4])||sls[4].equals(rls[4].substring(1))||sls[4].substring(1).equals(rls[4])||sls[4].substring(1).equals(rls[4].substring(1)))){
 						
 							int rnum=checkmap.get(rls[2]);
 							int snum=checkmap.get(sls[2]);
@@ -199,7 +213,6 @@ public class UMLGenerator {
 		}
 		relations.addAll(toAdd);
 		relations.removeAll(toRemove);
-		
 		
 	}
 
