@@ -1,5 +1,7 @@
 package parsers.FieldParser;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -8,7 +10,7 @@ import org.objectweb.asm.tree.FieldNode;
 import com.sun.javafx.scene.traversal.Hueristic2D;
 
 import utilities.AvoidNonclassUtils;
-
+import static utilities.SignatureInterpreter.interpret;
 public abstract class FieldDependencyParser extends FieldsParser {
 
 	public FieldDependencyParser(FieldsParser other) {
@@ -20,10 +22,16 @@ public abstract class FieldDependencyParser extends FieldsParser {
 		StringBuilder result = new StringBuilder();
 		for (FieldNode fn : (List<FieldNode>) fields) {
 			if ((fn.access & opcode) > 0) {
-				if (fn.signature != null && fn.signature.contains("<")) {
-					addCollectionDependency(relations, classname, fn.signature);
-				} else {
-					addDependency(relations, classname, fn.desc, false);
+				
+				if (fn.signature != null) { // && fn.signature.contains("<")
+//					addCollectionDependency(relations, classname, fn.signature);
+//				} else {
+					List<String> strs = new ArrayList<String>();
+					HashMap<String,Boolean> hm=new HashMap<>();
+					
+					interpret(fn.signature,strs,hm,false);
+					for(String s: strs)	{addDependency(relations, classname, s, hm.get(s));
+					}
 				}
 				if(fn.signature==null){
 					if(fn.desc.contains("[")){
