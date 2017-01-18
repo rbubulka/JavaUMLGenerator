@@ -1,4 +1,4 @@
-package parsers;
+package main;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,6 +10,7 @@ import java.util.TreeSet;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
 
+import parsers.Parser;
 import parsers.ClassParser.ClassParser;
 import parsers.FieldParser.FieldsParser;
 import parsers.MethodParser.MethodsParser;

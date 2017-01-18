@@ -10,9 +10,21 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import printing.*;
-
+import static utilities.ClassNameModiferUtils.splitclassname;
 public class GVMaker implements OutputMaker {
-	private Printer printer=new GVFilePrinter();;
+	private Printer printer;
+	HashMap<String, String> details;
+	
+	public GVMaker() {
+		printer=new GVFilePrinter();
+		details = new HashMap<>();
+		details.put("implements", "[arrowhead = \"onormal\", style = \"dashed\"");
+		details.put("extends", "[arrowhead=\"onormal\"");
+		details.put("hasa", "[arrowhead=\"vee\"");
+		details.put("usea", "[arrowhead=\"vee\", style=\"dashed\"");
+		details.put("bothhasa", "[arrowhead=\"vee\", dir=\"both\"");
+		details.put("bothusea", "[arrowhead=\"vee\", style=\"dashed\", dir=\"both\"");
+	}
 	public void fileWrite(String filePath, List<HashMap<String, String>> classdetails, Set<String> relations) throws IOException {
 
 		StringBuilder classDetailString = new StringBuilder();
@@ -21,17 +33,15 @@ public class GVMaker implements OutputMaker {
 		ppp.put("private", "-");
 		ppp.put("protected", "#");
 		for (HashMap<String, String> map : classdetails) {
-			// class
+			// class name
 			String classinfo = map.get("Class");
 			if (classinfo == null || classinfo.equals("")) {
 				continue;
 			}
-			// split the class info on for [ppp,
-			// classname,interface,isInterface,abstract,isAbstract]
+			// split the class info on for [ppp,classname,interface,isInterface,abstract,isAbstract]
 			String[] splited = classinfo.split(" ");
-//			classDetailString.append("\"" + splited[1].replaceAll("<", "&#60;").replaceAll(">", "&#62;").replaceAll("/", "&#47;") + "\" [\n");
 			classDetailString.append("\"" + splitclassname(splited[1]) + "\" [\n");
-			classDetailString.append("shape=\"record\",\n");
+			classDetailString.append("shape=\"record\", color = \"red\""+"\n");
 			classDetailString.append("label= <{");
 			// check if abstract
 			String temp1 = "";
@@ -45,7 +55,6 @@ public class GVMaker implements OutputMaker {
 				classDetailString.append("&#60;&#60;interface&#62;&#62;<br/>");
 			}
 			// add in class name to the uml object
-//			classDetailString.append(temp1 + splited[1].replaceAll("<", "&#60;").replaceAll(">", "&#62;").replaceAll("/", "&#47;") + temp2);
 			classDetailString.append(temp1 + splitclassname(splited[1]) + temp2);
 			classDetailString.append("|");
 			// field
@@ -56,7 +65,6 @@ public class GVMaker implements OutputMaker {
 					String[] splitedfield = field.split(" ");
 					classDetailString.append(ppp.get(splitedfield[0]));
 					classDetailString.append(splitedfield[2].replaceAll("<", "&#60;").replaceAll(">", "&#62;").replaceAll("/", "&#47;") + " : " + splitedfield[1].replaceAll("<", "&#60;").replaceAll(">", "&#62;").replaceAll("/", "&#47;") + "<br align=\"left\"/>");
-//					classDetailString.append(splitclassname(splitedfield[1]) + " : " + splitclassname(splitedfield[2]) + "<br align=\"left\"/>");
 				}
 				
 			}
@@ -71,26 +79,9 @@ public class GVMaker implements OutputMaker {
 					classDetailString.append(ppp.get(splitedmethod[0]));
 					for(int i=1;i<splitedmethod.length;i++){
 						String s=splitedmethod[i];
-					
-						if (!s.equals("null")){
-						
-						 
+						if (!s.equals("null")){						 
 						classDetailString.append(s.replaceAll("<", "&#60;").replaceAll(">", "&#62;").replaceAll("/", "&#47;")+" ");}
 					}
-//					classDetailString.append(ppp.get(splitedmethod[0]));
-//					classDetailString.append(splitedmethod[1].replaceAll("<", "&#60;").replaceAll(">", "&#62;").replaceAll("/", "&#47;"));
-//					if(!splitedmethod[2].equals("null")){
-//					String[] inputAndOther=splitedmethod[2].split(Pattern.quote(")"));
-//					String[] inputs=inputAndOther[0].split(";");
-//					classDetailString.append("(");
-//					for(String input:inputs){
-//	classDetailString.append(input.replaceAll("<", "&#60;").replaceAll(">", "&#62;").replaceAll("/", "&#47;"));}
-////					classDetailString.append(this.splitclassname(input));}
-////					classDetailString.append(inputAndOther[0].replaceAll(";", " "));
-//					classDetailString.append(")");
-//					classDetailString.append(" : ");
-//					classDetailString.append(inputAndOther[1].replaceAll("<", "&#60;").replaceAll(">", "&#62;").replaceAll("/", "&#47;"));}
-////					classDetailString.append(this.splitclassname(inputAndOther[1]));}
 					classDetailString.append("<br align=\"left\"/>");
 				}
 			}
@@ -101,18 +92,9 @@ public class GVMaker implements OutputMaker {
 			classDetailString.append("];\n\n");
 
 		}
-
-		HashMap<String, String> details = new HashMap<>();
-		details.put("implements", "[arrowhead = \"onormal\", style = \"dashed\"");
-		details.put("extends", "[arrowhead=\"onormal\"");
-		details.put("hasa", "[arrowhead=\"vee\"");
-		details.put("usea", "[arrowhead=\"vee\", style=\"dashed\"");
-		details.put("bothhasa", "[arrowhead=\"vee\", dir=\"both\"");
-		details.put("bothusea", "[arrowhead=\"vee\", style=\"dashed\", dir=\"both\"");
+		
 		StringBuilder relationstring = generateRelationsString(relations, details);
 
-//		 System.out.println(classDetailString.toString());
-		// System.out.println(relationstring.toString());
 		File file = new File(filePath);
 		FileOutputStream fop = new FileOutputStream(file);
 		if (!file.exists()) {
@@ -126,35 +108,27 @@ public class GVMaker implements OutputMaker {
 		//printer.print(filePath);
 		
 	}
-
+	public void addAdditionalRelationDetails(String relation, String detail){
+		details.put(relation, detail);
+	}
+	
 	private StringBuilder generateRelationsString(Set<String> relations, HashMap<String, String> details) {
 		StringBuilder relationstring = new StringBuilder();
 		for (String arrowstring : relations) {
-			String[] ls = arrowstring.split(" ");
-//			relationstring.append(ls[0].replaceAll("<", "&#60;").replaceAll(">", "&#62;").replaceAll("/", "&#47;") + " -> " + ls[2].replaceAll("<", "&#60;").replaceAll(">", "&#62;").replaceAll("/", "&#47;") + " " + details.get(ls[1]) + ";\n");
-			
+			String[] ls = arrowstring.split(" ");			
 			if(ls.length >= 5){
 				if(ls[2].contains("both")){
-					relationstring.append("\""+splitclassname(ls[0]).replaceAll("\\$", "") +"\"" + " -> " + "\""+ splitclassname(ls[4]).replaceAll("\\$", "") + "\""+" " + details.get(ls[2]) + ",headlabel=\""+ls[1]+"\",taillabel=\" "+ls[3]+"\"];\n");
-				}else{
-				relationstring.append("\""+splitclassname(ls[0]).replaceAll("\\$", "") +"\"" + " -> " + "\""+ splitclassname(ls[4]).replaceAll("\\$", "") + "\""+" " + details.get(ls[2]) + ",label=\""+ls[1]+"..."+ls[3]+"\" "+"];\n");
+					relationstring.append("\""+splitclassname(ls[0]).replaceAll("\\$", "&#36;") +"\"" + " -> " + "\""+ splitclassname(ls[4]).replaceAll("\\$", "") + "\""+" " + details.get(ls[2]) + ",headlabel=\""+ls[1]+"\",taillabel=\" "+ls[3] +"\" "+"fontcolor=\"red\""+"];\n");
+				} else {
+				relationstring.append("\""+splitclassname(ls[0]).replaceAll("\\$", "&#36;") +"\"" + " -> " + "\""+ splitclassname(ls[4]).replaceAll("\\$", "") + "\""+" " + details.get(ls[2]) + ",label=\""+ls[1]+"..."+ls[3]+"\" "+"frontcolor=\"red\""+"];\n");
 			}}
 
 		}
 		return relationstring;
 	}
 
-	public String splitclassname(String in) {
-		if(!in.contains("/")) return in;
-		String[] result = in.split("/");
-		String temp=result[result.length-1];
-		if(temp.charAt(0)!='"' && temp.charAt(temp.length()-1)=='"'){
-			return "\""+result[result.length - 1].replaceAll("//W", "").replaceAll(";", "");
-		}
-		return result[result.length - 1].replaceAll("//W", "").replaceAll(";", "");
-	}
 
-	public void printcheck(String fileName, List<HashMap<String, String>> classdetails, List<String> relations) {
+	private void printcheck(String fileName, List<HashMap<String, String>> classdetails, List<String> relations) {
 		for (HashMap<String, String> x : classdetails) {
 			for (String s : x.keySet()) {
 				System.out.println(s + "     " + x.get(s));

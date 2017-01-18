@@ -14,7 +14,6 @@ public abstract class MRDParser extends MethodsParser {
 
 	public MRDParser(MethodsParser other) {
 		super(other);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -81,18 +80,11 @@ public abstract class MRDParser extends MethodsParser {
 		return result.toString();
 	}
 
-	public String splitclassname(String in) {
-		String[] result = in.split("/");
-		return result[result.length - 1].replaceAll("//W", "").replaceAll(";", "").replaceAll("\\[", "");
-	}
-
 	private void addCollectionDependency(Set<String> relations, String classname, String local) {
 		if (!local.contains("<")) {
 			addDependency(relations, classname, local, true);
 		} else {
-//			System.out.println(local);
 			String collectionType = local.substring(local.indexOf("<") + 1, local.lastIndexOf(">"));
-//			System.out.println(collectionType);
 			String[] types = collectionType.split(";");
 			for (String type : types) {
 				if (type.contains("<")) {

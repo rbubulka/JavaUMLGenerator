@@ -72,49 +72,6 @@ public abstract class MIDParser extends MethodsParser {
 			}
 		}
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-//		for (MethodNode mn : (List<MethodNode>) methods) {
-//			List<LocalVariableNode> variables = (List<LocalVariableNode>)mn.localVariables;
-////			int lastIndex = 0;
-////			List<LocalVariableNode> toRemove = new ArrayList<LocalVariableNode>();
-////			for(int i = 0; i < variables.size(); i++){
-////				if(variables.get(i).index < lastIndex){
-////					int diff =  lastIndex - variables.get(i).index;
-////					for(int j = 0; j < i; j++) toRemove.add(variables.get(i-(j+1));
-////				}
-////				lastIndex = variables.get(i).index;
-////			}			
-//			
-//			if (mn.localVariables != null) {
-//				for (LocalVariableNode local : variables)
-//					if (local != null && local.signature != null) {
-//						if (local.signature.contains("<")) {
-//							addCollectionDependency(relations, classname, local.signature);
-//						} else {
-//							addDependency(relations, classname, local.signature, false);
-//						}
-//					}
-//			}
-//		}
-		
-		
-		
-		
-		
-		
 		if (otherparser != null)
 			result.append(this.otherparser.parse(methods, relations, classname));
 		return result.toString();
@@ -124,7 +81,6 @@ public abstract class MIDParser extends MethodsParser {
 		if (!local.contains("<")) {
 			addDependency(relations, classname, local, true);
 		} else {
-			//System.out.println(local);
 			String collectionType = "";
 			if(local.contains(">")){ collectionType = local.substring(local.indexOf("<")+1, local.lastIndexOf(">"));}
 			else{
