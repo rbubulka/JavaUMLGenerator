@@ -4,7 +4,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>450</x>
+      <x>360</x>
       <y>410</y>
       <w>540</w>
       <h>70</h>
@@ -41,13 +41,13 @@ private simplifyRelations(Set&lt;String&gt; relations)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>730</x>
-      <y>370</y>
+      <x>640</x>
+      <y>390</y>
       <w>320</w>
-      <h>60</h>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;40.0;300.0;10.0</additional_attributes>
+    <additional_attributes>10.0;20.0;300.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -316,24 +316,24 @@ public abstract String parse()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1110</x>
-      <y>440</y>
-      <w>40</w>
-      <h>330</h>
+      <x>1030</x>
+      <y>460</y>
+      <w>110</w>
+      <h>310</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;310.0;20.0;10.0</additional_attributes>
+    <additional_attributes>90.0;290.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1310</x>
-      <y>440</y>
-      <w>340</w>
-      <h>110</h>
+      <x>1220</x>
+      <y>460</y>
+      <w>430</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>320.0;90.0;10.0;10.0</additional_attributes>
+    <additional_attributes>410.0;70.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -456,8 +456,8 @@ is inner class of</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>450</x>
-      <y>550</y>
+      <x>320</x>
+      <y>580</y>
       <w>530</w>
       <h>70</h>
     </coordinates>
@@ -469,13 +469,13 @@ void addClasses(ArrayList&lt;String), set&lt;ClassNode&gt; nodes, List&lt;String
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>710</x>
+      <x>580</x>
       <y>470</y>
-      <w>30</w>
-      <h>100</h>
+      <w>70</w>
+      <h>130</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+    <additional_attributes>50.0;10.0;10.0;110.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -611,9 +611,9 @@ public String parse()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1030</x>
-      <y>330</y>
-      <w>470</w>
+      <x>940</x>
+      <y>350</y>
+      <w>660</w>
       <h>120</h>
     </coordinates>
     <panel_attributes>NodeParseToUml
@@ -622,7 +622,7 @@ public String parse()</panel_attributes>
 - FieldsParser fparser;
 - ClassParser cparser;
 --
-+NodeParseToUML(MethodsParser mppp,FieldsParser fppp,ClassParser cppp,List&lt;Parser&gt; otherppp){
++NodeParseToUML(MethodsParser mppp,FieldsParser fppp,ClassParser cppp,List&lt;Parser&gt; otherppp)
 +List&lt;HashMap&lt;String,String&gt;&gt; doParse(Set&lt;ClassNode&gt; nodes)</panel_attributes>
     <additional_attributes/>
   </element>
@@ -655,13 +655,13 @@ private addDependency(Set&lt;String&gt; relations, String classname, String type
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1210</x>
+      <x>1140</x>
       <y>290</y>
-      <w>50</w>
-      <h>60</h>
+      <w>100</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30.0;40.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;60.0;80.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -785,11 +785,11 @@ public MethodsParser makeParser()</panel_attributes>
     <coordinates>
       <x>1380</x>
       <y>250</y>
-      <w>270</w>
-      <h>110</h>
+      <w>220</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>250.0;90.0;10.0;10.0</additional_attributes>
+    <additional_attributes>200.0;100.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
