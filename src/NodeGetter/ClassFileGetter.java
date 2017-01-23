@@ -8,18 +8,19 @@ import java.util.Set;
 import java.util.Stack;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.tree.ClassNode;
-
+import static utilities.CheckIfInBlacklist.checkIfInBlacklist;
 public class ClassFileGetter implements FileGetter {
 
 	@Override
 	public void addClasses(ArrayList<String> classnames, Set<ClassNode> nodes, Set<String> relations,
-			boolean recursive) throws IOException {
+			boolean recursive,List<String> blacklist) throws IOException {
 		for (String cname : classnames) {
 			//System.out.println(cname);
+			if(!blacklist.contains(cname)){
 			ClassReader reader = new ClassReader(cname);
 			ClassNode classNode = new ClassNode();
 			reader.accept(classNode, ClassReader.EXPAND_FRAMES);
-			nodes.add(classNode);
+			nodes.add(classNode);}
 		}
 		HashSet<String> visited = new HashSet<String>();
 		Stack<ClassNode> st = new Stack<>();
@@ -30,7 +31,7 @@ public class ClassFileGetter implements FileGetter {
 				visited.add(v.name);
 				nodes.add(v);
 				for (String cns : (List<String>) v.interfaces) {
-					if (cns != null) {
+					if (cns != null && !checkIfInBlacklist(cns, blacklist)) {
 						if (recursive) {
 							ClassReader cr = new ClassReader(cns);
 							ClassNode cn = new ClassNode();
@@ -40,7 +41,7 @@ public class ClassFileGetter implements FileGetter {
 						relations.add(v.name + " 1 implements 1 " + cns);
 
 					}}
-					if (v.superName != null) {
+					if (v.superName != null&& !checkIfInBlacklist(v.superName, blacklist)) {
 						if (recursive) {
 							ClassReader readertemp = new ClassReader(v.superName);
 							ClassNode classNodetemp = new ClassNode();
@@ -52,7 +53,8 @@ public class ClassFileGetter implements FileGetter {
 				}
 			
 		}
-
+		
 	}
 
+	
 }

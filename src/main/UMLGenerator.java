@@ -21,6 +21,7 @@ import parsers.FieldParser.*;
 import parsers.MethodParser.*;
 import parsers.MethodParser.PublicMethodsParser;
 import utilities.NodeRelation;
+import static utilities.CheckIfInBlacklist.checkIfInBlacklist;
 
 public class UMLGenerator {
 
@@ -33,6 +34,8 @@ public class UMLGenerator {
 	private String input = null;
 	private boolean recursive = false;
 	private ArrayList<String> classnames = new ArrayList<String>();
+	private ArrayList<String> whitelist = new ArrayList<String>();
+	private ArrayList<String> blacklist = new ArrayList<String>();
 
 	public UMLGenerator(String[] args) throws Exception {
 		for (String a : args) {
@@ -68,57 +71,63 @@ public class UMLGenerator {
 				this.output = a.substring(3);
 			} else if (a.contains("-i=")) {
 				this.input = a.substring(3);
-			}  
-			else {
+			} else {
 				this.classnames.add(a);
 			}
 
 		}
-		
-		Properties pro=new Properties();
-		
+
+		Properties pro = new Properties();
+
 		FileInputStream in = new FileInputStream(input);
 		pro.load(in);
 		in.close();
-		
-		for(Object o:pro.keySet()){
-			String s=(String) o;
-			if (s.equals("publicClass")&&pro.getProperty(s).equals("true")) {
+
+		for (Object o : pro.keySet()) {
+			String s = (String) o;
+			if (s.equals("publicClass") && pro.getProperty(s).equals("true")) {
 				ClassParserMaker.getInstance().setPublicFields(true);
-			} else if (s.equals("protectedClass")&&pro.getProperty(s).equals("true")) {
+			} else if (s.equals("protectedClass") && pro.getProperty(s).equals("true")) {
 				ClassParserMaker.getInstance().setProtectedFields(true);
-			} else if (s.equals("FD")&&pro.getProperty(s).equals("true")) {
+			} else if (s.equals("FD") && pro.getProperty(s).equals("true")) {
 				FieldParserMaker.getInstance().setDependecies(true);
-			} else if (s.equals("publicField")&&pro.getProperty(s).equals("true")) {
+			} else if (s.equals("publicField") && pro.getProperty(s).equals("true")) {
 				FieldParserMaker.getInstance().setPublicFields(true);
-			} else if (s.equals("protectedField")&&pro.getProperty(s).equals("true")) {
+			} else if (s.equals("protectedField") && pro.getProperty(s).equals("true")) {
 				FieldParserMaker.getInstance().setProtectedFields(true);
-			} else if (s.equals("privateField")&&pro.getProperty(s).equals("true")) {
+			} else if (s.equals("privateField") && pro.getProperty(s).equals("true")) {
 				FieldParserMaker.getInstance().setPrivateFields(true);
-			} else if (s.equals("fieldDependency")&&pro.getProperty(s).equals("true")) {
+			} else if (s.equals("fieldDependency") && pro.getProperty(s).equals("true")) {
 				FieldParserMaker.getInstance().setDependecies(true);
-			} else if (s.equals("publicMethod")&&pro.getProperty(s).equals("true")) {
+			} else if (s.equals("publicMethod") && pro.getProperty(s).equals("true")) {
 				MethodParserMaker.getInstance().setPublicFields(true);
-			} else if (s.equals("protectedMethod")&&pro.getProperty(s).equals("true")) {
+			} else if (s.equals("protectedMethod") && pro.getProperty(s).equals("true")) {
 				MethodParserMaker.getInstance().setProtectedFields(true);
-			} else if (s.equals("privateMethod")&&pro.getProperty(s).equals("true")) {
+			} else if (s.equals("privateMethod") && pro.getProperty(s).equals("true")) {
 				MethodParserMaker.getInstance().setPrivateFields(true);
-			} else if (s.equals("MRD")&&pro.getProperty(s).equals("true")) {
+			} else if (s.equals("MRD") && pro.getProperty(s).equals("true")) {
 				MethodParserMaker.getInstance().setDependecies(true);
-			} else if (s.equals("MID")&&pro.getProperty(s).equals("true")) {
+			} else if (s.equals("MID") && pro.getProperty(s).equals("true")) {
 				MethodParserMaker.getInstance().setInstructions(true);
-			} else if (s.equals("GVM")&&pro.getProperty(s).equals("true")) {
+			} else if (s.equals("GVM") && pro.getProperty(s).equals("true")) {
 				outputmaker = new GVMaker();
-			} else if (s.equals("recursive")&&pro.getProperty(s).equals("true")) {
-				this.recursive = true;}
-			
+			} else if (s.equals("recursive") && pro.getProperty(s).equals("true")) {
+				this.recursive = true;
+			} else if (s.equals("whitelist") && !pro.getProperty(s).equals("")) {
+				for (String str : pro.getProperty(s).split(",")) {
+					whitelist.add(str);
+				}
+
+			} else if (s.equals("blacklist") && !pro.getProperty(s).equals("")) {
+				for (String str : pro.getProperty(s).split(",")) {
+					blacklist.add(str);
+				}
+			} else if (s.equals("lambda") && pro.getProperty(s).equals("true")) {
+				MethodParserMaker.getInstance().setLambda(true);
+			}
+
 		}
-		
-		
-		
-		
-		
-		
+
 		MethodsParser mp = MethodParserMaker.getInstance().makeParser();
 		if (mp != null) {
 			this.methodparser = mp;
@@ -151,7 +160,7 @@ public class UMLGenerator {
 
 		this.simplifyRelations(relations);
 		this.twoWayRelations(relations);
-
+		this.cleanblacklist(relations);
 		this.outputmaker.fileWrite(this.output, parsedstring, relations);
 
 	}
@@ -159,7 +168,8 @@ public class UMLGenerator {
 	public NodeRelation getNodes(boolean recursive) throws IOException {
 		HashSet<ClassNode> nodes = new HashSet<ClassNode>();
 		Set<String> relations = new HashSet<>();
-		this.parser.addClasses(this.classnames, nodes, relations, recursive);
+		this.classnames.addAll(whitelist);
+		this.parser.addClasses(this.classnames, nodes, relations, recursive, blacklist);
 		return new NodeRelation(nodes, relations);
 
 	}
@@ -241,4 +251,15 @@ public class UMLGenerator {
 
 	}
 
+	private void cleanblacklist(Set<String> relations) {
+		ArrayList<String> toRemove = new ArrayList<>();
+
+		for (String s : relations) {
+			if (checkIfInBlacklist(s, blacklist)) {
+				toRemove.add(s);
+
+			}
+		}
+		relations.removeAll(toRemove);
+	}
 }

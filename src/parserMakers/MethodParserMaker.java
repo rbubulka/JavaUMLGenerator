@@ -8,6 +8,7 @@ public class MethodParserMaker {
 	private boolean publicMethods = false;
 	private boolean dependecies = false;
 	private boolean instructions = false;
+	private boolean lambda=false;
 	
 	private static volatile MethodParserMaker config;
 
@@ -24,6 +25,9 @@ public class MethodParserMaker {
 
 	public void setPrivateFields(boolean privateFields) {
 		this.privateMethods = privateFields;
+	}
+	public void setLambda(boolean lambda) {
+		this.lambda = lambda;
 	}
 
 	public void setProtectedFields(boolean protectedFields) {
@@ -42,6 +46,7 @@ public class MethodParserMaker {
 	}
 	public MethodsParser makeParser(){
 		MethodsParser parser = null;
+		
 		if(instructions){
 			if(this.privateMethods){
 				parser = new PublicMIDParser(parser);
@@ -73,6 +78,9 @@ public class MethodParserMaker {
 		}
 		if(this.privateMethods){
 			parser = new PrivateMethodsParser(parser);
+		}
+		if(!lambda){
+			parser=new LambdaParser(parser);
 		}
 		return parser;
 		

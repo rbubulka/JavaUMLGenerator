@@ -27,6 +27,7 @@ public abstract class MethodsParser implements Parser {
 		StringBuilder result= new StringBuilder();
 		for(MethodNode md:(List<MethodNode>)methods){
 			if((md.access&opcode)>0){
+				
 				result.append(text+" " + md.name +" "+ md.desc + "\n");
 			}
 		}
