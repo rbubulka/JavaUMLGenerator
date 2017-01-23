@@ -19,12 +19,12 @@ public class ClassParserMaker {
 		return config;
 	}
 
-	public void setProtectedFields(boolean protectedFields) {
-		this.protectedClass = protectedFields;
+	public void setProtectedClass() {
+		this.protectedClass = !this.protectedClass;
 	}
 
-	public void setPublicFields(boolean publicFields) {
-		this.publicClass = publicFields;
+	public void setPublicClass() {
+		this.publicClass = !this.publicClass;
 	}
 
 	public ClassParser makeParser(){

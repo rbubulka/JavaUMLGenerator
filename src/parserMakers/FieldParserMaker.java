@@ -21,20 +21,20 @@ public class FieldParserMaker {
 		return config;
 	}
 
-	public void setPrivateFields(boolean privateFields) {
-		this.privateFields = privateFields;
+	public void setPrivateFields() {
+		this.privateFields = !this.privateFields;
 	}
 
-	public void setProtectedFields(boolean protectedFields) {
-		this.protectedFields = protectedFields;
+	public void setProtectedFields() {
+		this.protectedFields = !this.protectedFields;
 	}
 
-	public void setPublicFields(boolean publicFields) {
-		this.publicFields = publicFields;
+	public void setPublicFields() {
+		this.publicFields = !this.publicFields;
 	}
 
-	public void setDependecies(boolean dependecies) {
-		this.dependecies = dependecies;
+	public void setDependecies() {
+		this.dependecies = !this.dependecies;
 	}
 	
 	public FieldsParser makeParser(){

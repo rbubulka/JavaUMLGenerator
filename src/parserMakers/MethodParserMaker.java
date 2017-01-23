@@ -23,26 +23,26 @@ public class MethodParserMaker {
 		return config;
 	}
 
-	public void setPrivateFields(boolean privateFields) {
-		this.privateMethods = privateFields;
+	public void setPrivateMethods() {
+		this.privateMethods = !this.privateMethods;
 	}
 	public void setLambda(boolean lambda) {
-		this.lambda = lambda;
+		this.lambda = !this.lambda;
 	}
 
-	public void setProtectedFields(boolean protectedFields) {
-		this.protectedMethods = protectedFields;
+	public void setProtectedMethods() {
+		this.protectedMethods = !this.protectedMethods;
 	}
 
-	public void setPublicFields(boolean publicFields) {
-		this.publicMethods = publicFields;
+	public void setPublicMethods() {
+		this.publicMethods = !this.publicMethods;
 	}
 
-	public void setDependecies(boolean dependecies) {
-		this.dependecies = dependecies;
+	public void setDependecies() {
+		this.dependecies = !this.dependecies;
 	}
-	public void setInstructions(boolean instruction) {
-		this.instructions = instruction;
+	public void setInstructions() {
+		this.instructions = !this.instructions;
 	}
 	public MethodsParser makeParser(){
 		MethodsParser parser = null;

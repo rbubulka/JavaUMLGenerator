@@ -40,29 +40,29 @@ public class UMLGenerator {
 	public UMLGenerator(String[] args) throws Exception {
 		for (String a : args) {
 			if (a.equals("-publicClass")) {
-				ClassParserMaker.getInstance().setPublicFields(true);
+				ClassParserMaker.getInstance().setPublicClass();
 			} else if (a.equals("-protectedClass")) {
-				ClassParserMaker.getInstance().setProtectedFields(true);
+				ClassParserMaker.getInstance().setProtectedClass();
 			} else if (a.equals("-FD")) {
-				FieldParserMaker.getInstance().setDependecies(true);
+				FieldParserMaker.getInstance().setDependecies();
 			} else if (a.equals("-publicField")) {
-				FieldParserMaker.getInstance().setPublicFields(true);
+				FieldParserMaker.getInstance().setPublicFields();
 			} else if (a.equals("-protectedField")) {
-				FieldParserMaker.getInstance().setProtectedFields(true);
+				FieldParserMaker.getInstance().setProtectedFields();
 			} else if (a.equals("-privateField")) {
-				FieldParserMaker.getInstance().setPrivateFields(true);
+				FieldParserMaker.getInstance().setPrivateFields();
 			} else if (a.equals("-fieldDependency")) {
-				FieldParserMaker.getInstance().setDependecies(true);
+				FieldParserMaker.getInstance().setDependecies();
 			} else if (a.equals("-publicMethod")) {
-				MethodParserMaker.getInstance().setPublicFields(true);
+				MethodParserMaker.getInstance().setPublicMethods();
 			} else if (a.equals("-protectedMethod")) {
-				MethodParserMaker.getInstance().setProtectedFields(true);
+				MethodParserMaker.getInstance().setProtectedMethods();
 			} else if (a.equals("-privateMethod")) {
-				MethodParserMaker.getInstance().setPrivateFields(true);
+				MethodParserMaker.getInstance().setPrivateMethods();
 			} else if (a.equals("-MRD")) {
-				MethodParserMaker.getInstance().setDependecies(true);
+				MethodParserMaker.getInstance().setDependecies();
 			} else if (a.equals("-MID")) {
-				MethodParserMaker.getInstance().setInstructions(true);
+				MethodParserMaker.getInstance().setInstructions();
 			} else if (a.equals("-GVM")) {
 				outputmaker = new GVMaker();
 			} else if (a.equals("-recursive")) {
@@ -86,29 +86,29 @@ public class UMLGenerator {
 		for (Object o : pro.keySet()) {
 			String s = (String) o;
 			if (s.equals("publicClass") && pro.getProperty(s).equals("true")) {
-				ClassParserMaker.getInstance().setPublicFields(true);
+				ClassParserMaker.getInstance().setPublicClass();
 			} else if (s.equals("protectedClass") && pro.getProperty(s).equals("true")) {
-				ClassParserMaker.getInstance().setProtectedFields(true);
+				ClassParserMaker.getInstance().setProtectedClass();
 			} else if (s.equals("FD") && pro.getProperty(s).equals("true")) {
-				FieldParserMaker.getInstance().setDependecies(true);
+				FieldParserMaker.getInstance().setDependecies();
 			} else if (s.equals("publicField") && pro.getProperty(s).equals("true")) {
-				FieldParserMaker.getInstance().setPublicFields(true);
+				FieldParserMaker.getInstance().setPublicFields();
 			} else if (s.equals("protectedField") && pro.getProperty(s).equals("true")) {
-				FieldParserMaker.getInstance().setProtectedFields(true);
+				FieldParserMaker.getInstance().setProtectedFields();
 			} else if (s.equals("privateField") && pro.getProperty(s).equals("true")) {
-				FieldParserMaker.getInstance().setPrivateFields(true);
+				FieldParserMaker.getInstance().setPrivateFields();
 			} else if (s.equals("fieldDependency") && pro.getProperty(s).equals("true")) {
-				FieldParserMaker.getInstance().setDependecies(true);
+				FieldParserMaker.getInstance().setDependecies();
 			} else if (s.equals("publicMethod") && pro.getProperty(s).equals("true")) {
-				MethodParserMaker.getInstance().setPublicFields(true);
+				MethodParserMaker.getInstance().setPublicMethods();
 			} else if (s.equals("protectedMethod") && pro.getProperty(s).equals("true")) {
-				MethodParserMaker.getInstance().setProtectedFields(true);
+				MethodParserMaker.getInstance().setProtectedMethods();
 			} else if (s.equals("privateMethod") && pro.getProperty(s).equals("true")) {
-				MethodParserMaker.getInstance().setPrivateFields(true);
+				MethodParserMaker.getInstance().setPrivateMethods();
 			} else if (s.equals("MRD") && pro.getProperty(s).equals("true")) {
-				MethodParserMaker.getInstance().setDependecies(true);
+				MethodParserMaker.getInstance().setDependecies();
 			} else if (s.equals("MID") && pro.getProperty(s).equals("true")) {
-				MethodParserMaker.getInstance().setInstructions(true);
+				MethodParserMaker.getInstance().setInstructions();
 			} else if (s.equals("GVM") && pro.getProperty(s).equals("true")) {
 				outputmaker = new GVMaker();
 			} else if (s.equals("recursive") && pro.getProperty(s).equals("true")) {
