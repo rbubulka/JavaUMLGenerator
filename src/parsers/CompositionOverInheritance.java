@@ -29,12 +29,14 @@ public class CompositionOverInheritance extends ClassParser{
 		Set<String> toRemove=new HashSet<>();
 		for(ClassNode cn : (List<ClassNode>) nodes ){
 			List<String> ls=cn.interfaces;
-			ls.add(cn.superName);
+			if(cn.superName!=null){
+			ls.add(cn.superName);}
 			List<ClassNode> nodels=new ArrayList<>();
 			for(String classname:ls){
 				ClassReader readertemp;
 				try {
 					readertemp = new ClassReader(classname);
+					
 					ClassNode classNodetemp = new ClassNode();
 					readertemp.accept(classNodetemp, ClassReader.EXPAND_FRAMES);
 					nodels.add(classNodetemp);
@@ -50,7 +52,7 @@ public class CompositionOverInheritance extends ClassParser{
 					if(supermd.name.equals("<init>")) continue;
 					for(MethodNode md:(List<MethodNode>)cn.methods){
 						if((md.desc.equals(supermd.desc))&&(md.name.equals(supermd.name))){
-							result.append(", color= \"orange\"");
+							result.append("color=orange");
 							
 							for(String relation:relations){
 								String[] rels=relation.split(" ");

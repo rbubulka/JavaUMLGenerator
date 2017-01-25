@@ -33,7 +33,7 @@ public class SingletonDectectorParser extends ClassParser {
 			}
 		}
 		if(hasSelf && returnsSelf){
-			result.append(", color= \"blue\"");
+			result.append("color=blue,write=singleton");
 		}
 		if(otherparser !=  null)result.append(this.otherparser.parse(nodes, relations));
 		return result.toString();

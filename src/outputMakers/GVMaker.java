@@ -56,6 +56,12 @@ public class GVMaker implements OutputMaker {
 			}
 			// add in class name to the uml object
 			classDetailString.append(temp1 + splitclassname(splited[1]) + temp2);
+			String detail=map.get("Details");
+			for(String dstr:detail.split(",")){
+				if(dstr.contains("write=")){
+					classDetailString.append("<br/>&#60;&#60;"+dstr.substring(6)+"&#62;&#62;<br/>");
+				}
+			}
 			classDetailString.append("|");
 			// field
 			String fieldinfo = map.get("Field");
@@ -89,7 +95,14 @@ public class GVMaker implements OutputMaker {
 			// close label
 			classDetailString.append("}>");
 			//
-			classDetailString.append(map.get("Details"));
+			String detail2=map.get("Details");
+			for(String dstr:detail2.split(",")){
+				if(dstr.contains("color=")){
+					System.out.println(" ,color=\""+dstr.substring(6)+"\"");
+					classDetailString.append(" ,color=\""+dstr.substring(6)+"\"");
+				}
+			}
+			
 			// close class
 			classDetailString.append("];\n\n");
 

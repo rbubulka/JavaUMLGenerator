@@ -128,19 +128,19 @@ public class UMLGenerator {
 				outputmaker = new GVMaker();
 			} else if (s.equals("recursive") && pro.getProperty(s).equals("true")) {
 				this.recursive = true;
-			} else if (s.equals("whitelist") && !pro.getProperty(s).equals("")) {
+			} else if (s.equals("whitelist") && !pro.getProperty(s).equals("false")) {
 				for (String str : pro.getProperty(s).split(",")) {
 					whitelist.add(str);
 				}
 
-			} else if (s.equals("blacklist") && !pro.getProperty(s).equals("")) {
+			} else if (s.equals("blacklist") && !pro.getProperty(s).equals("false")) {
 				for (String str : pro.getProperty(s).split(",")) {
 					blacklist.add(str);
 				}
 			} else if (s.equals("lambda") && pro.getProperty(s).equals("true")) {
 				MethodParserMaker.getInstance().setLambda(true);
 			}
-			 else if (s.equals("pattern") && !pro.getProperty(s).equals("")) {
+			 else if (s.equals("pattern") && !pro.getProperty(s).equals("false")) {
 				 for (String str : pro.getProperty(s).split(",")) {
 					 ClassLoader reader = new ClassLoader() {
 					};
