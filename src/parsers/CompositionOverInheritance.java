@@ -52,7 +52,8 @@ public class CompositionOverInheritance extends ClassParser{
 					if(supermd.name.equals("<init>")) continue;
 					for(MethodNode md:(List<MethodNode>)cn.methods){
 						if((md.desc.equals(supermd.desc))&&(md.name.equals(supermd.name))){
-							result.append("color=orange");
+							if(!result.toString().contains("color=orange")){
+							result.append("color=orange");}
 							
 							for(String relation:relations){
 								String[] rels=relation.split(" ");
