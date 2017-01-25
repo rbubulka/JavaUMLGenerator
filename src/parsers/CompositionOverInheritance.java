@@ -23,7 +23,7 @@ public class CompositionOverInheritance extends ClassParser{
 	@Override
 	public  String parse(List nodes, Set<String> relations){
 		StringBuilder result = new StringBuilder();
-		loop:
+		
 		for(ClassNode cn : (List<ClassNode>) nodes ){
 			List<String> ls=cn.interfaces;
 			ls.add(cn.superName);
@@ -36,15 +36,17 @@ public class CompositionOverInheritance extends ClassParser{
 					readertemp.accept(classNodetemp, ClassReader.EXPAND_FRAMES);
 					nodels.add(classNodetemp);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
 			}
+			
 			for(ClassNode supercn:nodels){
+					loop:
 				for(MethodNode supermd:(List<MethodNode>)supercn.methods){
+					if(supermd.name.equals("<init>")) continue;
 					for(MethodNode md:(List<MethodNode>)cn.methods){
-						if(md.desc.equals(supermd.desc)){
+						if((md.desc.equals(supermd.desc))&&(md.name.equals(supermd.name))){
 							result.append(", color= \"orange\"");
 							break loop;
 						}
