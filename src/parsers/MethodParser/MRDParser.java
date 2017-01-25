@@ -94,26 +94,8 @@ public abstract class MRDParser extends MethodsParser {
 		return result.toString();
 	}
 
-	private void addCollectionDependency(Set<String> relations, String classname, String local) {
-		if (!local.contains("<")) {
-			addDependency(relations, classname, local, true);
-		} else {
-			String collectionType = local.substring(local.indexOf("<") + 1, local.lastIndexOf(">"));
-			String[] types = collectionType.split(";");
-			for (String type : types) {
-				if (type.contains("<")) {
-					addCollectionDependency(relations, classname, type);
-				} else {
-					addDependency(relations, classname, type, true);
-				}
-			}
-		}
-	}
-
 	private void addDependency(Set<String> relations, String classname, String type, boolean isCollection) {
 		if (AvoidNonclassUtils.isAClass(type)) {
-			if(type.contains("Dummy")){
-				System.out.println(type+""+isCollection);}
 			String num = "1 ";
 			if (isCollection||type.contains("["))
 				num = "* ";

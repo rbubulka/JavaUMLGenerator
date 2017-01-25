@@ -2,6 +2,7 @@ package main;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -9,6 +10,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
+
+import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.tree.ClassNode;
 
 import NodeGetter.ClassFileGetter;
@@ -16,6 +19,7 @@ import NodeGetter.FileGetter;
 import outputMakers.GVMaker;
 import outputMakers.OutputMaker;
 import parserMakers.*;
+import parsers.Parser;
 import parsers.ClassParser.*;
 import parsers.FieldParser.*;
 import parsers.MethodParser.*;
@@ -29,6 +33,7 @@ public class UMLGenerator {
 	private MethodsParser methodparser = new PublicMethodsParser(null);
 	private FieldsParser fieldparser = new PublicFieldsParser(null);
 	private ClassParser classparser = new PublicClassParser(null);
+	private List<Parser> otherparser=new ArrayList<>();
 	private OutputMaker outputmaker = new GVMaker();
 	private String output = ".\\Documents\\output.dot";
 	private String input = null;
@@ -71,7 +76,17 @@ public class UMLGenerator {
 				this.output = a.substring(3);
 			} else if (a.contains("-i=")) {
 				this.input = a.substring(3);
-			} else {
+			}else if (a.contains("-e=")) {
+				 for (String str : a.substring(3).split(",")) {
+					 ClassLoader reader = new ClassLoader() {
+						};
+						Class<?> clazz=reader.loadClass(str);
+						Constructor<?> con=clazz.getConstructor(ClassParser.class);
+						ClassParser[] ls=new ClassParser[1];
+						this.otherparser.add((ClassParser)con.newInstance(ls));
+						}
+			}  
+			else {
 				this.classnames.add(a);
 			}
 
@@ -125,6 +140,16 @@ public class UMLGenerator {
 			} else if (s.equals("lambda") && pro.getProperty(s).equals("true")) {
 				MethodParserMaker.getInstance().setLambda(true);
 			}
+			 else if (s.equals("pattern") && !pro.getProperty(s).equals("")) {
+				 for (String str : pro.getProperty(s).split(",")) {
+					 ClassLoader reader = new ClassLoader() {
+					};
+					Class<?> clazz=reader.loadClass(str);
+					Constructor<?> con=clazz.getConstructor(ClassParser.class);
+					ClassParser[] ls=new ClassParser[1];
+					this.otherparser.add((ClassParser)con.newInstance(ls));
+					}
+				}
 
 		}
 
@@ -144,7 +169,7 @@ public class UMLGenerator {
 		NodeRelation nodeRelations = this.getNodes(this.recursive);
 		Set<ClassNode> nodelist = nodeRelations.getNodes();
 		Set<String> relations = nodeRelations.getRelations();
-		NodeParseToUML nptu = new NodeParseToUML(this.methodparser, this.fieldparser, this.classparser, null);
+		NodeParseToUML nptu = new NodeParseToUML(this.methodparser, this.fieldparser, this.classparser, this.otherparser);
 		List<HashMap<String, String>> parsedstring = nptu.doParse(nodelist, relations);
 
 		HashSet<String> toremove = new HashSet<>();
@@ -175,7 +200,7 @@ public class UMLGenerator {
 	}
 
 	private void twoWayRelations(Set<String> relations) {
-		List r1 = Arrays.asList(relations.toArray());
+		List<Object> r1 = Arrays.asList(relations.toArray());
 		Set<String> toRemove = new HashSet<String>();
 		Set<String> toAdd = new HashSet<String>();
 		for (int i = 0; i < r1.size(); i++) {

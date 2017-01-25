@@ -17,8 +17,6 @@ public abstract class ClassParser implements Parser {
 		this.otherparser = other;
 	}
 	
-	
-	
 	@Override
 	public  String parse(List nodes, Set<String> relations){
 		StringBuilder result = new StringBuilder();
