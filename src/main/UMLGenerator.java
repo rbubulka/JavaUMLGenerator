@@ -152,7 +152,6 @@ public class UMLGenerator {
 				}
 
 		}
-
 		MethodsParser mp = MethodParserMaker.getInstance().makeParser();
 		if (mp != null) {
 			this.methodparser = mp;
