@@ -6,8 +6,8 @@ public class DummyTwo {
 	private List<DummyOne> dummyone;
 	
 	
-	private void DummyThree(DummyOne[] d){
+	public void DummyThree(DummyOne[] d){
 	
-		
+		int i=1;
 	}
 }

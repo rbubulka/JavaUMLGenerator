@@ -3,11 +3,11 @@ package main;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DummyOne {
+public class DummyOne extends DummyTwo{
 	private DummyTwo dummytwo;
-	
-	private ArrayList<DummyOne> DummyThree(){
-		return new ArrayList<DummyOne>() ;
+	@Override
+	public void DummyThree(DummyOne[] d){
+		return;
 		
 	}
 	private void Test$TEst(){
