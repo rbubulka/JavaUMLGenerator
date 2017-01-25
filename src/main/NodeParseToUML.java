@@ -20,10 +20,12 @@ public class NodeParseToUML {
 	private MethodsParser mparser;
 	private FieldsParser fparser;
 	private ClassParser cparser;
+	private List<Parser> oparsers;
 	public NodeParseToUML(MethodsParser mppp,FieldsParser fppp,ClassParser cppp,List<Parser> otherppp){
 		this.mparser=mppp;
 		this.fparser=fppp;
 		this.cparser=cppp;
+		this.oparsers=otherppp;
 	}
 	
 	public List<HashMap<String,String>> doParse(Set<ClassNode> nodes, Set<String> relations){
@@ -33,6 +35,11 @@ public class NodeParseToUML {
 			classInfo.put("Class",cparser.parse(Collections.singletonList(n), relations));
 			classInfo.put("Method",mparser.parse(n.methods, relations,n.name));
 			classInfo.put("Field",fparser.parse(n.fields, relations,n.name));
+			StringBuilder details = new StringBuilder();
+			for(Parser o: this.oparsers){
+				details.append(o.parse(Collections.singletonList(n), relations));
+			}
+			classInfo.put("Details", details.toString());
 			classInfoList.add(classInfo);
 			
 		}

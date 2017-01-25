@@ -41,7 +41,7 @@ public class GVMaker implements OutputMaker {
 			// split the class info on for [ppp,classname,interface,isInterface,abstract,isAbstract]
 			String[] splited = classinfo.split(" ");
 			classDetailString.append("\"" + splitclassname(splited[1]) + "\" [\n");
-			classDetailString.append("shape=\"record\", color = \"red\""+"\n");
+			classDetailString.append("shape=\"record\"\n");
 			classDetailString.append("label= <{");
 			// check if abstract
 			String temp1 = "";
@@ -88,6 +88,8 @@ public class GVMaker implements OutputMaker {
 			
 			// close label
 			classDetailString.append("}>");
+			//
+			classDetailString.append(map.get("Details"));
 			// close class
 			classDetailString.append("];\n\n");
 
