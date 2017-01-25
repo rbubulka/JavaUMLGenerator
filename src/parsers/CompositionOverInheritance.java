@@ -2,6 +2,7 @@ package parsers;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -13,6 +14,7 @@ import org.objectweb.asm.tree.MethodNode;
 
 import com.sun.xml.internal.ws.org.objectweb.asm.Type;
 
+import jdk.management.resource.internal.TotalResourceContext;
 import parsers.ClassParser.ClassParser;
 
 public class CompositionOverInheritance extends ClassParser{
@@ -23,7 +25,8 @@ public class CompositionOverInheritance extends ClassParser{
 	@Override
 	public  String parse(List nodes, Set<String> relations){
 		StringBuilder result = new StringBuilder();
-		
+		Set<String> toAdd=new HashSet<>();
+		Set<String> toRemove=new HashSet<>();
 		for(ClassNode cn : (List<ClassNode>) nodes ){
 			List<String> ls=cn.interfaces;
 			ls.add(cn.superName);
@@ -48,13 +51,22 @@ public class CompositionOverInheritance extends ClassParser{
 					for(MethodNode md:(List<MethodNode>)cn.methods){
 						if((md.desc.equals(supermd.desc))&&(md.name.equals(supermd.name))){
 							result.append(", color= \"orange\"");
+							
+							for(String relation:relations){
+								String[] rels=relation.split(" ");
+								if(rels[0].equals(cn.name)&&rels[4].equals(supercn.name)){
+									toAdd.add(relation+" ,color=\"orange\"");
+									toRemove.add(relation);
+								}
+							}
 							break loop;
 						}
 					}
 				}
 			}
 		}
-		
+		relations.removeAll(toRemove);
+		relations.addAll(toAdd);
 		if(otherparser !=  null)result.append(this.otherparser.parse(nodes, relations));
 		return result.toString();
 	}

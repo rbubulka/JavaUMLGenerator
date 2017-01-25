@@ -117,12 +117,16 @@ public class GVMaker implements OutputMaker {
 	private StringBuilder generateRelationsString(Set<String> relations, HashMap<String, String> details) {
 		StringBuilder relationstring = new StringBuilder();
 		for (String arrowstring : relations) {
-			String[] ls = arrowstring.split(" ");			
+			String[] ls = arrowstring.split(" ");	
+			String color="";
+			if(ls.length>5){
+				color=ls[5];
+			}
 			if(ls.length >= 5){
 				if(ls[2].contains("both")){
-					relationstring.append("\""+splitclassname(ls[0]).replaceAll("\\$", "&#36;") +"\"" + " -> " + "\""+ splitclassname(ls[4]).replaceAll("\\$", "") + "\""+" " + details.get(ls[2]) + ",headlabel=\""+ls[1]+"\",taillabel=\" "+ls[3] +"\" "+"];\n");
+					relationstring.append("\""+splitclassname(ls[0]).replaceAll("\\$", "&#36;") +"\"" + " -> " + "\""+ splitclassname(ls[4]).replaceAll("\\$", "") + "\""+" " + details.get(ls[2]) + ",headlabel=\""+ls[1]+"\",taillabel=\" "+ls[3] +"\" "+color+"];\n");
 				} else {
-				relationstring.append("\""+splitclassname(ls[0]).replaceAll("\\$", "&#36;") +"\"" + " -> " + "\""+ splitclassname(ls[4]).replaceAll("\\$", "") + "\""+" " + details.get(ls[2]) + ",label=\""+ls[1]+"..."+ls[3]+"\" "+"];\n");
+				relationstring.append("\""+splitclassname(ls[0]).replaceAll("\\$", "&#36;") +"\"" + " -> " + "\""+ splitclassname(ls[4]).replaceAll("\\$", "") + "\""+" " + details.get(ls[2]) + ",label=\""+ls[1]+"..."+ls[3]+"\" "+color+"];\n");
 			}}
 
 		}
