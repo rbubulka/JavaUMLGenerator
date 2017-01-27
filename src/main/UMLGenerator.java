@@ -128,19 +128,19 @@ public class UMLGenerator {
 				outputmaker = new GVMaker();
 			} else if (s.equals("recursive") && pro.getProperty(s).equals("true")) {
 				this.recursive = true;
-			} else if (s.equals("whitelist") && !pro.getProperty(s).equals("")) {
+			} else if (s.equals("whitelist") && !pro.getProperty(s).equals("false")) {
 				for (String str : pro.getProperty(s).split(",")) {
 					whitelist.add(str);
 				}
 
-			} else if (s.equals("blacklist") && !pro.getProperty(s).equals("")) {
+			} else if (s.equals("blacklist") && !pro.getProperty(s).equals("false")) {
 				for (String str : pro.getProperty(s).split(",")) {
 					blacklist.add(str);
 				}
 			} else if (s.equals("lambda") && pro.getProperty(s).equals("true")) {
 				MethodParserMaker.getInstance().setLambda(true);
 			}
-			 else if (s.equals("pattern") && !pro.getProperty(s).equals("")) {
+			 else if (s.equals("pattern") && !pro.getProperty(s).equals("false")) {
 				 for (String str : pro.getProperty(s).split(",")) {
 					 ClassLoader reader = new ClassLoader() {
 					};
@@ -152,7 +152,6 @@ public class UMLGenerator {
 				}
 
 		}
-
 		MethodsParser mp = MethodParserMaker.getInstance().makeParser();
 		if (mp != null) {
 			this.methodparser = mp;
@@ -210,12 +209,20 @@ public class UMLGenerator {
 				if (relation1 != relation2) {
 					String[] rel1 = relation1.split(" ");
 					String[] rel2 = relation2.split(" ");
+					String color="";
+					if(rel1.length>5){
+					
+						color=rel1[5];
+					}
+					if(rel2.length>5){
+						color=rel2[5];
+					}
 
 					if (rel1.length >= 5 && rel2.length >= 5
 							&& ((rel1[0]).equals(rel2[4]) || ("L" + rel1[0]).equals(rel2[4]))
 							&& (rel1[4].equals("L" + rel2[0]) || rel1[4].equals(rel2[0])) && rel1[2].equals(rel2[2])) {
 						toAdd.add(rel1[0] + " " + rel1[1] + "..." + rel1[3] + " " + "both" + rel1[2].trim() + " "
-								+ rel2[1] + "..." + rel2[3] + " " + rel1[4]);
+								+ rel2[1] + "..." + rel2[3] + " " + rel1[4]+color);
 						toRemove.add(relation1);
 						toRemove.add(relation2);
 					}
@@ -224,6 +231,19 @@ public class UMLGenerator {
 		}
 		relations.addAll(toAdd);
 		relations.removeAll(toRemove);
+		
+		
+		
+		HashSet<String> toRemove2=new HashSet<>();
+		for(String s:relations){
+			for(String ss:relations){
+				if(s!=ss&&s.contains(ss)){
+					toRemove2.add(ss);
+				}
+			}
+		}
+		relations.removeAll(toRemove2);
+		
 	}
 
 	private void simplifyRelations(Set<String> relations) {
@@ -273,6 +293,10 @@ public class UMLGenerator {
 		}
 		relations.addAll(toAdd);
 		relations.removeAll(toRemove);
+		
+	
+		
+		
 
 	}
 

@@ -18,26 +18,47 @@ public class SingletonDectectorParser extends ClassParser {
 	public SingletonDectectorParser(ClassParser other) {
 		super(other);
 	}
-	
+
 	@Override
-	public  String parse(List nodes, Set<String> relations){
+	public String parse(List nodes, Set<String> relations) {
 		StringBuilder result = new StringBuilder();
 		boolean hasSelf = false;
 		boolean returnsSelf = false;
-		for(ClassNode cn : (List<ClassNode>) nodes ){
-			for(FieldNode fn: (List<FieldNode>)cn.fields){
-				if((fn.access & Opcodes.ACC_STATIC) >0 && fn.desc.contains(cn.name)){ hasSelf = true; break;}
+		for (ClassNode cn : (List<ClassNode>) nodes) {
+			for (FieldNode fn : (List<FieldNode>) cn.fields) {
+				if ((fn.access & Opcodes.ACC_STATIC) > 0 && fn.desc.contains(cn.name)) {
+					hasSelf = true;
+					break;
+				}
 			}
-			for(MethodNode mn: (List<MethodNode>) cn.methods){
-				if(Type.getReturnType(mn.desc).getClassName().replaceAll("\\.", "/").contains(cn.name)) {returnsSelf = true;break;}
+			for (MethodNode mn : (List<MethodNode>) cn.methods) {
+				if (Type.getReturnType(mn.desc).getClassName().replaceAll("\\.", "/").contains(cn.name)) {
+					returnsSelf = true;
+					break;
+				}
 			}
 		}
-		if(hasSelf && returnsSelf){
-			result.append(", color= \"blue\"");
+		if (hasSelf && returnsSelf) {
+			StringBuilder other;
+			if (otherparser != null) {
+				other = new StringBuilder(this.otherparser.parse(nodes, relations));
+				if (other.toString().contains("color=")) {
+					int index = other.toString().indexOf("color=");
+					other.insert(index + 6, "blue:");
+					result = other;
+				} else {
+					result.append(",color=blue");
+				}
+			}
+			else{
+				result.append(",color=blue");
+			}
+			result.append(",write=singleton");
 		}
-		if(otherparser !=  null)result.append(this.otherparser.parse(nodes, relations));
+		else{
+			if(otherparser !=  null)result.append(this.otherparser.parse(nodes, relations));
+		}
 		return result.toString();
 	}
-
 
 }
