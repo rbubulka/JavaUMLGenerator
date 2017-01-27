@@ -70,7 +70,15 @@ public class CompositionOverInheritance extends ClassParser{
 		}
 		relations.removeAll(toRemove);
 		relations.addAll(toAdd);
-		if(otherparser !=  null)result.append(this.otherparser.parse(nodes, relations));
+		if(otherparser !=  null){
+			StringBuilder other = new StringBuilder( this.otherparser.parse(nodes, relations));
+			if(other.toString().contains("color=")){
+				int index = other.toString().indexOf("color=");
+				other.insert(index+6, "orange:");
+				result = other;
+			}else{
+			result.append(other);}
+			};
 		return result.toString();
 	}
 
