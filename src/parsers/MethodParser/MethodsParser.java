@@ -9,6 +9,7 @@ import org.objectweb.asm.tree.MethodNode;
 import com.sun.xml.internal.ws.org.objectweb.asm.Opcodes;
 
 import parsers.Parser;
+import parsers.ClassParser.ClassParser;
 
 public abstract class MethodsParser implements Parser {
 	protected int opcode;
@@ -34,6 +35,8 @@ public abstract class MethodsParser implements Parser {
 		if(otherparser !=  null)result.append(this.otherparser.parse(methods, relations, name));
 		return result.toString();
 	}
-
+	public void setParser(Parser other){
+		this.otherparser = (MethodsParser) other;
+	}
 
 }

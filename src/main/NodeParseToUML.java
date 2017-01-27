@@ -42,15 +42,18 @@ public class NodeParseToUML {
 			for (ClassNode n : nodes) {
 				String nname = n.name;
 				String[] classnameinfo = map.get("Class").split(" ");
+				if(classnameinfo.length >= 2){
 				String realname = classnameinfo[1];
 				if (realname.contains(nname)) {
 
 					StringBuilder details = new StringBuilder();
-					for (Parser o : this.oparsers) {
-						details.append(o.parse(Collections.singletonList(n), relations));
+					for (int i = 1; i < oparsers.size(); i++) {
+						oparsers.get(i).setParser(oparsers.get(i-1));
 					}
+					details.append(oparsers.get(oparsers.size()-1).parse(Collections.singletonList(n), relations));
+					System.out.println("details"+details);
 					map.put("Details", details.toString());
-				}
+				}}
 			}
 		}
 		return classInfoList;

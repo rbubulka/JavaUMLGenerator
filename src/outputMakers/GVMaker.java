@@ -24,6 +24,7 @@ public class GVMaker implements OutputMaker {
 		details.put("usea", "[arrowhead=\"vee\", style=\"dashed\"");
 		details.put("bothhasa", "[arrowhead=\"vee\", dir=\"both\"");
 		details.put("bothusea", "[arrowhead=\"vee\", style=\"dashed\", dir=\"both\"");
+		details.put("bothextends", "[arrowhead=\"onormal\", dir=\"both\"");
 	}
 	public void fileWrite(String filePath, List<HashMap<String, String>> classdetails, Set<String> relations) throws IOException {
 
@@ -98,7 +99,7 @@ public class GVMaker implements OutputMaker {
 			String detail2=map.get("Details");
 			for(String dstr:detail2.split(",")){
 				if(dstr.contains("color=")){
-					classDetailString.append(" ,color=\""+dstr.substring(6)+"\"");
+					classDetailString.append(" ,color="+dstr.substring(6));
 				}
 			}
 			

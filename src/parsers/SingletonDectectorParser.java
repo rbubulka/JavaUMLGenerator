@@ -47,15 +47,16 @@ public class SingletonDectectorParser extends ClassParser {
 					other.insert(index + 6, "blue:");
 					result = other;
 				} else {
-					result.append(",color=blue");
+					result.append(",color=\"blue\"");
 				}
 			}
 			else{
-				result.append(",color=blue");
+				result.append(",color=\"blue\"");
 			}
 			result.append(",write=singleton");
 		}
 		else{
+
 			if(otherparser !=  null)result.append(this.otherparser.parse(nodes, relations));
 		}
 		return result.toString();

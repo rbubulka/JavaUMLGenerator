@@ -8,6 +8,7 @@ import org.objectweb.asm.tree.FieldNode;
 import com.sun.xml.internal.ws.org.objectweb.asm.Opcodes;
 
 import parsers.Parser;
+import parsers.ClassParser.ClassParser;
 
 public abstract class FieldsParser implements Parser {
 	protected int opcode;
@@ -36,6 +37,8 @@ public abstract class FieldsParser implements Parser {
 	public int getOpcode(){
 		return opcode;
 	}
-	
+	public void setParser(Parser other){
+		this.otherparser = (FieldsParser) other;
+	}
 	
 }

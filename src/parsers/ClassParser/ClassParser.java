@@ -29,6 +29,8 @@ public abstract class ClassParser implements Parser {
 		return result.toString();
 	}
 
-
+	public void setParser(Parser other){
+		this.otherparser = (ClassParser) other;
+	}
 
 }

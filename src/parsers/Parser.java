@@ -6,4 +6,5 @@ import java.util.Set;
 
 public interface Parser {
 	public String parse(List nodes, Set<String> relations);
+	public void setParser(Parser other);
 }

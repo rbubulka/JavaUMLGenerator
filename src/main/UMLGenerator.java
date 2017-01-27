@@ -33,7 +33,7 @@ public class UMLGenerator {
 	private MethodsParser methodparser = new PublicMethodsParser(null);
 	private FieldsParser fieldparser = new PublicFieldsParser(null);
 	private ClassParser classparser = new PublicClassParser(null);
-	private List<Parser> otherparser=new ArrayList<>();
+	private List<Parser> otherparser = new ArrayList<>();
 	private OutputMaker outputmaker = new GVMaker();
 	private String output = ".\\Documents\\output.dot";
 	private String input = null;
@@ -76,17 +76,16 @@ public class UMLGenerator {
 				this.output = a.substring(3);
 			} else if (a.contains("-i=")) {
 				this.input = a.substring(3);
-			}else if (a.contains("-e=")) {
-				 for (String str : a.substring(3).split(",")) {
-					 ClassLoader reader = new ClassLoader() {
-						};
-						Class<?> clazz=reader.loadClass(str);
-						Constructor<?> con=clazz.getConstructor(ClassParser.class);
-						ClassParser[] ls=new ClassParser[1];
-						this.otherparser.add((ClassParser)con.newInstance(ls));
-						}
-			}  
-			else {
+			} else if (a.contains("-e=")) {
+				for (String str : a.substring(3).split(",")) {
+					ClassLoader reader = new ClassLoader() {
+					};
+					Class<?> clazz = reader.loadClass(str);
+					Constructor<?> con = clazz.getConstructor(ClassParser.class);
+					ClassParser[] ls = new ClassParser[1];
+					this.otherparser.add((ClassParser) con.newInstance(ls));
+				}
+			} else {
 				this.classnames.add(a);
 			}
 
@@ -139,17 +138,16 @@ public class UMLGenerator {
 				}
 			} else if (s.equals("lambda") && pro.getProperty(s).equals("true")) {
 				MethodParserMaker.getInstance().setLambda(true);
-			}
-			 else if (s.equals("pattern") && !pro.getProperty(s).equals("false")) {
-				 for (String str : pro.getProperty(s).split(",")) {
-					 ClassLoader reader = new ClassLoader() {
+			} else if (s.equals("pattern") && !pro.getProperty(s).equals("false")) {
+				for (String str : pro.getProperty(s).split(",")) {
+					ClassLoader reader = new ClassLoader() {
 					};
-					Class<?> clazz=reader.loadClass(str);
-					Constructor<?> con=clazz.getConstructor(ClassParser.class);
-					ClassParser[] ls=new ClassParser[1];
-					this.otherparser.add((ClassParser)con.newInstance(ls));
-					}
+					Class<?> clazz = reader.loadClass(str);
+					Constructor<?> con = clazz.getConstructor(ClassParser.class);
+					ClassParser[] ls = new ClassParser[1];
+					this.otherparser.add((ClassParser) con.newInstance(ls));
 				}
+			}
 
 		}
 		MethodsParser mp = MethodParserMaker.getInstance().makeParser();
@@ -168,7 +166,8 @@ public class UMLGenerator {
 		NodeRelation nodeRelations = this.getNodes(this.recursive);
 		Set<ClassNode> nodelist = nodeRelations.getNodes();
 		Set<String> relations = nodeRelations.getRelations();
-		NodeParseToUML nptu = new NodeParseToUML(this.methodparser, this.fieldparser, this.classparser, this.otherparser);
+		NodeParseToUML nptu = new NodeParseToUML(this.methodparser, this.fieldparser, this.classparser,
+				this.otherparser);
 		List<HashMap<String, String>> parsedstring = nptu.doParse(nodelist, relations);
 
 		HashSet<String> toremove = new HashSet<>();
@@ -185,6 +184,13 @@ public class UMLGenerator {
 		this.simplifyRelations(relations);
 		this.twoWayRelations(relations);
 		this.cleanblacklist(relations);
+		this.simplifyRelations(relations);
+
+		for (String s : relations) {
+			if (s.contains("Component") && s.contains("Container"))
+				System.out.println(s);
+		}
+
 		this.outputmaker.fileWrite(this.output, parsedstring, relations);
 
 	}
@@ -204,54 +210,69 @@ public class UMLGenerator {
 		Set<String> toAdd = new HashSet<String>();
 		for (int i = 0; i < r1.size(); i++) {
 			String relation1 = (String) r1.get(i);
+			String rpre1 = "";
+			if (relation1.charAt(0) == ')' && relation1.charAt(1) == 'L') {
+				relation1 = relation1.substring(2);
+				rpre1 = ")L";
+			}
+
 			for (int j = i; j < r1.size(); j++) {
 				String relation2 = (String) r1.get(j);
+				String rpre2 = "";
+				if (relation2.charAt(0) == ')' && relation2.charAt(1) == 'L') {
+					relation2 = relation2.substring(2);
+					rpre2 = ")L";
+				}
 				if (relation1 != relation2) {
 					String[] rel1 = relation1.split(" ");
 					String[] rel2 = relation2.split(" ");
-					String color="";
-					if(rel1.length>5){
-					
-						color=rel1[5];
+					String color = "";
+					if (rel1.length > 5) {
+
+						color = rel1[5];
 					}
-					if(rel2.length>5){
-						color=rel2[5];
+					if (rel2.length > 5) {
+						color = rel2[5];
 					}
 
 					if (rel1.length >= 5 && rel2.length >= 5
 							&& ((rel1[0]).equals(rel2[4]) || ("L" + rel1[0]).equals(rel2[4]))
-							&& (rel1[4].equals("L" + rel2[0]) || rel1[4].equals(rel2[0])) && rel1[2].equals(rel2[2])) {
-						toAdd.add(rel1[0] + " " + rel1[1] + "..." + rel1[3] + " " + "both" + rel1[2].trim() + " "
-								+ rel2[1] + "..." + rel2[3] + " " + rel1[4]+color);
-						toRemove.add(relation1);
-						toRemove.add(relation2);
+							&& (rel1[4].equals("L" + rel2[0]) || rel1[4].equals(rel2[0]))
+							&& (rel1[2].equals(rel2[2]) && !rel1[2].contains("both"))) {
+						toAdd.add(rel1[0] + " " + rel1[1].charAt(0) + "..." + rel1[3].charAt(0) + " " + "both"
+								+ rel1[2].trim() + " " + rel2[1].charAt(0) + "..." + rel2[3].charAt(0) + " " + rel1[4]
+								+ color);
+						toRemove.add(rpre1 + relation1);
+						toRemove.add(rpre2 + relation2);
 					}
 				}
 			}
 		}
 		relations.addAll(toAdd);
 		relations.removeAll(toRemove);
-		
-		
-		
-		HashSet<String> toRemove2=new HashSet<>();
-		for(String s:relations){
-			for(String ss:relations){
-				if(s!=ss&&s.contains(ss)){
+
+		HashSet<String> toRemove2 = new HashSet<>();
+		for (String s : relations) {
+			for (String ss : relations) {
+				if (s != ss && s.contains(ss)) {
 					toRemove2.add(ss);
 				}
 			}
 		}
 		relations.removeAll(toRemove2);
-		
+
 	}
 
 	private void simplifyRelations(Set<String> relations) {
 		HashMap<String, Integer> checkmap = new HashMap<>();
-		checkmap.put("usea", 0);
-		checkmap.put("hasa", 1);
-		checkmap.put("implements", 2);
-		checkmap.put("extends", 3);
+		checkmap.put("usea", 1);
+		checkmap.put("bothusea", 2);
+		checkmap.put("hasa", 3);
+		checkmap.put("bothhasa", 4);
+		checkmap.put("implements", 5);
+		checkmap.put("bothimplements", 6);
+		checkmap.put("extends", 7);
+		checkmap.put("bothextends", 8);
 		Set<String> toRemove = new HashSet<String>();
 		Set<String> toAdd = new HashSet<String>();
 		Object[] rel = relations.toArray();
@@ -261,10 +282,13 @@ public class UMLGenerator {
 			for (int j = i; j < rel.length; j++) {
 				String r = (String) rel[j];
 				String[] rls = r.split(" ");
-				if (sls.length == 5 && rls.length == 5 && r != s && sls[0].equals(rls[0])
-						&& (sls[4].equals(rls[4]) || sls[4].equals(rls[4].substring(1))
-								|| sls[4].substring(1).equals(rls[4])
-								|| sls[4].substring(1).equals(rls[4].substring(1)))) {
+				if((r.contains("java//awt//Container")&&s.contains("java//awt//Component"))||((s.contains("java//awt//Container")&&r.contains("java//awt//Component")))){
+				System.out.println(r + "     nkjfea        "+s);
+				}
+				if (sls.length >= 5 && rls.length >= 5 && r != s && (((sls[0].contains(rls[0]) || rls[0].contains(sls[0]))
+						&& (sls[4].contains(rls[4]) || rls[4].contains(sls[4])))||(sls[0].contains(rls[4])||rls[4].contains(sls[0]))&&(sls[4].contains(rls[0])||rls[0].contains(sls[4]))&&sls[2].contains("both")&&rls[2].contains("both")))
+				 {
+					
 					int rnum = checkmap.get(rls[2]);
 					int snum = checkmap.get(sls[2]);
 					if (rnum > snum) {
@@ -280,7 +304,10 @@ public class UMLGenerator {
 						if (!sright.equals(rright)) {
 							rls[3] = "*";
 						}
-						toAdd.add(rls[0] + " " + rls[1] + " " + rls[2] + " " + rls[3] + " " + rls[4]);
+						String extra = "";
+						if (rls.length >= 6)
+							extra = " " + rls[5];
+						toAdd.add(rls[0] + " " + rls[1] + " " + rls[2] + " " + rls[3] + " " + rls[4] + extra);
 						toRemove.add(r);
 						toRemove.add(s);
 
@@ -293,10 +320,6 @@ public class UMLGenerator {
 		}
 		relations.addAll(toAdd);
 		relations.removeAll(toRemove);
-		
-	
-		
-		
 
 	}
 
