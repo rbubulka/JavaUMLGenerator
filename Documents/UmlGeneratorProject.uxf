@@ -81,13 +81,13 @@ public void fileWrite(String fileName, List&lt;HashMap&gt; classdetails, List&lt
     <coordinates>
       <x>990</x>
       <y>750</y>
-      <w>290</w>
+      <w>490</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 Parsers
 --
-public String parse(List node, List relations);</panel_attributes>
+public String parse(List node, List relations,List&lt;HashMap&gt; classinfo);</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
