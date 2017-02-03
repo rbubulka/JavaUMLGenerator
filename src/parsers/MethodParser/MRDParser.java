@@ -18,7 +18,7 @@ public abstract class MRDParser extends MethodsParser {
 	}
 
 	@Override
-	public String parse(List methods, Set<String> relations, String name) {
+	public String parse(List methods, Set<String> relations, String name,  List<HashMap<String, String>> classinfo) {
 		StringBuilder result = new StringBuilder();
 		for (MethodNode md : (List<MethodNode>) methods) {
 			if ((md.access & opcode) > 0) {
@@ -90,7 +90,7 @@ public abstract class MRDParser extends MethodsParser {
 			}
 		}
 		if (otherparser != null)
-			result.append(this.otherparser.parse(methods, relations, name));
+			result.append(this.otherparser.parse(methods, relations, name, classinfo));
 		return result.toString();
 	}
 

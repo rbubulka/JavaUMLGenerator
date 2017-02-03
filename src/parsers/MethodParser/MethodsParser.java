@@ -20,11 +20,11 @@ public abstract class MethodsParser implements Parser {
 	
 		
 	}
-	public String parse(List methods, Set<String> relations){
-		return this.parse(methods, relations, "");
+	public String parse(List methods, Set<String> relations,  List<HashMap<String, String>> classinfo){
+		return this.parse(methods, relations, "", classinfo);
 	}
 	
-	public  String parse(List methods, Set<String> relations,String name){
+	public  String parse(List methods, Set<String> relations,String name,  List<HashMap<String, String>> classinfo){
 		StringBuilder result= new StringBuilder();
 		for(MethodNode md:(List<MethodNode>)methods){
 			if((md.access&opcode)>0){
@@ -32,7 +32,7 @@ public abstract class MethodsParser implements Parser {
 				result.append(text+" " + md.name +" "+ md.desc + "\n");
 			}
 		}
-		if(otherparser !=  null)result.append(this.otherparser.parse(methods, relations, name));
+		if(otherparser !=  null)result.append(this.otherparser.parse(methods, relations, name, classinfo));
 		return result.toString();
 	}
 	public void setParser(Parser other){

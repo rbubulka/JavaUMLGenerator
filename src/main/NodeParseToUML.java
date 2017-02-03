@@ -33,9 +33,9 @@ public class NodeParseToUML {
 		HashMap<String, String> classInfo;
 		for (ClassNode n : nodes) {
 			classInfo = new HashMap<>();
-			classInfo.put("Class", cparser.parse(Collections.singletonList(n), relations));
-			classInfo.put("Method", mparser.parse(n.methods, relations, n.name));
-			classInfo.put("Field", fparser.parse(n.fields, relations, n.name));
+			classInfo.put("Class", cparser.parse(Collections.singletonList(n), relations, null));
+			classInfo.put("Method", mparser.parse(n.methods, relations, n.name, null));
+			classInfo.put("Field", fparser.parse(n.fields, relations, n.name, null));
 			classInfoList.add(classInfo);
 		}
 		for (HashMap<String, String> map : classInfoList) {
@@ -50,8 +50,7 @@ public class NodeParseToUML {
 					for (int i = 1; i < oparsers.size(); i++) {
 						oparsers.get(i).setParser(oparsers.get(i-1));
 					}
-					details.append(oparsers.get(oparsers.size()-1).parse(Collections.singletonList(n), relations));
-					System.out.println("details"+details);
+					details.append(oparsers.get(oparsers.size()-1).parse(Collections.singletonList(n), relations, classInfoList));
 					map.put("Details", details.toString());
 				}}
 			}

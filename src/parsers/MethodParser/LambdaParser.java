@@ -1,6 +1,7 @@
 package parsers.MethodParser;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -12,7 +13,7 @@ public class LambdaParser extends MethodsParser {
 		super(other);
 	}
 	@Override
-	public  String parse(List methods, Set<String> relations,String name){
+	public  String parse(List methods, Set<String> relations,String name,  List<HashMap<String, String>> classinfo){
 		StringBuilder result= new StringBuilder();
 		ArrayList<MethodNode> toRemove=new ArrayList<>();
 		for(MethodNode m:(List<MethodNode>) methods){
@@ -21,7 +22,7 @@ public class LambdaParser extends MethodsParser {
 			}
 		}
 		methods.removeAll(toRemove);
-		if(otherparser !=  null)result.append(this.otherparser.parse(methods, relations, name));
+		if(otherparser !=  null)result.append(this.otherparser.parse(methods, relations, name, classinfo));
 		return result.toString();
 	}
 

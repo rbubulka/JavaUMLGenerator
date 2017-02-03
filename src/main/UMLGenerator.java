@@ -185,12 +185,6 @@ public class UMLGenerator {
 		this.twoWayRelations(relations);
 		this.cleanblacklist(relations);
 		this.simplifyRelations(relations);
-
-		for (String s : relations) {
-			if (s.contains("Component") && s.contains("Container"))
-				System.out.println(s);
-		}
-
 		this.outputmaker.fileWrite(this.output, parsedstring, relations);
 
 	}
@@ -282,9 +276,6 @@ public class UMLGenerator {
 			for (int j = i; j < rel.length; j++) {
 				String r = (String) rel[j];
 				String[] rls = r.split(" ");
-				if((r.contains("java//awt//Container")&&s.contains("java//awt//Component"))||((s.contains("java//awt//Container")&&r.contains("java//awt//Component")))){
-				System.out.println(r + "     nkjfea        "+s);
-				}
 				if (sls.length >= 5 && rls.length >= 5 && r != s && (((sls[0].contains(rls[0]) || rls[0].contains(sls[0]))
 						&& (sls[4].contains(rls[4]) || rls[4].contains(sls[4])))||(sls[0].contains(rls[4])||rls[4].contains(sls[0]))&&(sls[4].contains(rls[0])||rls[0].contains(sls[4]))&&sls[2].contains("both")&&rls[2].contains("both")))
 				 {

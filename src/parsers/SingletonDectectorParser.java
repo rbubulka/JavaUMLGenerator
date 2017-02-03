@@ -1,5 +1,6 @@
 package parsers;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -20,7 +21,7 @@ public class SingletonDectectorParser extends ClassParser {
 	}
 
 	@Override
-	public String parse(List nodes, Set<String> relations) {
+	public String parse(List nodes, Set<String> relations,  List<HashMap<String, String>> classinfo) {
 		StringBuilder result = new StringBuilder();
 		boolean hasSelf = false;
 		boolean returnsSelf = false;
@@ -41,7 +42,7 @@ public class SingletonDectectorParser extends ClassParser {
 		if (hasSelf && returnsSelf) {
 			StringBuilder other;
 			if (otherparser != null) {
-				other = new StringBuilder(this.otherparser.parse(nodes, relations));
+				other = new StringBuilder(this.otherparser.parse(nodes, relations, classinfo));
 				if (other.toString().contains("color=")) {
 					int index = other.toString().indexOf("color=");
 					other.insert(index + 6, "blue:");
@@ -57,7 +58,7 @@ public class SingletonDectectorParser extends ClassParser {
 		}
 		else{
 
-			if(otherparser !=  null)result.append(this.otherparser.parse(nodes, relations));
+			if(otherparser !=  null)result.append(this.otherparser.parse(nodes, relations, classinfo));
 		}
 		return result.toString();
 	}

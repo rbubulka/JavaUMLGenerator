@@ -1,5 +1,6 @@
 package parsers.FieldParser;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -9,7 +10,7 @@ public class NoField extends FieldsParser {
 		super(other);
 	}
 	@Override
-	public String parse(List fields, Set<String> relations){
+	public String parse(List fields, Set<String> relations,  List<HashMap<String, String>> classinfo){
 		return "";
 	}
 }

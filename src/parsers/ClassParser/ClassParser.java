@@ -1,5 +1,6 @@
 package parsers.ClassParser;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -18,14 +19,14 @@ public abstract class ClassParser implements Parser {
 	}
 	
 	@Override
-	public  String parse(List nodes, Set<String> relations){
+	public  String parse(List nodes, Set<String> relations, List<HashMap<String, String>> classinfo){
 		StringBuilder result = new StringBuilder();
 		for(ClassNode cn : (List<ClassNode>) nodes ){
 			if((cn.access&this.opcode)>0){
 			result.append(text+" "+cn.name+" " +"Interface? "+String.valueOf((cn.access&Opcodes.ACC_INTERFACE)>0)+" Abstract? "+String.valueOf((cn.access&Opcodes.ACC_ABSTRACT)>0)+"\n");
 			}
 		}
-		if(otherparser !=  null)result.append(this.otherparser.parse(nodes, relations));
+		if(otherparser !=  null)result.append(this.otherparser.parse(nodes, relations, classinfo));
 		return result.toString();
 	}
 

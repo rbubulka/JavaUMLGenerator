@@ -2,6 +2,7 @@ package parsers;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -24,7 +25,7 @@ public class CompositionOverInheritance extends ClassParser {
 	}
 
 	@Override
-	public String parse(List nodes, Set<String> relations) {
+	public String parse(List nodes, Set<String> relations,  List<HashMap<String, String>> classinfo) {
 		StringBuilder result = new StringBuilder();
 		Set<String> toAdd = new HashSet<>();
 		Set<String> toRemove = new HashSet<>();
@@ -74,7 +75,7 @@ public class CompositionOverInheritance extends ClassParser {
 		relations.removeAll(toRemove);
 		relations.addAll(toAdd);
 		if (otherparser != null) {
-			StringBuilder other = new StringBuilder(this.otherparser.parse(nodes, relations));
+			StringBuilder other = new StringBuilder(this.otherparser.parse(nodes, relations, classinfo));
 			if (other.toString().contains("color=")) {
 				int index = other.toString().indexOf("color=");
 				other.insert(index + 7, "orange:");

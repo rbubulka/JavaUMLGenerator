@@ -2,6 +2,7 @@ package parsers.MethodParser;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -21,7 +22,7 @@ public abstract class MIDParser extends MethodsParser {
 	}
 
 	@Override
-	public String parse(List methods, Set<String> relations, String classname) {
+	public String parse(List methods, Set<String> relations, String classname,  List<HashMap<String, String>> classinfo) {
 		StringBuilder result = new StringBuilder();
 		
 		for(MethodNode md:(List<MethodNode>)methods){
@@ -73,7 +74,7 @@ public abstract class MIDParser extends MethodsParser {
 		}
 		
 		if (otherparser != null)
-			result.append(this.otherparser.parse(methods, relations, classname));
+			result.append(this.otherparser.parse(methods, relations, classname, classinfo));
 		return result.toString();
 	}
 
