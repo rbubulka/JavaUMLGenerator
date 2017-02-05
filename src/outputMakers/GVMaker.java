@@ -97,9 +97,10 @@ public class GVMaker implements OutputMaker {
 			classDetailString.append("}>");
 			//
 			String detail2=map.get("Details");
+			System.out.println("details: "+detail2);
 			for(String dstr:detail2.split(",")){
-				if(dstr.contains("color=")){
-					classDetailString.append(" ,color="+dstr.substring(6));
+				if(!dstr.contains("write=")){
+					classDetailString.append(dstr+",");
 				}
 			}
 			

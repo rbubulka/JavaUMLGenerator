@@ -51,7 +51,9 @@ public class NodeParseToUML {
 						oparsers.get(i).setParser(oparsers.get(i-1));
 					}
 					details.append(oparsers.get(oparsers.size()-1).parse(Collections.singletonList(n), relations, classInfoList));
-					map.put("Details", details.toString());
+					String initdetails=  map.get("Details");
+					if(initdetails == null) initdetails="";
+					map.put("Details", details.toString()+initdetails);
 				}}
 			}
 		}

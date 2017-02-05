@@ -15,7 +15,6 @@ public class ClassFileGetter implements FileGetter {
 	public void addClasses(ArrayList<String> classnames, Set<ClassNode> nodes, Set<String> relations,
 			boolean recursive,List<String> blacklist) throws IOException {
 		for (String cname : classnames) {
-			//System.out.println(cname);
 			if(!blacklist.contains(cname)){
 			ClassReader reader = new ClassReader(cname);
 			ClassNode classNode = new ClassNode();
