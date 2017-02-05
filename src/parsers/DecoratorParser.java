@@ -37,16 +37,33 @@ public class DecoratorParser extends ClassParser {
 			List<MethodNode> thismls=(List<MethodNode>)current.methods;
 		Set<String> paths=new HashSet<String>();
 		Set<String> comp=new HashSet<String>();
-					boolean xxx=helper(cn, paths,comp);
-					if(xxx){
-						for(String x:paths){
-							System.out.println("final p " +x);
+					boolean ifDe=helper(cn, paths,comp);
+					if(ifDe){
+						for(String p:paths){
+							
+							for(HashMap<String,String> hashmap:classinfo){
+								if(hashmap.get("Class").contains(p)){
+									String details=hashmap.get("Details");
+									if(!details.contains("fillcolor")){
+										hashmap.put("Details", details+",wirte=decorator"+",fillcolor=\"green\"");
+										
+									}
+								}
+							}
 						}
-						for(String x:comp){
-							System.out.println("final c " +x);
+						for(String p:comp){
+							for(HashMap<String,String> hashmap:classinfo){
+								if(hashmap.get("Class").contains(p)){
+									String details=hashmap.get("Details");
+									if(!details.contains("fillcolor")){
+										hashmap.put("Details", details+",wirte=component"+",fillcolor=\"green\"");
+										
+									}
+								}
+							}
 						}
 					}
-					System.out.println(xxx);
+			
 					
 			
 			
