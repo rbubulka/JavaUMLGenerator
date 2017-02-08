@@ -136,12 +136,19 @@ public class GVMaker implements OutputMaker {
 			if(ls.length>5){
 				color=ls[5];
 			}
+			String label = "";
+			if(ls.length>6){
+				label = ls[6];
+			}
+			System.out.println(color);
 			if(ls.length >= 5){
 				if(ls[2].contains("both")){
-					relationstring.append("\""+splitclassname(ls[0]).replaceAll("\\$", "&#36;") +"\"" + " -> " + "\""+ splitclassname(ls[4]).replaceAll("\\$", "") + "\""+" " + details.get(ls[2]) + ",headlabel=\""+ls[1]+"\",taillabel=\" "+ls[3] +"\" "+color+"];\n");
+					relationstring.append("\""+splitclassname(ls[0]).replaceAll("\\$", "&#36;") +"\"" + " -> " + "\""+ splitclassname(ls[4]).replaceAll("\\$", "") + "\""+" " + details.get(ls[2]) + ",headlabel=\""+ls[1]+"\",taillabel=\" "+ls[3] +label+"\" "+color+"];\n");
 				} else {
-				relationstring.append("\""+splitclassname(ls[0]).replaceAll("\\$", "&#36;") +"\"" + " -> " + "\""+ splitclassname(ls[4]).replaceAll("\\$", "") + "\""+" " + details.get(ls[2]) + ",label=\""+ls[1]+"..."+ls[3]+"\" "+color+"];\n");
-			}}
+				relationstring.append("\""+splitclassname(ls[0]).replaceAll("\\$", "&#36;") +"\"" + " -> " + "\""+ splitclassname(ls[4]).replaceAll("\\$", "") + "\""+" " + details.get(ls[2]) + ",label=\""+ls[1]+"..."+ls[3]+label+"\" "+color+"];\n");
+			}
+				
+			}
 
 		}
 		return relationstring;

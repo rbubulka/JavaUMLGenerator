@@ -180,7 +180,7 @@ public class UMLGenerator {
 		}
 		relations.removeAll(toremove);
 		relations.addAll(toadd);
-
+		
 		this.simplifyRelations(relations);
 		this.twoWayRelations(relations);
 		this.cleanblacklist(relations);
@@ -228,14 +228,23 @@ public class UMLGenerator {
 					if (rel2.length > 5) {
 						color = rel2[5];
 					}
-
+					String extra = "";
+					if (rel1.length >= rel2.length) {
+						for (int k = 6; k < rel1.length; k++) {
+							extra += " " + rel1[k];
+						}
+					} else {
+						for (int k = 6; k < rel2.length; k++) {
+							extra += " " + rel2[k];
+						}
+					}
 					if (rel1.length >= 5 && rel2.length >= 5
 							&& ((rel1[0]).equals(rel2[4]) || ("L" + rel1[0]).equals(rel2[4]))
 							&& (rel1[4].equals("L" + rel2[0]) || rel1[4].equals(rel2[0]))
 							&& (rel1[2].equals(rel2[2]) && !rel1[2].contains("both"))) {
 						toAdd.add(rel1[0] + " " + rel1[1].charAt(0) + "..." + rel1[3].charAt(0) + " " + "both"
 								+ rel1[2].trim() + " " + rel2[1].charAt(0) + "..." + rel2[3].charAt(0) + " " + rel1[4]
-								+ color);
+								+ color + extra);
 						toRemove.add(rpre1 + relation1);
 						toRemove.add(rpre2 + relation2);
 					}
@@ -276,10 +285,13 @@ public class UMLGenerator {
 			for (int j = i; j < rel.length; j++) {
 				String r = (String) rel[j];
 				String[] rls = r.split(" ");
-				if (sls.length >= 5 && rls.length >= 5 && r != s && (((sls[0].contains(rls[0]) || rls[0].contains(sls[0]))
-						&& (sls[4].contains(rls[4]) || rls[4].contains(sls[4])))||(sls[0].contains(rls[4])||rls[4].contains(sls[0]))&&(sls[4].contains(rls[0])||rls[0].contains(sls[4]))&&sls[2].contains("both")&&rls[2].contains("both")))
-				 {
-					
+				if (sls.length >= 5 && rls.length >= 5 && r != s
+						&& (((sls[0].contains(rls[0]) || rls[0].contains(sls[0]))
+								&& (sls[4].contains(rls[4]) || rls[4].contains(sls[4])))
+								|| (sls[0].contains(rls[4]) || rls[4].contains(sls[0]))
+										&& (sls[4].contains(rls[0]) || rls[0].contains(sls[4]))
+										&& sls[2].contains("both") && rls[2].contains("both"))) {
+
 					int rnum = checkmap.get(rls[2]);
 					int snum = checkmap.get(sls[2]);
 					if (rnum > snum) {
@@ -296,8 +308,15 @@ public class UMLGenerator {
 							rls[3] = "*";
 						}
 						String extra = "";
-						if (rls.length >= 6)
-							extra = " " + rls[5];
+						if (rls.length >= sls.length) {
+							for (int k = 5; k < rls.length; k++) {
+								extra += " " + rls[k];
+							}
+						} else {
+							for (int k = 5; k < sls.length; k++) {
+								extra += " " + sls[k];
+							}
+						}
 						toAdd.add(rls[0] + " " + rls[1] + " " + rls[2] + " " + rls[3] + " " + rls[4] + extra);
 						toRemove.add(r);
 						toRemove.add(s);

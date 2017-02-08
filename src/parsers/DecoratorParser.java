@@ -1,6 +1,7 @@
 package parsers;
 
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -29,16 +30,17 @@ public class DecoratorParser extends ClassParser {
 		for (ClassNode cn : (List<ClassNode>) nodes) {
 			ClassNode current = cn;
 			List<MethodNode> thismls = (List<MethodNode>) current.methods;
-			Set<String> paths = new HashSet<String>();
+			List<String> paths = new ArrayList<String>();
 			Set<String> comp = new HashSet<String>();
 			boolean ifDe = helper(cn, paths, comp);
 			if (ifDe) {
-				
+
 				for (String p : comp) {
 					for (HashMap<String, String> hashmap : classinfo) {
 						if (hashmap.get("Class").contains(p)) {
 							String details = hashmap.get("Details");
-							if(details == null) details  = "";
+							if (details == null)
+								details = "";
 							if (!details.contains("fillcolor")) {
 								hashmap.put("Details",
 										details + ",write=component" + ",fillcolor=\"green\"" + ",style=\"filled\"");
@@ -50,20 +52,39 @@ public class DecoratorParser extends ClassParser {
 				for (String p : paths) {
 
 					for (HashMap<String, String> hashmap : classinfo) {
-						
+
 						if (hashmap.get("Class").contains(p)) {
 							String details = hashmap.get("Details");
-							if(details == null) details = "";
+							if (details == null)
+								details = "";
 							if (!details.contains("fillcolor")) {
-//								System.out.println(hashmap.get("Class"));
+								// System.out.println(hashmap.get("Class"));
 								hashmap.put("Details",
 										details + ",write=decorator" + ",fillcolor=\"green\"" + ",style=\"filled\"");
-//								System.out.println("Details"+hashmap.get("Details"));
-//								System.out.println("end");
+								// System.out.println("Details"+hashmap.get("Details"));
+								// System.out.println("end");
 							}
 						}
 					}
 				}
+					String componentname = (String) comp.toArray()[0];
+					String decoratorname = paths.get(paths.size() - 1);
+					Set<String> toRemove = new HashSet<String>();
+					Set<String> toAdd = new HashSet<String>();
+				for (String rel : relations) {
+					String[] splitted = rel.split(" ");
+					if((splitted[4].contains(componentname)||componentname.contains(splitted[4]))
+							&&(splitted[0].contains(decoratorname)||decoratorname.contains(splitted[0]))){
+						toRemove.add(rel);				
+						if(rel.split(" ").length == 5){
+							rel=rel.concat(" color=\"black\"");
+						}
+
+						toAdd.add(rel.concat(" <<decorates>>"));
+					}
+				}
+				relations.removeAll(toRemove);
+				relations.addAll(toAdd);
 				
 			}
 
@@ -73,7 +94,7 @@ public class DecoratorParser extends ClassParser {
 		return result.toString();
 	}
 
-	private boolean helper(ClassNode cn, Set<String> path, Set<String> comp) {
+	private boolean helper(ClassNode cn, List<String> path, Set<String> comp) {
 		List<MethodNode> methodls = cn.methods;
 		Set<String> typels = new HashSet<String>();
 		// get all the classes passed as arguments in the constructor
@@ -107,7 +128,7 @@ public class DecoratorParser extends ClassParser {
 			// arguemtn
 			for (String interfacename : interfacels) {
 				for (String tp : typels) {
-					if (tp.contains(interfacename) || interfacename.contains(tp)) { 
+					if (tp.contains(interfacename) || interfacename.contains(tp)) {
 						// if it does then is a decorator
 						comp.add(interfacename);
 						return true;
