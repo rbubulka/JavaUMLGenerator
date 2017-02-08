@@ -97,7 +97,6 @@ public class GVMaker implements OutputMaker {
 			classDetailString.append("}>");
 			//
 			String detail2=map.get("Details");
-			System.out.println("details: "+detail2);
 			for(String dstr:detail2.split(",")){
 				if(!dstr.contains("write=")){
 					classDetailString.append(dstr+",");
@@ -140,7 +139,6 @@ public class GVMaker implements OutputMaker {
 			if(ls.length>6){
 				label = ls[6];
 			}
-			System.out.println(color);
 			if(ls.length >= 5){
 				if(ls[2].contains("both")){
 					relationstring.append("\""+splitclassname(ls[0]).replaceAll("\\$", "&#36;") +"\"" + " -> " + "\""+ splitclassname(ls[4]).replaceAll("\\$", "") + "\""+" " + details.get(ls[2]) + ",headlabel=\""+ls[1]+"\",taillabel=\" "+ls[3] +label+"\" "+color+"];\n");
