@@ -86,8 +86,10 @@ public class BadDecoratorDetectorParser extends ClassParser {
 							cr.accept(supernode, ClassReader.EXPAND_FRAMES);
 							int supercount = 0;
 							for(MethodNode  mn: (List<MethodNode>)supernode.methods){
-								if((mn.access&Opcodes.ACC_PUBLIC>0)||(mn.access&Opcodes.ACC_PROTECTED>0))
+								if(((mn.access&Opcodes.ACC_PUBLIC)>0)||((mn.access&Opcodes.ACC_PROTECTED)>0)) supercount++;
+								if((mn.access&Opcodes.ACC_ABSTRACT)>0) supercount--;
 							}
+							//for(decoratornode.)
 							
 		
 							
