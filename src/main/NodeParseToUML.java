@@ -45,16 +45,17 @@ public class NodeParseToUML {
 				if(classnameinfo.length >= 2){
 				String realname = classnameinfo[1];
 				if (realname.contains(nname)) {
-
 					StringBuilder details = new StringBuilder();
+					if(oparsers.size()>0){
 					for (int i = 1; i < oparsers.size(); i++) {
 						oparsers.get(i).setParser(oparsers.get(i-1));
 					}
 					details.append(oparsers.get(oparsers.size()-1).parse(Collections.singletonList(n), relations, classInfoList));
+					}
 					String initdetails=  map.get("Details");
 					if(initdetails == null) initdetails="";
-					map.put("Details", details.toString()+initdetails);
-				}}
+					map.put("Details", details.toString()+initdetails);}
+				}
 			}
 		}
 		return classInfoList;
