@@ -61,7 +61,7 @@ public class CompositionOverInheritance extends ClassParser {
 
 							for (String relation : relations) {
 								String[] rels = relation.split(" ");
-								if (rels[0].equals(cn.name) && rels[4].equals(supercn.name)) {
+								if (rels[0].equals(cn.name) && rels[4].equals(supercn.name)&&(!relation.contains("color="))) {
 									toAdd.add(relation + " ,color=\"orange\"");
 									toRemove.add(relation);
 								}
