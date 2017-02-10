@@ -3,6 +3,7 @@ package parsers;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -126,6 +127,27 @@ public class AdapterParser extends ClassParser {
 						}
 					}
 				}
+				for (String fi : adapteesmap.keySet()) {
+					if (!adapteesmap.get(fi)) {
+						continue;
+					}
+				Set<String> toRemove = new HashSet<String>();
+				Set<String> toAdd = new HashSet<String>();
+			for (String rel : relations) {
+				String[] splitted = rel.split(" ");
+				if((splitted[4].contains(cn.name)||cn.name.contains(splitted[4]))
+						&&(splitted[0].contains(fi)||fi.contains(splitted[0]))){
+					toRemove.add(rel);				
+					if(rel.split(" ").length == 5){
+						rel=rel.concat(" color=\"black\"");
+					}
+
+					toAdd.add(rel.concat(" <<adapts>>"));
+				}
+			}
+			relations.removeAll(toRemove);
+			relations.addAll(toAdd);
+			
 
 				// for every argument in <init> we must go through the method
 				// nodes
@@ -135,7 +157,7 @@ public class AdapterParser extends ClassParser {
 				// go to super make red mark as target, go to matching
 				// overusedfieldclass and mark as adaptee
 
-			}
+			}}
 		}
 		if (otherparser != null)
 			result.append(this.otherparser.parse(nodes, relations, classinfo));
