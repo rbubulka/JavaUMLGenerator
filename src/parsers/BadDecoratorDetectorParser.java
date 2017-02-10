@@ -84,13 +84,28 @@ public class BadDecoratorDetectorParser extends ClassParser {
 							}
 							ClassNode supernode = new ClassNode();
 							cr.accept(supernode, ClassReader.EXPAND_FRAMES);
-							int supercount = 0;
+//							int supercount = 0;
+							boolean sofar=true;
 							for(MethodNode  mn: (List<MethodNode>)supernode.methods){
-								if(((mn.access&Opcodes.ACC_PUBLIC)>0)||((mn.access&Opcodes.ACC_PROTECTED)>0)) supercount++;
-								if((mn.access&Opcodes.ACC_ABSTRACT)>0) supercount--;
+//								if(((mn.access&Opcodes.ACC_PUBLIC)>0)||((mn.access&Opcodes.ACC_PROTECTED)>0)) supercount++;
+//								if((mn.access&Opcodes.ACC_ABSTRACT)>0) supercount--;
+								boolean iffind=false;
+								for(MethodNode mn2:(List<MethodNode>)decoratornode.methods){
+										
+									if(mn.name.equals(mn2.name)&&mn.desc.equals(mn2.desc)){
+										iffind=true;
+									}
+									
+								}
+								sofar=sofar&iffind;				
+								
+								
 							}
-							//for(decoratornode.)
 							
+							//for(decoratornode.)
+							if(!sofar){
+								color="skyblue";
+							}
 		
 							
 							//do decoratory shit

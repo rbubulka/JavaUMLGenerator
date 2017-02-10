@@ -28,54 +28,114 @@ public class AdapterParser extends ClassParser {
 		for (ClassNode cn : (List<ClassNode>) nodes) {
 			// check if has interface
 			List<String> interfaces = cn.interfaces;
-			List<ClassNode> interfacenodes = new ArrayList<ClassNode>();
-			List<String> methodNames = new ArrayList<String>();
-			Map<String, Boolean> adapteesmap = new HashMap<String, Boolean>();
-			for (FieldNode fn : (List<FieldNode>) cn.fields) {
-				adapteesmap.put(fn.desc, true);
-			}
-			for (MethodNode method : (List<MethodNode>) cn.methods) {
-				methodNames.add(method.name);
-			}
-			for (String interfacestring : interfaces) {
-				System.out.println("hbfkdsabfa");
-				ClassReader cr = null;
-				try {
-					cr = new ClassReader(interfacestring);
-				} catch (IOException e) {
-					e.printStackTrace();
+			if (interfaces.size() > 0) {
+				List<ClassNode> interfacenodes = new ArrayList<ClassNode>();
+				List<String> methodNames = new ArrayList<String>();
+				Map<String, Boolean> adapteesmap = new HashMap<String, Boolean>();
+				for (FieldNode fn : (List<FieldNode>) cn.fields) {
+					adapteesmap.put(fn.desc, false);
 				}
-				ClassNode interfacenode = new ClassNode();
-				cr.accept(interfacenode, ClassReader.EXPAND_FRAMES);
-				interfacenodes.add(interfacenode);
-				System.out.println(interfacenodes.size());
-			}
-			for (ClassNode node : interfacenodes) {
-				System.out.println("loop1");
-				for (MethodNode method : (List<MethodNode>) node.methods) {
-					System.out.println("loop2");
-					for (String field : adapteesmap.keySet()) {
-						System.out.println("loop3");
-						List<String> attributes = new ArrayList<String>();
-						for (Attribute at : (List<Attribute>) method.attrs) {
-							System.out.println("loop4");
-							System.out.println(at.type);
-							attributes.add(at.type);
+				for (MethodNode method : (List<MethodNode>) cn.methods) {
+					if (method.name.contains("<init>")) {
+						String argstring = method.desc.substring(method.desc.indexOf("(") + 1,
+								method.desc.lastIndexOf(")"));
+						String[] args = argstring.split(";");
+						if (args.length == 1) {
+							for (String key : adapteesmap.keySet()) {
+								if (key.contains(args[0]) || args[0].contains(key)) {
+									adapteesmap.put(key, true);
+								}
+							}
 						}
-						if (!attributes.contains(field)) {
-							adapteesmap.put(field, false);
+					}
+					methodNames.add(method.name);
+				}
+				for (String interfacestring : interfaces) {
+					ClassReader cr = null;
+					try {
+						cr = new ClassReader(interfacestring);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					ClassNode interfacenode = new ClassNode();
+					cr.accept(interfacenode, ClassReader.EXPAND_FRAMES);
+					interfacenodes.add(interfacenode);
+				}
+				// for (ClassNode node : interfacenodes) {
+				// System.out.println("loop1");
+				// for (MethodNode method : (List<MethodNode>) node.methods) {
+				// System.out.println("loop2");
+				// for (String field : adapteesmap.keySet()) {
+				// System.out.println("loop3");
+				// List<String> attributes = new ArrayList<String>();
+				// for (Attribute at : (List<Attribute>) method.attrs) {
+				// System.out.println("loop4");
+				// System.out.println(at.type);
+				// attributes.add(at.type);
+				// }
+				// if (!attributes.contains(field)) {
+				// adapteesmap.put(field, false);
+				// }
+				// }
+				// }
+				//
+				// }
+
+				for (HashMap<String, String> hashmap : classinfo) {
+					if (hashmap.get("Class").contains(cn.name)) {
+						String details = hashmap.get("Details");
+						if (details == null)
+							details = "";
+						if (!details.contains("fillcolor")) {
+							hashmap.put("Details",
+									details + ",write=adapter" + ",fillcolor=\"red\"" + ",style=\"filled\"");
+
 						}
 					}
 				}
 
+				for (HashMap<String, String> hashmap : classinfo) {
+					for (ClassNode innode : interfacenodes) {
+						if (hashmap.get("Class").contains(innode.name)) {
+							String details = hashmap.get("Details");
+							if (details == null)
+								details = "";
+							if (!details.contains("fillcolor")) {
+								hashmap.put("Details",
+										details + ",write=target" + ",fillcolor=\"red\"" + ",style=\"filled\"");
+
+							}
+						}
+					}
+				}
+
+				for (HashMap<String, String> hashmap : classinfo) {
+					for (String fi : adapteesmap.keySet()) {
+						if (!adapteesmap.get(fi)) {
+							continue;
+						}
+						if (hashmap.get("Class").contains(fi)) {
+							String details = hashmap.get("Details");
+							if (details == null)
+								details = "";
+							if (!details.contains("fillcolor")) {
+								hashmap.put("Details",
+										details + ",write=adaptee" + ",fillcolor=\"red\"" + ",style=\"filled\"");
+
+							}
+						}
+					}
+				}
+
+				// for every argument in <init> we must go through the method
+				// nodes
+				// and find which one is used in every method or the method
+				// throws
+				// an exception which matches the super
+				// go to super make red mark as target, go to matching
+				// overusedfieldclass and mark as adaptee
+
 			}
-
-			// for every argument in <init> we must go through the method nodes
-			// and find which one is used in every method or the method throws
-			// an exception which matches the super
-			// go to super make red mark as target, go to matching
-			// overusedfieldclass and mark as adaptee
-
 		}
 		if (otherparser != null)
 			result.append(this.otherparser.parse(nodes, relations, classinfo));

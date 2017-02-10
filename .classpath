@@ -4,9 +4,8 @@
 	<classpathentry kind="src" path="properties"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="asm-all-5.0.4.jar"/>
-	<classpathentry kind="src" path="/Lab1-1"/>
 	<classpathentry kind="lib" path="/Lab1-1/src"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Lab3-1"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/1-1LiveCoding-ExamVersion"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Lab6-1"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
