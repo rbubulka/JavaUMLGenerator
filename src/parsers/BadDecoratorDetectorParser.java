@@ -97,7 +97,7 @@ public class BadDecoratorDetectorParser extends ClassParser {
 									}
 									
 								}
-								sofar=sofar&iffind;				
+								sofar=sofar&&iffind;				
 								
 								
 							}
@@ -119,6 +119,7 @@ public class BadDecoratorDetectorParser extends ClassParser {
 								// System.out.println("Details"+hashmap.get("Details"));
 								// System.out.println("end");
 							}
+							color="green";
 						}
 					}
 				}

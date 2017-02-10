@@ -16,6 +16,7 @@ public class ClassFileGetter implements FileGetter {
 			boolean recursive,List<String> blacklist) throws IOException {
 		for (String cname : classnames) {
 			if(!blacklist.contains(cname)){
+				System.out.println(cname);
 			ClassReader reader = new ClassReader(cname);
 			ClassNode classNode = new ClassNode();
 			reader.accept(classNode, ClassReader.EXPAND_FRAMES);
@@ -32,7 +33,8 @@ public class ClassFileGetter implements FileGetter {
 				for (String cns : (List<String>) v.interfaces) {
 					if (cns != null && !checkIfInBlacklist(cns, blacklist)) {
 						if (recursive) {
-							ClassReader cr = new ClassReader(cns);
+							System.out.println(cns.replaceAll("/", "."));
+							ClassReader cr = new ClassReader(cns.replaceAll("/", "."));
 							ClassNode cn = new ClassNode();
 							cr.accept(cn, ClassReader.EXPAND_FRAMES);
 							st.push(cn);
@@ -42,7 +44,8 @@ public class ClassFileGetter implements FileGetter {
 					}}
 					if (v.superName != null&& !checkIfInBlacklist(v.superName, blacklist)) {
 						if (recursive) {
-							ClassReader readertemp = new ClassReader(v.superName);
+							System.out.println(v.superName.replaceAll("/", "."));
+							ClassReader readertemp = new ClassReader(v.superName.replaceAll("/", "."));
 							ClassNode classNodetemp = new ClassNode();
 							readertemp.accept(classNodetemp, ClassReader.EXPAND_FRAMES);
 							st.push(classNodetemp);

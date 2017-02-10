@@ -3,6 +3,7 @@
 	<name>CSSE374Project</name>
 	<comment></comment>
 	<projects>
+		<project>PizzaWiredFactoryProjects</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

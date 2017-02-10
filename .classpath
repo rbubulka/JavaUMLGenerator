@@ -7,5 +7,8 @@
 	<classpathentry kind="lib" path="/Lab1-1/src"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/1-1LiveCoding-ExamVersion"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Lab6-1"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/Downloads/PizzaWiredFactoryProjects/PizzaFactoryFinal/src/main"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Lab2-1"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Exam2"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

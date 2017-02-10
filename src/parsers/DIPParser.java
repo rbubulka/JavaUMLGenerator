@@ -28,9 +28,12 @@ public class DIPParser extends ClassParser {
 				ClassReader cr = null;
 				
 				try {
-					cr = new ClassReader(field.desc.replaceAll("/", ".").substring(1).replaceAll(";", ""));
+					String temp = field.desc.replaceAll("/", ".").replaceAll("\\[", "");
+					if(temp.charAt(0)=='L') temp = temp.substring(1);
+					temp = temp.replaceAll(";", "");
+					System.out.println(temp);
+					cr = new ClassReader(temp);
 				} catch (IOException e) {
-					e.printStackTrace();
 				}
 				ClassNode fieldclass = new ClassNode();
 				cr.accept(fieldclass, ClassReader.EXPAND_FRAMES);
