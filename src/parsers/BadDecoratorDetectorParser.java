@@ -90,16 +90,12 @@ public class BadDecoratorDetectorParser extends ClassParser {
 //								if(((mn.access&Opcodes.ACC_PUBLIC)>0)||((mn.access&Opcodes.ACC_PROTECTED)>0)) supercount++;
 //								if((mn.access&Opcodes.ACC_ABSTRACT)>0) supercount--;
 								boolean iffind=false;
-								for(MethodNode mn2:(List<MethodNode>)decoratornode.methods){
-										
+								for(MethodNode mn2:(List<MethodNode>)decoratornode.methods){	
 									if(mn.name.equals(mn2.name)&&mn.desc.equals(mn2.desc)){
 										iffind=true;
-									}
-									
+									}	
 								}
-								sofar=sofar&&iffind;				
-								
-								
+								sofar=sofar&&iffind;								
 							}
 							
 							//for(decoratornode.)
