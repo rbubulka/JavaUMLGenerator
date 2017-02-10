@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 public class AvoidNonclassUtils {
 	
-	private static String[] nonclass = {"B","C","D","F","I","J","S","Z","V",">","*", "JI",")V",")I",")Z","IIIII",")F","ZZ","JJ","BB","SS","CC","FF","DD","TT",")J","ZJ","IZ",")TT",")TE",")C","BII","CII","II"};
+	private static String[] nonclass = {"B","C","D","F","I","J","S","Z","V",">","*", "JI",")V",")I",")Z","IIIII",")F","ZZ","JJ","BB","SS","CC","FF","DD","TT",")J","ZJ","IZ",")TT",")TE",")C","BII","CII","II","TE"};
 	private static List<String> classes = Arrays.asList(nonclass);
 	public static boolean isAClass(String signature){
 		//Pattern pattern = new Pattern("");

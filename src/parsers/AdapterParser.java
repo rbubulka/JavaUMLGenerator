@@ -3,6 +3,7 @@ package parsers;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -36,7 +37,7 @@ public class AdapterParser extends ClassParser {
 					adapteesmap.put(fn.desc, false);
 				}
 				for (MethodNode method : (List<MethodNode>) cn.methods) {
-					if (method.name.contains("<init>")) {
+					if (method.name.contains("<init>")&&!method.desc.contains("Object")) {
 						String argstring = method.desc.substring(method.desc.indexOf("(") + 1,
 								method.desc.lastIndexOf(")"));
 						String[] args = argstring.split(";");
@@ -61,25 +62,27 @@ public class AdapterParser extends ClassParser {
 					cr.accept(interfacenode, ClassReader.EXPAND_FRAMES);
 					interfacenodes.add(interfacenode);
 				}
-				// for (ClassNode node : interfacenodes) {
-				// System.out.println("loop1");
-				// for (MethodNode method : (List<MethodNode>) node.methods) {
-				// System.out.println("loop2");
-				// for (String field : adapteesmap.keySet()) {
-				// System.out.println("loop3");
-				// List<String> attributes = new ArrayList<String>();
-				// for (Attribute at : (List<Attribute>) method.attrs) {
-				// System.out.println("loop4");
-				// System.out.println(at.type);
-				// attributes.add(at.type);
-				// }
-				// if (!attributes.contains(field)) {
-				// adapteesmap.put(field, false);
-				// }
-				// }
-				// }
-				//
-				// }
+				for (ClassNode node : interfacenodes) {
+					
+					boolean sofar=true;
+					for(MethodNode  mn: (List<MethodNode>)node.methods){
+						if(!((mn.access&Opcodes.ACC_PUBLIC)>0)||((mn.access&Opcodes.ACC_FINAL)>0)) continue;
+						boolean iffind=false;
+						for(MethodNode mn2:(List<MethodNode>)cn.methods){	
+							if(mn.name.equals(mn2.name)&&mn.desc.equals(mn2.desc)){
+								iffind=true;
+							}	
+						}
+						sofar=sofar&&iffind;								
+					}
+					
+					if(!sofar){
+						if (otherparser != null)
+							result.append(this.otherparser.parse(nodes, relations, classinfo));
+						return result.toString();
+					}
+
+				}
 
 				for (HashMap<String, String> hashmap : classinfo) {
 					if (hashmap.get("Class").contains(cn.name)) {
@@ -108,12 +111,12 @@ public class AdapterParser extends ClassParser {
 						}
 					}
 				}
+				for (String fi : adapteesmap.keySet()) {
+					if (!adapteesmap.get(fi)) {
+						continue;
+					}
+					for (HashMap<String, String> hashmap : classinfo) {
 
-				for (HashMap<String, String> hashmap : classinfo) {
-					for (String fi : adapteesmap.keySet()) {
-						if (!adapteesmap.get(fi)) {
-							continue;
-						}
 						if (hashmap.get("Class").contains(fi)) {
 							String details = hashmap.get("Details");
 							if (details == null)
@@ -126,15 +129,37 @@ public class AdapterParser extends ClassParser {
 						}
 					}
 				}
+				for (String fi : adapteesmap.keySet()) {
+					if (!adapteesmap.get(fi)) {
+						continue;
+					}
+					Set<String> toRemove = new HashSet<String>();
+					Set<String> toAdd = new HashSet<String>();
+					for (String rel : relations) {
+						String[] splitted = rel.split(" ");
+						if ((splitted[4].contains(fi) || fi.contains(splitted[4]))
+								&& (splitted[0].contains(cn.name) || cn.name.contains(splitted[0]))) {
+							toRemove.add(rel);
+							if (rel.split(" ").length == 5) {
+								rel = rel.concat(" color=\"black\"");
+							}
 
-				// for every argument in <init> we must go through the method
-				// nodes
-				// and find which one is used in every method or the method
-				// throws
-				// an exception which matches the super
-				// go to super make red mark as target, go to matching
-				// overusedfieldclass and mark as adaptee
+							toAdd.add(rel.concat(" <<adapts>>"));
+						}
+					}
+					relations.removeAll(toRemove);
+					relations.addAll(toAdd);
 
+					// for every argument in <init> we must go through the
+					// method
+					// nodes
+					// and find which one is used in every method or the method
+					// throws
+					// an exception which matches the super
+					// go to super make red mark as target, go to matching
+					// overusedfieldclass and mark as adaptee
+
+				}
 			}
 		}
 		if (otherparser != null)
