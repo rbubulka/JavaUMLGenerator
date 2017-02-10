@@ -20,3 +20,5 @@ The following argument flags are valid and will cause their listed behaviors
 		-pattern=				will allow the generator to use custom parser files which are designed by external parties so long as they extend the projects parser class in some fashion. This should be a common separated fully qualified classname for the java class which is the parsers
 		-o=						followed by a file path will specify where to print the output file. 
 		
+UML:
+![alt tag](http://imgur.com/ay3LXt2)
