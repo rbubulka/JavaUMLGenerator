@@ -21,4 +21,4 @@ The following argument flags are valid and will cause their listed behaviors
 		-o=						followed by a file path will specify where to print the output file. 
 		
 UML:
-![alt tag](http://imgur.com/ay3LXt2)
+![alt tag](http://i.imgur.com/ay3LXt2.jpg)
