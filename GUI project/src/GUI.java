@@ -148,8 +148,6 @@ public class GUI {
 					BufferedWriter writer=new BufferedWriter(writer2);
 					writer.write("GVM=true");
 					writer.newLine();
-					writer.write("fieldDependency=true");
-					writer.newLine();
 					if (c1.isSelected()) {
 						writer.write("publicClass=true");
 					} else {
